@@ -208,6 +208,10 @@
                width: calc(var(--nav-width) + 156px)
             }
 
+            .fade {
+               width: 100%
+            }
+
             .body-pd {
                padding-left: calc(var(--nav-width) + 188px)
             }
@@ -215,8 +219,8 @@
         </style>
 
     </head>
-    <body id="body-pd">
-      <header class="header" id="header">
+    <body id="header">
+      <header class="header" id="body-pd">
          <div class="header_toggle">
             <i class='bx bx-menu' id="header-toggle"></i>
          </div>
@@ -229,75 +233,165 @@
       </header>
       <div class="l-navbar" id="nav-bar">
          <nav class="nav">
-               <div>
-                  <a href="#" class="nav_logo">
-                     <i class='bx bxs-message-alt-dots nav_logo-icon'></i>
-                     <span class="nav_logo-name">DISCUSS.ION</span>
-                  </a>
-                  <div class="nav_list">
-                     <a href="#" class="nav_link active">
-                        <i class='bx bx-grid-alt nav_icon'></i>
-                        <span class="nav_name">Dashboard</span>
-                     </a>
-                     <a href="#" class="nav_link"> 
-                        <i class='bx bx-home nav_icon'></i>
-                        <span class="nav_name">Home</span>
-                     </a>
-                     <a href="#" class="nav_link">
-                        <i class='bx bxs-user-badge nav_icon'></i>
-                        <span class="nav_name">Users Control</span>
-                     </a>
-                  </div>
-               </div>
-               <a href="#" class="nav_link">
-                  <i class='bx bx-log-out nav_icon'></i>
-                  <span class="nav_name">SignOut</span>
+            <div>
+               <a href="#" class="nav_logo">
+                  <i class='bx bxs-message-alt-dots nav_logo-icon'></i>
+                  <span class="nav_logo-name">DISCUSS.ION</span>
                </a>
+               <div class="nav_list">
+                  <a href="#" class="nav_link active">
+                     <i class='bx bx-grid-alt nav_icon'></i>
+                     <span class="nav_name">Dashboard</span>
+                  </a>
+                  <a href="#" class="nav_link"> 
+                     <i class='bx bx-home nav_icon'></i>
+                     <span class="nav_name">Home</span>
+                  </a>
+                  <a href="#" class="nav_link">
+                     <i class='bx bxs-user-badge nav_icon'></i>
+                     <span class="nav_name">Users Control</span>
+                  </a>
+               </div>
+            </div>
+            <a href="#" class="nav_link">
+               <i class='bx bx-log-out nav_icon'></i>
+               <span class="nav_name">SignOut</span>
+            </a>
          </nav>
       </div>
-    </body>
-
-    <br><br>
-    <div class="content">
-       <div class="container">
-         <button class="btn btn-primary float-right m-1" type="button" style="background-color: #414372" data-toggle="modal" data-target="#addpromoModal">
-         <i class='bx bx-plus-circle' style="color: white;"></i>
-           CREATE USER
-         </button>
-       </div><br>
-       <div class="container">
-         <div class="form-row">
-            <div class="form-group col-md-12">
-               <table class="table table-striped table-bordered table-hover horizontal-scrollable" id="stockadjtable">
-                  <thead>
-                        <tr>
-                           <th>User ID</th>
-                           <th>User Name</th>
-                           <th>User Email</th>
-                           <th>Department</th>
-                           <th>Position</th>
-                           <th>Accesibility</th>
-                           <th>Status</th>
-                           <th></th>
-                        </tr>
-                  </thead>
-                  <tbody id="stockadjBody"> 
-                        <tr>
-                           <td>SCPG1700562</td>
-                           <td>Yvette Yee YingYing</td>
-                           <td>scpg1700562@segi4u.my</td>
-                           <td>Information Technology</td>
-                           <td>Manager</td>
-                           <td>Level3</td>
-                           <td></td>
-                           <td></td>
-                        </tr>
-                  </tbody>
-               </table>
+      <!-- ----------------------------------------Content---------------------------------------- -->
+      <br><br>
+      <div class="content">
+         <div class="container">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color: #414372">
+            <i class='bx bx-plus-circle' style="color: white;"></i>
+            CREATE USER
+            </button>
+         </div><br>
+         <div class="container">
+            <div class="form-row">
+               <div class="form-group col-md-12">
+                  <table class="table table-striped table-bordered table-hover horizontal-scrollable" id="stockadjtable">
+                     <thead>
+                           <tr>
+                              <th>User ID</th>
+                              <th>User Name</th>
+                              <th>User Email</th>
+                              <th>Department</th>
+                              <th>Position</th>
+                              <th>Accesibility</th>
+                              <th>Status</th>
+                              <th></th>
+                           </tr>
+                     </thead>
+                     <tbody id="stockadjBody"> 
+                           <tr>
+                              <td>SCPG1700562</td>
+                              <td>Yvette Yee YingYing</td>
+                              <td>scpg1700562@segi4u.my</td>
+                              <td>Information Technology</td>
+                              <td>Manager</td>
+                              <td>Level3</td>
+                              <td></td>
+                              <td></td>
+                           </tr>
+                     </tbody>
+                  </table>
+               </div>
             </div>
          </div>
       </div>
-   </div>
+
+      <!-- ------------------------------------- Create user-control (Modal Box)--------------------------------------- -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Create User Control</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                  <div class="container-fluid">
+                     <div class="row">
+                        <div class="col-md-6">
+                           <label for="">Pre-set Username:</label>
+                           <input type="text" class="form-control" id="" placeholder="Please insert..." required>
+                        </div>
+                        <div class="col-md-6">
+                           <label for="">Pre-set Password:</label>
+                           <input type="text" class="form-control" id="" placeholder="Please insert..." required>
+                        </div>
+                     </div><br>
+                     <div class="row">
+                        <div class="col-md-6">
+                           <label for="">User Email:</label>
+                           <input type="text" class="form-control" id="" placeholder="Please insert..." required>
+                        </div>
+                        <div class="col-md-6">
+                           <label for="">Department:</label>
+                           <select class="form-select" aria-label="Default select example">
+                              <option selected>Please Choose...</option>
+                              <option value="1">IT</option>
+                              <option value="2">Marketing</option>
+                              <option value="3">Accounting Finance</option>
+                           </select>
+                        </div>
+                     </div><br>
+                     <div class="row">
+                        <div class="col-md-6">
+                           <label for="">Position:</label>
+                           <select class="form-select" aria-label="Default select example">
+                              <option selected>Please Choose...</option>
+                              <option value="1">Manager</option>
+                              <option value="2">Coordinator</option>
+                              <option value="3">Admin</option>
+                              <option value="3">Staff</option>
+                           </select>
+                        </div>
+                        <div class="col-md-6">
+                           <label for="">Accessibility:</label>
+                           <select class="form-select" aria-label="Default select example">
+                              <option selected>Please Choose...</option>
+                              <option value="1">Level 1</option>
+                              <option value="2">Level 2</option>
+                              <option value="3">Level 3</option>
+                           </select>
+                        </div>
+                     </div><br>
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" id="createu">Create</button>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <!-- ------------------------------------- Success (Modal Box)--------------------------------------- -->
+      <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Succesfully Created.</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                  <label>New User created.</label>
+                  <label>Notification will be send for user through email.</label>
+               </div>
+               <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Notice</button>
+               </div>
+            </div>
+         </div>
+      </div>
+
+    </body>
+
+    
+
 
 </html>
 
@@ -339,6 +433,40 @@
       linkColor.forEach(l=> l.addEventListener('click', colorLink))
 
       // Your code to run since DOM is loaded and ready
+   });
+
+</script>
+
+<script>
+   var t = $('#stockadjtable').DataTable({//call table id
+
+      //retrieve: true,
+      //scrollCollapse: true,
+      scroll: true,
+      responsive: true,
+      searching: true,
+      paging: true,
+
+      columnDefs: [ {
+         targets: 6,
+         data: null,
+         defaultContent:'<input type="checkbox" id="userstatus" data-toggle="toggle" data-on="On" data-off="Off" data-size="sm" checked required>'
+         },
+
+      {
+         targets: -1,
+         data: null,
+         defaultContent: '<button class="btn btn-light" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="bx bx-trash"></i></button>'
+      }],
+
+   });
+
+   $('#createu').on( 'click',function () {
+      $("#successModal").modal("show");
+   });
+
+   $('#createu').on( 'click',function () {
+      $("#exampleModal").modal("hide");
    });
 
 </script>
