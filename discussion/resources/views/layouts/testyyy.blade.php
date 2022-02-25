@@ -20,8 +20,8 @@
         <script charset="utf8" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
         
         <!-- Datatable -->
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
-        <script charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
+        <script charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
 
         <!-- Toggle button -->
         <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
@@ -219,8 +219,10 @@
         </style>
 
     </head>
+
     <body id="header">
-      <header class="header" id="body-pd">
+      
+    <header class="header" id="body-pd">
          <div class="header_toggle">
             <i class='bx bx-menu' id="header-toggle"></i>
          </div>
@@ -253,22 +255,26 @@
                   </a>
                </div>
             </div>
+            <form>
             <a href="#" class="nav_link">
                <i class='bx bx-log-out nav_icon'></i>
-               <span class="nav_name">SignOut</span>
+               <span class="nav_name">Logout</span>
             </a>
+            <a href="#" class="nav_link">
+               <i class='bx bx-log-out nav_icon'></i>
+               <span class="nav_name">Logout</span>
+            </a>
+            </form>
+           
          </nav>
       </div>
+
       <!-- ----------------------------------------Content---------------------------------------- -->
       <br><br>
       <div class="content">
-         <div class="container">
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color: #414372">
-            <i class='bx bx-plus-circle' style="color: white;"></i>
-            CREATE USER
-            </button>
-         </div><br>
+         <div>
+         @yield ('button')
+      </div>
          <div class="container">
             <div class="form-row">
                <div class="form-group col-md-12">
