@@ -1,117 +1,142 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <style>
-body {
-background-color: white;
+.empty{
+  background-color: #D1D4E3;
+  padding: 35px;
+}
+
+body{
+  background-color: white;
+}
+
+h2{
+  text-align: right;
 }
 
 form {
-border: 3px solid #D1D4E3;
+border: 30px solid #F4F6FB;
 background-color: #F4F6FB;
+border-radius: 10px;
+box-shadow:1px 1px 3px 1px rgba(1,1,1,0.2);
+padding: 5px;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+td, th {
+  text-align: left;
+  padding: 10px;
 }
 
 input[type=text], input[type=password] {
   width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
+  padding: 10px 100px;
+  margin: 10px 0;
   display: inline-block;
-  border: 1px solid #ccc;
+  border: 1px #ffff;
+  border-radius: 5px 5px 5px 5px;
   box-sizing: border-box;
-}
-
-button {
-  background-color: #424473;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
 }
 
 button:hover {
   opacity: 0.8;
 }
 
-.imgcontainer {
-  display: flex; /* or display:grid */
-  justify-content: center;
-  margin: 10px 0 10px 125px;
-}
-
-img.avatar {
-  width: 40%;
-  border-radius: 50%;
-}
-
-.container {
-  padding: 16px;
-  background-color:#F4F6FB
+.psw{
+  background-color: #C1AEC3;
+  color: #3C3541;
+  padding: 10px 10px;
+  border: none;
+  border-radius: 5px 5px 5px 5px;
+  cursor: pointer;
 }
 
 .userid{
   float: right;
+  margin-top: 0px;
 }
 
 .name{
   text-align: center;
 }
 
-span.psw {
-  margin: 50px 0 0 0;
+.imgcontainer {
+  display: flex; /* or display:grid */
+  justify-content: center;
 }
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-  span.psw {
-     display: block;
-     float: none;
-  }
+
+img.avatar {
+  width: 15%;
+  border-radius: 50%;
 }
+
+.submit {
+  background-color: #424473;
+  color: white;
+  padding: 10px 90px;
+  border: none;
+  border-radius: 5px 5px 5px 5px;
+  cursor: pointer;
+  float: right;
+}
+
+.update{
+  background-color: #F4F6FB;
+  margin: 5px 0 30px 0;
+}
+
 </style>
 </head>
 <body>
 
-<h2>Profile Settings</h2>
-
+<h2>Profile Setting</h2>
+<div class="empty">
 <form action="/action_page.php" method="post">
-
-  <div class="container">
-    <span class="psw">Change <a href="#">password?</a></span>
+<div class="container">
+    <button class="psw" onclick="document.location='default.asp'">Change password</button>
     <p class="userid">UserID: UID001</p>
   </div>
 
   <div class="imgcontainer">
-    <img src="img_avatar2.png" alt="Avatar" class="avatar">
+  <img src="/images/profile.png" class="avatar">
   </div>
   
   <div>
     <p id="profileName" class="name">SCPG1700562</p>
   </div>
-  
-  <div class="container">
-    <label for="uname"><b>First Name:</b></label>
-    <input type="text" name="fname" required>
-    
-    <label for="lname"><b>Last Name:</b></label>
-    <input type="text" name="lname" required>
-    
-    <label for="email"><b>Email:</b></label>
-    <input type="text" name="email" required>
-    
-    <label for="contact"><b>Contact:</b></label>
-    <input type="text" name="contact" required>
-    
-    <label for="department"><b>Department:</b></label>
-    <input type="text" name="department" required>
-    
-    <label for="position"><b>Position:</b></label>
-    <input type="text" name="position" required>
-    
-    <button type="submit">Update</button>
-  </div>
-</form>
 
+<table>
+  <tr>
+    <td><label for="uname" class="leftsection"><b>First Name:</b></label><br>
+      <input type="text" name="fname" class="leftsection" required></td>
+    <td><label for="lname" class="rightsection"><b>Last Name:</b></label><br>
+      <input type="text" name="lname" class="rightsection" required></td>
+  </tr>
+  <tr>
+    <td><label for="email" class="leftsection"><b>Email:</b></label><br>
+      <input type="text" name="email" class="leftsection" required></td>
+    <td><label for="contact" class="rightsection"><b>Contact:</b></label><br>
+      <input type="text" name="contact" class="rightsection" required></td>
+  </tr>
+  <tr>
+    <td><label for="department" class="leftsection"><b>Department:</b></label><br>
+    <input type="text" name="department" class="leftsection" style="background-color: #E6E6E5" required></td>
+    <td><label for="position" class="rightsection"><b>Position:</b></label><br>
+    <input type="text" name="position" class ="rightsection" style="background-color: #E6E6E5" required></td>
+  </tr>
+</table>
+
+<div class="update">
+  <button type="submit" class="submit">Update</button>
+</div>
+
+</form>
+</div>
 </body>
 </html>
