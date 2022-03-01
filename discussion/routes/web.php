@@ -14,5 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('profile');
+    return view('usercontrol');
 });
+
+Route::get('dashboard', function () {
+    return view('dashboard');
+});
+
+Route::get('sidebar', function () {
+    return view('sidebar');
+});
+
