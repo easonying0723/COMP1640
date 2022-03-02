@@ -34,7 +34,7 @@
                    <div class="accordion-body">
                      <div class="list-group" id="categoryListGroup">
                         <a href="#" class="list-group-item list-group-item-dark list-group-item-action d-flex justify-content-between align-items-center" style="border:none;" id="categorylist">
-                           #CHAIR
+                           #CB EASON
                            <span class="badge badge-primary badge-pill">
                               11
                            </span>
