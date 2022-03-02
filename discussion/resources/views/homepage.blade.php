@@ -86,7 +86,7 @@
                <div class="accordion-item">
                  <h2 class="accordion-header" id="flush-headingThree">
                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                     #ANYTHING
+                     #NOTHING
                      <span class="position-absolute top-0 start-100 translate-middle p-1 bg-warning rounded-circle">
                         <span class="visually-hidden">New alerts</span>
                       </span>
