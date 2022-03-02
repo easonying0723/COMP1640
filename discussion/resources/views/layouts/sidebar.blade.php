@@ -27,6 +27,8 @@
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
         <script charset="utf8" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+
         <!-- Own -->
         <link href="{{ URL::asset('css/sidebar.css') }}" rel="stylesheet">
         <script src="{{ URL::asset('js/sidebar.js') }}" type="module"></script>
@@ -39,10 +41,12 @@
             <i class='bx bx-menu' id="header-toggle"></i>
          </div>
          <div>
-            <h4>User Control</h4>
+            <h4>@yield ('title')</h4>
          </div>
          <div>
-            <i class='bx bx-bell' style="font-size: 1.5rem;"></i>
+            <button type="button" class="btn btn-light position-relative">
+               <i class='bx bx-bell' style="font-size: 1.5rem;"></i> <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">+99 <span class="visually-hidden">unread messages</span></span>
+             </button>
          </div>
       </header>
       <div class="l-navbar" id="nav-bar">
@@ -84,8 +88,11 @@
          </nav>
       </div>
 
-      @yield ('usercontrolcontent')
-      @yield ('homepage')
+      <div class="content">
+         @yield ('usercontrolcontent')
+         @yield ('homepage')
+         @yield ('category')
+      </div>
 
     </body>
 </html>

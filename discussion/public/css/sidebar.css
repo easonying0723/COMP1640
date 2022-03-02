@@ -2,7 +2,7 @@
 
          :root {
             --header-height: 3rem;
-            --nav-width: 78px;
+            --nav-width: 75px;
             --first-color: #3C3541;
             --first-color-light: #AFA5D9;
             --white-color: #F7F6FB;
@@ -71,7 +71,7 @@
             width: var(--nav-width);
             height: 100vh;
             background-color: var(--first-color);
-            padding: .5rem 1rem 0 0;
+            padding: 1rem 1rem 0 0;
             transition: .5s;
             z-index: var(--z-fixed)
          }
@@ -128,7 +128,7 @@
          }
 
          .body-pd {
-            padding-left: calc(var(--nav-width) + 1rem)
+            padding-left: calc(var(--nav-width) + 0rem)
          }
 
          .active {
@@ -151,7 +151,7 @@
          @media screen and (min-width: 768px) {
             body {
                margin: calc(var(--header-height) + 1rem) 0 0 0;
-               padding-left: calc(var(--nav-width) + 2rem)
+               padding-left: calc(var(--nav-width) + 0.7rem)
             }
 
             .header {
@@ -182,6 +182,6 @@
             }
 
             .body-pd {
-               padding-left: calc(var(--nav-width) + 188px)
+               padding-left: calc(var(--nav-width) + 168px)
             }
          }
