@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('usercontrol');
+    return view('password');
 });
 
 Route::get('dashboard', function () {
@@ -24,4 +24,6 @@ Route::get('dashboard', function () {
 Route::get('sidebar', function () {
     return view('sidebar');
 });
+
+
 

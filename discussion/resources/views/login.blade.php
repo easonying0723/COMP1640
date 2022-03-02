@@ -27,7 +27,7 @@ body{
   flex: 50%;
   padding: 10px;
   height: 475px; /* Should be removed. Only for demonstration */
-  margin: 4.5% auto 4.5% 15%;
+  margin: 60px auto 0 100px;
   border: 2px #424473;
   border-radius: 15px 0 0 15px;
 }
@@ -35,7 +35,7 @@ body{
 .column2 {
   flex: 50%;
   padding: 50px 30px 50px 30px;
-  margin: 4.5% 15% 4.5% auto;
+  margin: 60px 100px 0 auto;
   border: 2px #F4F6FB;
   border-radius: 0 15px 15px 0;
 }
