@@ -29,3 +29,15 @@ Route::get('sidebar', function () {
     return view('sidebar');
 });
 
+Route::get('login', function () {
+    return view('login');
+});
+
+Route::get('profile', function () {
+    return view('profile');
+});
+
+Route::get('terms', function () {
+    return view('terms');
+});
+

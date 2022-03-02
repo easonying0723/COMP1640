@@ -41,7 +41,7 @@
             <i class='bx bx-menu' id="header-toggle"></i>
          </div>
          <div>
-            <h4>@yield ('title')</h4>
+            <h3>@yield ('title')</h3>
          </div>
          <div>
             <button type="button" class="btn btn-light position-relative">
@@ -76,7 +76,7 @@
                <img src="/images/ironman.png" class="userimg">
                <div>
                   <br>
-                  <span class="nav_name" style="font-size:12px">Yvette Yee YingYing</span>
+                  <span class="nav_name" style="font-size:13px">Yvette Yee YingYing</span>
                   <p class="nav_name" style="font-weight:bold">QA Coordinator</p>
                </div>
             </a>
