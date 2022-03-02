@@ -25,7 +25,7 @@
                  <h5 class="accordion-header" id="flush-headingOne">
                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                      #FACILITIES
-                     <span class="position-absolute top-0 start-100 translate-middle p-2 bg-warning rounded-circle">
+                     <span class="position-absolute top-0 start-100 translate-middle p-1 bg-warning rounded-circle">
                         <span class="visually-hidden">New alerts</span>
                       </span>
                    </button>
@@ -56,7 +56,7 @@
                  <h2 class="accordion-header" id="flush-headingTwo">
                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
                      #LECTURER
-                     <span class="position-absolute top-0 start-100 translate-middle p-2 bg-warning rounded-circle">
+                     <span class="position-absolute top-0 start-100 translate-middle p-1 bg-warning rounded-circle">
                         <span class="visually-hidden">New alerts</span>
                       </span>
                    </button>
@@ -87,7 +87,7 @@
                  <h2 class="accordion-header" id="flush-headingThree">
                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
                      #ANYTHING
-                     <span class="position-absolute top-0 start-100 translate-middle p-2 bg-warning rounded-circle">
+                     <span class="position-absolute top-0 start-100 translate-middle p-1 bg-warning rounded-circle">
                         <span class="visually-hidden">New alerts</span>
                       </span>
                    </button>
