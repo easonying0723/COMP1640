@@ -1,3 +1,8 @@
+<?php
+
+
+ 
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +45,7 @@ body{
   border-radius: 0 15px 15px 0;
 }
 
-.lgnImage{
+.lgnImage {
 display:block;
 margin: 80px auto;
 width:300px;
@@ -124,12 +129,19 @@ span.psw {
       <h2 class="welcome">Hello Again!</h2>
       <p class="welcome">Welcome back you've been missed!</p>
     
-      <form action="/action_page.php" method="post">
-
+      <form action="{{ route('auth.check') }}" method="post">
+    @csrf
     <div class="container">
-      <input type="text" placeholder="Enter Username" name="uname" required>
+      <div class="form-group">
+        <input type="text" placeholder="Enter Username" name="uname" required>
+        <span class="text-danger">
+          
+        </span>
+      </div>
 
-      <input type="password" placeholder="Enter Password" name="psw" required>   
+      <div class="form-group">
+        <input type="password" placeholder="Enter Password" name="password" required> 
+      </div>  
     </div>
    
     <div class ="reminder">

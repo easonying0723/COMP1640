@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\MainController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,4 +28,8 @@ Route::get('dashboard', function () {
 Route::get('sidebar', function () {
     return view('sidebar');
 });
+
+Route::get('/auth/login', [MainController::class,'login'])->name('auth.login'); //view at main controller
+Route::post('/auth/check', [MainController::class,'check'])->name('auth.check'); //view at main controller
+
 
