@@ -1,11 +1,13 @@
 @extends ('layouts/sidebar')
 
+@section('title', 'User Control')
+
 <!-- Own -->
 <script src="{{ URL::asset('js/usercontrol.js') }}" type="module"></script>
 
 @section('usercontrolcontent')
 <!-- ----------------------------------------Content---------------------------------------- -->
-   <br><br>
+   <br>
       <div class="content">
          <div class="container">
             <!-- Button trigger modal -->
