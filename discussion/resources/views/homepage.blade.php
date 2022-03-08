@@ -20,6 +20,45 @@
                   </button>
                </p>
             </div>
+            <!---------------------------------------Create Modal --------------------------------------------->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+           <div class="modal-content">
+              <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">New Category</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                 <div class="container-fluid">
+                    <div class="row">
+                       <div class="col-md-6">
+                          <label for="">Category:</label>
+                          <input type="text" class="form-control" id="" placeholder="Please fill in..." required>
+                       </div>
+                       <div class="col-md-6">
+                          <label for="">Creator Name:</label>
+                          <input type="text" class="form-control" id="" placeholder="Please state..." required>
+                       </div>
+                    </div><br>
+                    <div class="row">
+                       <div class="col-md-6">
+                          <label for="">Description:</label>
+                          <input type="text" class="form-control" id="" placeholder="Please state..." required>
+                       </div>
+                       
+                    </div><br>                   
+                    </div><br>
+                 </div>
+              </div>
+              <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                 <button type="button" class="btn btn-primary" id="createcategory">Create</button>
+              </div>
+           </div>
+        </div>
+     </div>
+ </div>
+            <!---------------------------------------End Of Modal---------------------------------------------->
             <div class="accordion accordion-flush overflow-auto p-2 bg-transparent" style="max-height: 630px;" id="accordionFlushExample">
                <div class="accordion-item flex">
                  <h5 class="accordion-header" id="flush-headingOne">
