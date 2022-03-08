@@ -21,7 +21,7 @@
                </p>
             </div>
             <!---------------------------------------Create Modal --------------------------------------------->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-----<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -56,7 +56,7 @@
       </div>
     </div>
   </div>
-</div>
+</div>----->
                     
             <!---------------------------------------End Of Modal---------------------------------------------->
             <div class="accordion accordion-flush overflow-auto p-2 bg-transparent" style="max-height: 630px;" id="accordionFlushExample">
