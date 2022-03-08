@@ -21,7 +21,31 @@
                </p>
             </div>
             <!---------------------------------------Create Modal --------------------------------------------->
-            
+
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label class="form-label required">Enter Category name</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label required">Creater Name</label>
+                                <input type="email" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label required">Description</label>
+                                <textarea class="form-control"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-danger">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
             <!---------------------------------------End Of Modal---------------------------------------------->
             <div class="accordion accordion-flush overflow-auto p-2 bg-transparent" style="max-height: 630px;" id="accordionFlushExample">
                <div class="accordion-item flex">
