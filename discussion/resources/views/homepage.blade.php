@@ -13,51 +13,81 @@
          <input type="text" class="form-control" placeholder="Search">
          <br>
          <div class="categoryContainer">
-    <div class="container">
-       <p class="justify-content-between" style="color: #D0D4E3; font-weight: bold;">Category
-          <button type="button" id="categoryadd" class="btn btn-primary btn-lg bg-transparent float-right" data-bs-toggle="modal" data-bs-target="#exampleModal" style="border: none">
-             <i class='bx bx-plus-circle' style="color: #F4F7FF"></i>
-          </button>
-       </p>
-    </div>
-    <!------------Modal Box----------------->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-           <div class="modal-content">
-              <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">New Category</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                 <div class="container-fluid">
-                    <div class="row">
-                       <div class="col-md-6">
-                          <label for="">Category:</label>
-                          <input type="text" class="form-control" id="" placeholder="Please fill in..." required>
-                       </div>
-                       <div class="col-md-6">
-                          <label for="">Creator Name:</label>
-                          <input type="text" class="form-control" id="" placeholder="Please state..." required>
-                       </div>
-                    </div><br>
-                    <div class="row">
-                       <div class="col-md-6">
-                          <label for="">Description:</label>
-                          <input type="text" class="form-control" id="" placeholder="Please state..." required>
-                       </div>
-                       
-                    </div><br>                   
-                    </div><br>
+            <div class="container">
+               <p class="justify-content-between" style="color: #D0D4E3; font-weight: bold;">Category
+                  <button type="button" id="categoryadd" class="btn btn-primary btn-lg bg-transparent float-right" data-bs-toggle="modal" data-bs-target="#exampleModal" style="border: none">
+                     <i class='bx bx-plus-circle' style="color: #F4F7FF"></i>
+                  </button>
+               </p>
+            </div>
+            <div class="accordion accordion-flush overflow-auto p-2 bg-transparent" style="max-height: 630px;" id="accordionFlushExample">
+               <div class="accordion-item flex">
+                 <h5 class="accordion-header" id="flush-headingOne">
+                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                     #FACILITIES
+                     <span class="position-absolute top-10 start-100 translate-middle p-1 bg-warning rounded-circle">
+                        <span class="visually-hidden">New alerts</span>
+                      </span>
+                   </button>
+                 </h5>
+                 <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                   <div class="accordion-body">
+                     <div class="list-group" id="categoryListGroup">
+                        <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center bg-transparent">
+                           #CBEASON
+                           <span class="badge badge-primary badge-pill">
+                              11
+                           </span>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center bg-transparent">
+                           #TOILET
+                           <span class="badge badge-primary badge-pill">
+                              2
+                           </span>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-dark list-group-item-action d-flex justify-content-between align-items-center">
+                           + ADD TITLE
+                        </a>
+                     </div>
+                   </div>
                  </div>
-              </div>
-              <div class="modal-footer">
-                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                 <button type="button" class="btn btn-primary" id="createcategory">Create</button>
-              </div>
-           </div>
-        </div>
-     </div>
- </div>
+               </div>
+               <div class="accordion-item">
+                 <h2 class="accordion-header" id="flush-headingTwo">
+                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                     #LECTURER
+                     <span class="position-absolute top-10 start-100 translate-middle p-1 bg-warning rounded-circle">
+                        <span class="visually-hidden">New alerts</span>
+                      </span>
+                   </button>
+                 </h2>
+                 <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">
+                     <a href="#" class="list-group-item list-group-item-dark list-group-item-action d-flex justify-content-between align-items-center">
+                        + ADD TITLE
+                     </a>
+                   </div>
+                 </div>
+               </div>
+               <div class="accordion-item">
+                 <h2 class="accordion-header" id="flush-headingThree">
+                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                     #NOTHING
+                     <span class="position-absolute top-10 start-100 translate-middle p-1 bg-warning rounded-circle">
+                        <span class="visually-hidden">New alerts</span>
+                      </span>
+                   </button>
+                 </h2>
+                 <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">
+                     <a href="#" class="list-group-item list-group-item-dark list-group-item-action d-flex justify-content-between align-items-center">
+                        + ADD TITLE
+                     </a>
+                  </div>
+                 </div>
+               </div>
+            </div>
+         </div>
       </div>
       <div class="col-md-9" style="background-color: #A7B7CD">
          <br>
