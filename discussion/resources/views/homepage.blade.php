@@ -298,7 +298,7 @@
                            <input type="text" class="form-control" id="" placeholder="Please state you position" required>
                         </div>
                      </div><br>
-                        <div class="col-md-12">
+                        <div class="col-md-13">
                            <label for="">Description:</label>
                            <input type="text" class="form-control" id="" placeholder="Please write something" required>
                         </div>                    
@@ -306,7 +306,7 @@
                </div>
                <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary" id="createusercontrol">Create</button>
+                  <button type="button" class="btn btn-primary" id="creatcategory">Create</button>
                </div>
             </div>
          </div>
