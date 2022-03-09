@@ -67,6 +67,9 @@
                      <a href="#" class="list-group-item list-group-item-dark list-group-item-action d-flex justify-content-between align-items-center">
                         + ADD TITLE
                      </a>
+                     <!---------------------------Testing on the add title---------------------------->
+
+                     <!-------------------------Ends testing-------------------------------------->
                    </div>
                  </div>
                </div>
