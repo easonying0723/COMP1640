@@ -106,9 +106,8 @@
                   <div class="card" style="width: 18rem;">
                      <img src="images/add.png" class="card-img-top" style="">
                      <div class="card-body">
-                       <a href="#" class="btn btn-primary">+ New Ideas</a>
                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                        Launch demo modal
+                        + New Idea
                       </button>
                      </div>
                    </div>
