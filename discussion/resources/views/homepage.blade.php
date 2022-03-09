@@ -311,10 +311,7 @@
       </div>
     </div>
   </div>
-</div>
-                    
-            <!---------------------------------------End Of Modal---------------------------------------------->
-            <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
          <div class="modal-dialog">
             <div class="modal-content">
                <div class="modal-header">
@@ -331,4 +328,8 @@
             </div>
          </div>
       </div>
+</div>
+                    
+            <!---------------------------------------End Of Modal---------------------------------------------->
+            
 @endsection
