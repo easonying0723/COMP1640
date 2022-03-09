@@ -275,63 +275,61 @@
          <br>
       </div>
    </div>
-<!---------------------------------------Create Modal --------------------------------------------->
+<!-- ------------------------------------- Add Category--------------------------------------- -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Category</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Add New Category</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                  <div class="container-fluid">
+                     <div class="row">
+                        <div class="col-md-6">
+                           <label for="">Category Name:</label>
+                           <input type="text" class="form-control" id="" placeholder="Please insert..." required>
+                        </div>
+                        <div class="col-md-6">
+                           <label for="">Author Name:</label>
+                           <input type="text" class="form-control" id="" placeholder="Please insert..." required>
+                        </div>
+                     </div><br>
+                     <div class="row">
+                        <div class="col-md-6">
+                           <label for="">Description:</label>
+                           <input type="text" class="form-control" id="" placeholder="Please insert..." required>
+                        </div>
+                        
+                     </div><br>
+                     
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" id="createusercontrol">Create</button>
+               </div>
+            </div>
+         </div>
       </div>
-      <div class="modal-body">
-      <div class="container-fluid">
-                    <div class="row">
-                       <div class="col-md-6">
-                          <label for="">Category Name:</label>
-                          <input type="text" class="form-control" id="" placeholder="Please fill in..." required>
-                       </div>
-                       <div class="col-md-6">
-                          <label for="">Creator Name:</label>
-                          <input type="text" class="form-control" id="" placeholder="Please state..." required>
-                       </div>
-                    </div><br>
-                    <div class="row">
-                       <div class="col-md-6">
-                          <label for="">Description:</label>
-                          <input type="text" class="form-control" id="" placeholder="Please state..." required>
-                       </div>
-                       
-                    </div><br>                   
-                    </div><br>
-                 </div>
+
+      <!-- ------------------------------------- Successful Message (Modal Box)--------------------------------------- -->
+      <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Created Successfully.</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                  <label>New category has been added.</label>
+                  </div>
+               <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+               </div>
+            </div>
+         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Create</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!----------------------------------------------------------End Of Modal-------------------------------------------------------->
-<!----------------------------------------------------------Successful Created-------------------------------------------------->                    
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Created Successfully</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-          <label>You have successfully created a new category</label>
-        <label>New Category have been created</label>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        
-      </div>
-    </div>
-  </div>
-</div>
 
             
 @endsection
