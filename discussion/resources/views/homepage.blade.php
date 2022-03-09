@@ -309,11 +309,7 @@
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                   <button type="button" class="btn btn-primary" id="createusercontrol">Create</button>
                </div>
-            </div>
-         </div>
-      </div>
-
-      <!-- ------------------------------------- Successful Message (Modal Box)--------------------------------------- -->
+                    <!-- ------------------------------------- Successful Message (Modal Box)--------------------------------------- -->
       <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
          <div class="modal-dialog">
             <div class="modal-content">
@@ -330,6 +326,11 @@
             </div>
          </div>
       </div>
+            </div>
+         </div>
+      </div>
+
+ 
 
             
 @endsection
