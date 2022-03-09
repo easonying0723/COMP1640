@@ -311,25 +311,27 @@
       </div>
     </div>
   </div>
-  <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-         <div class="modal-dialog">
-            <div class="modal-content">
-               <div class="modal-header">
-               <h5 class="modal-title" id="exampleModalLabel">Succesfully Added.</h5>
-               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-               </div>
-               <div class="modal-body">
-                  <label>New Category Added.</label>
-                  
-               </div>
-               <div class="modal-footer">
-               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Notice</button>
-               </div>
-            </div>
-         </div>
-      </div>
 </div>
-                    
-            <!---------------------------------------End Of Modal---------------------------------------------->
+<!----------------------------------------------------------End Of Modal-------------------------------------------------------->
+<!----------------------------------------------------------Successful Created-------------------------------------------------->                    
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Created Successfully</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <label>You have successfully created a new category</label>
+        <label>New Category have been created</label>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
             
 @endsection
