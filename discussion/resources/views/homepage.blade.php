@@ -2,13 +2,13 @@
 
 <!-- Own -->
 <link href="{{ URL::asset('css/homepage.css') }}" rel="stylesheet">
-<script src="{{ URL::asset('js/homepage.js') }}" type="module"></script>
+{{-- <script src="{{ URL::asset('js/homepage.js') }}" type="module"></script> --}}
 
 @section('title', 'Home Page')
 
 @section('category')
-   <div class="row" >
-      <div class="col-md-3" style="background-color: #5E5267">
+   <div class="row homepagecontent">
+      <div class="col-md-3 categorynav">
          <br>
          <input type="text" class="form-control" placeholder="Search">
          <br>
@@ -20,7 +20,6 @@
                   </button>
                </p>
             </div>
-            
             <div class="accordion accordion-flush overflow-auto p-2 bg-transparent" style="max-height: 630px;" id="accordionFlushExample">
                <div class="accordion-item flex">
                  <h5 class="accordion-header" id="flush-headingOne">
@@ -90,7 +89,7 @@
             </div>
          </div>
       </div>
-      <div class="col-md-9" style="background-color: #A7B7CD">
+      <div class="col-md-9 content" style="background-color: #A7B7CD">
          <br>
          <div class="container">
             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
@@ -105,9 +104,12 @@
             <div class="row row-cols-3">
                <div class="col-sm-4" >
                   <div class="card" style="width: 18rem;">
-                     <img src="images/virtual-discussion-illustration-free-vector.jpg" class="card-img-top" style="">
+                     <img src="images/add.png" class="card-img-top" style="">
                      <div class="card-body">
                        <a href="#" class="btn btn-primary">+ New Ideas</a>
+                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Launch demo modal
+                      </button>
                      </div>
                    </div>
                </div>
@@ -126,135 +128,31 @@
                            <button type="button" class="btn btn-info btn-sm" disabled>IT Department</button>
                         </div>
                         <br>
-                        <p class="card-text d-inline-block text-truncate" style="max-width: 100%; overflow: hidden;">The high-level management of SEGi so sucks. Keep kicking ball over.</p>
+                        <p class="card-text ideascontent">The high-level management of SEGi so sucks. Keep kicking ball over. SEGi really is a sampah school.</p>
                         <a href="#" class="btn btn-secondary">View</a>
                         
                         <small style="float: right; margin: 10px">23 Views</small>
                      </div>
                      <div class="card-footer">
-                        <div id="demo">
-                           <button class="btn btn-warning btn-sm" style="margin:1px;"><span class="bx bx-like" aria-hidden="true" id="like"></span><span class="likes"> 0</span></button>
-                           <button class="btn btn-danger btn-sm" style="margin:1px;"><span class="bx bx-dislike" aria-hidden="true" id="dislike"></span><span class="dislikes"> 0</span></button>
+                        <div>
+                           <button id="like" class="btn like btn-warning btn-sm" style="margin:1px;"><span class="bx bx-like" aria-hidden="true"></span><span class="likes" id="likeValue"></span></button>
+                           <button id="dislike" class="btn dislike btn-danger btn-sm" style="margin:1px;"><span class="bx bx-dislike" aria-hidden="true"></span><span class="dislikes"id="dislikeValue" enabled='false'></span></button>
                            <small style="float: right; margin: 10px">78 Comments</small>
                          </div>
                      </div>
                   </div>
                </div>
                <div class="col-sm-4">
-                  <div class="card">
-                     <div class="card-header">
-                        <strong class="me-auto">Why FYP use Wordpress?</strong>
-                        <br>
-                        <small>11 mins ago</small>
-                     </div>
-                     <div class="card-body">
-                        <div>
-                           <h6 class="card-subtitle mb-2 text-muted" style="font-weight: bold; float: middle;">Yee YingYing
-                              <img src="images/ironman.png" id="userimg">
-                           </h6>
-                           <button type="button" class="btn btn-info btn-sm" disabled>IT Department</button>
-                        </div>
-                        <br>
-                        <p class="card-text d-inline-block text-truncate" style="max-width: 100%; overflow: hidden;">The high-level management of SEGi so sucks. Keep kicking ball over.</p>
-                        <a href="#" class="btn btn-secondary">View</a>
-                        
-                        <small style="float: right; margin: 10px">23 Views</small>
-                     </div>
-                     <div class="card-footer">
-                        <div id="demo">
-                           <button class="btn btn-warning btn-sm" style="margin:1px;"><span class="bx bx-like" aria-hidden="true" id="like"></span><span class="likes"> 0</span></button>
-                           <button class="btn btn-danger btn-sm" style="margin:1px;"><span class="bx bx-dislike" aria-hidden="true" id="dislike"></span><span class="dislikes"> 0</span></button>
-                           <small style="float: right; margin: 10px">78 Comments</small>
-                         </div>
-                     </div>
-                  </div>
+                  
                </div>
                <div class="col-sm-4">
-                  <div class="card">
-                     <div class="card-header">
-                        <strong class="me-auto">Why FYP use Wordpress?</strong>
-                        <br>
-                        <small>11 mins ago</small>
-                     </div>
-                     <div class="card-body">
-                        <div>
-                           <h6 class="card-subtitle mb-2 text-muted" style="font-weight: bold; float: middle;">Yee YingYing
-                              <img src="images/ironman.png" id="userimg">
-                           </h6>
-                           <button type="button" class="btn btn-info btn-sm" disabled>IT Department</button>
-                        </div>
-                        <br>
-                        <p class="card-text d-inline-block text-truncate" style="max-width: 100%; overflow: hidden;">The high-level management of SEGi so sucks. Keep kicking ball over.</p>
-                        <a href="#" class="btn btn-secondary">View</a>
-                        
-                        <small style="float: right; margin: 10px">23 Views</small>
-                     </div>
-                     <div class="card-footer">
-                        <div id="demo">
-                           <button class="btn btn-warning btn-sm" style="margin:1px;"><span class="bx bx-like" aria-hidden="true" id="like"></span><span class="likes"> 0</span></button>
-                           <button class="btn btn-danger btn-sm" style="margin:1px;"><span class="bx bx-dislike" aria-hidden="true" id="dislike"></span><span class="dislikes"> 0</span></button>
-                           <small style="float: right; margin: 10px">78 Comments</small>
-                         </div>
-                     </div>
-                  </div>
+                  
                </div>
                <div class="col-sm-4">
-                  <div class="card">
-                     <div class="card-header">
-                        <strong class="me-auto">Why FYP use Wordpress?</strong>
-                        <br>
-                        <small>11 mins ago</small>
-                     </div>
-                     <div class="card-body">
-                        <div>
-                           <h6 class="card-subtitle mb-2 text-muted" style="font-weight: bold; float: middle;">Yee YingYing
-                              <img src="images/ironman.png" id="userimg">
-                           </h6>
-                           <button type="button" class="btn btn-info btn-sm" disabled>IT Department</button>
-                        </div>
-                        <br>
-                        <p class="card-text d-inline-block text-truncate" style="max-width: 100%; overflow: hidden;">The high-level management of SEGi so sucks. Keep kicking ball over.</p>
-                        <a href="#" class="btn btn-secondary">View</a>
-                        
-                        <small style="float: right; margin: 10px">23 Views</small>
-                     </div>
-                     <div class="card-footer">
-                        <div id="demo">
-                           <button class="btn btn-warning btn-sm" style="margin:1px;"><span class="bx bx-like" aria-hidden="true" id="like"></span><span class="likes"> 0</span></button>
-                           <button class="btn btn-danger btn-sm" style="margin:1px;"><span class="bx bx-dislike" aria-hidden="true" id="dislike"></span><span class="dislikes"> 0</span></button>
-                           <small style="float: right; margin: 10px">78 Comments</small>
-                         </div>
-                     </div>
-                  </div>
+                  
                </div>
                <div class="col-sm-4">
-                  <div class="card">
-                     <div class="card-header">
-                        <strong class="me-auto">Why FYP use Wordpress?</strong>
-                        <br>
-                        <small>11 mins ago</small>
-                     </div>
-                     <div class="card-body">
-                        <div>
-                           <h6 class="card-subtitle mb-2 text-muted" style="font-weight: bold; float: middle;">Yee YingYing
-                              <img src="images/ironman.png" id="userimg">
-                           </h6>
-                           <button type="button" class="btn btn-info btn-sm" disabled>IT Department</button>
-                        </div>
-                        <br>
-                        <p class="card-text d-inline-block text-truncate" style="max-width: 100%; overflow: hidden;">The high-level management of SEGi so sucks. Keep kicking ball over.</p>
-                        <a href="#" class="btn btn-secondary">View</a>
-                        
-                        <small style="float: right; margin: 10px">23 Views</small>
-                     </div>
-                     <div class="card-footer">
-                        <div id="demo">
-                           <button class="btn btn-warning btn-sm" style="margin:1px;"><span class="bx bx-like" aria-hidden="true" id="like"></span><span class="likes"> 0</span></button>
-                           <button class="btn btn-danger btn-sm" style="margin:1px;"><span class="bx bx-dislike" aria-hidden="true" id="dislike"></span><span class="dislikes"> 0</span></button>
-                           <small style="float: right; margin: 10px">78 Comments</small>
-                         </div>
-                     </div>
-                  </div>
+                  
                </div>
             </div>
          </div>
@@ -275,43 +173,53 @@
          <br>
       </div>
    </div>
-<!---------------------------------------Create Modal --------------------------------------------->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Category</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <div class="container-fluid">
-                    <div class="row">
-                       <div class="col-md-6">
-                          <label for="">Category:</label>
-                          <input type="text" class="form-control" id="" placeholder="Please fill in..." required>
-                       </div>
-                       <div class="col-md-6">
-                          <label for="">Creator Name:</label>
-                          <input type="text" class="form-control" id="" placeholder="Please state..." required>
-                       </div>
-                    </div><br>
-                    <div class="row">
-                       <div class="col-md-6">
-                          <label for="">Description:</label>
-                          <input type="text" class="form-control" id="" placeholder="Please state..." required>
-                       </div>
-                       
-                    </div><br>                   
-                    </div><br>
-                 </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-                    
-            <!---------------------------------------End Of Modal---------------------------------------------->
+
+   <script>
+
+      function setLikeText(id,newvalue) {
+         var s= document.getElementById(id);
+         s.innerHTML = newvalue;
+      }
+
+      function setDislikeText(id,newvalue) {
+         var s= document.getElementById(id);
+         s.innerHTML = newvalue;
+      }
+
+      window.onload = function() {
+
+         setLikeText("likeValue", 0);
+         setDislikeText("dislikeValue", 0);
+
+      }
+
+      var currentLike = document.getElementById("likeValue").textContent;
+      var currentDislike = document.getElementById("dislikeValue").textContent;
+
+      //what if don't use span??
+
+      $('#like').click(function() {
+         console.log(currentLike);
+         console.log(currentDislike);
+         if(currentLike > 0){
+            setLike("likeValue", 0);
+         }
+         else {
+         setLikeText("likeValue", 1);
+         setDislikeText("dislikeValue", 0);
+         }
+      });
+
+
+      $('#dislike').click(function() {
+         if(currentDislike > 0){
+            setDislikeText("dislikeValue", 1);
+         }
+         else {
+         setDislikeText("dislikeValue", 1);
+         setLikeText("likeValue", 0);
+         }
+      });
+   </script>
+
 @endsection
