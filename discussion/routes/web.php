@@ -17,6 +17,10 @@ Route::get('usercontrol', function () {
     return view('usercontrol');
 });
 
+Route::get('test', function () {
+    return view('test');
+});
+
 Route::get('homepage', function () {
     return view('homepage');
 });
