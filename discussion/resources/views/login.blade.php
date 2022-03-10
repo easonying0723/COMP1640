@@ -9,6 +9,12 @@
   
   <!-- Fonts -->
   <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+  <!--Bootstrap-->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
+        <script charset="utf8" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
 <style>
 * {
   box-sizing: border-box;
@@ -19,30 +25,28 @@ body{
 }
 
 .row {
-  display: flex;
+  margin: 0 auto;
 }
 
 /* Create two equal columns that sits next to each other */
 .column1 {
-  flex: 50%;
+  margin: 60px 0 0 0;
   padding: 10px;
-  height: 475px; /* Should be removed. Only for demonstration */
-  margin: 60px auto 0 100px;
+  line-height: 475px; /*Should be removed. Only for demonstration */
   border: 2px #424473;
   border-radius: 15px 0 0 15px;
+  text-align: center;
 }
 
 .column2 {
-  flex: 50%;
-  padding: 50px 30px 50px 30px;
-  margin: 60px 100px 0 auto;
+  margin: 60px 0 0 0;
+  padding: 100px 10px 0 10px;
   border: 2px #F4F6FB;
   border-radius: 0 15px 15px 0;
 }
 
 .lgnImage{
-display:block;
-margin: 80px auto;
+display:inline-block;
 width:300px;
 height:310px;
 }
@@ -57,9 +61,9 @@ background-color: #F4F6FB;
 }
 
 input[type=text], input[type=password] {
-  width: 90%;
-  padding: 15px 30px;
-  margin: 10px 0;
+  width: 65%;
+  padding: 8px 30px;
+  margin: 20px 0 0 0;
   display: inline-block;
   border: 1px #ffff;
   border-radius: 10px 10px 10px 10px;
@@ -70,12 +74,12 @@ input[type=text], input[type=password] {
 button {
   background-color: #5A5EAA;
   color: white;
-  padding: 14px 20px;
+  padding: 6px 0;
   margin: 8px 0;
   border: none;
   border-radius: 10px 10px 10px 10px;
   cursor: pointer;
-  width: 80%;
+  width: 60%;
   display:block;
   margin: 0 auto;
 }
@@ -84,61 +88,62 @@ button:hover {
   opacity: 0.8;
 }
 
-.container {
+.textField {
   padding: 10px 0 0 0;
   text-align: center;
 }
 
-/*Remember or forget password*/
-.reminder{
-  padding: 5px 20px 25px 20px;
-}
-  
 .lgn {
-  padding: 30px 10px 30px 10px;
-  width: 80%;
+  padding: 30px 0 0 0;
+  width: 60%;
   display:block;
   margin: 0 auto;
 }
 
-span.psw {
-  float: right;
+/*Remember or forget password*/
+/*.reminder{
+  padding: 20px 20px 25px 20px;
 }
 
+span.psw {
+  float: right;
+}*/
+
 /* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
+/*@media screen and (max-width: 300px) {
   span.psw {
      display: block;
      float: none;
   }  
-}
+}*/
 </style>
 </head>
 <body>
+<div class="container">
   <div class="row">
-    <div class="column1" style="background-color:#424473;">
+    <div class="column1 col-6" style="background-color:#424473;">
       <img src="/images/login.png" class="lgnImage">
     </div>
 
-    <div class="column2" style="background-color:#F4F6FB;">
+    <div class="column2 col-6" style="background-color:#F4F6FB;">
       <h2 class="welcome">Hello Again!</h2>
       <p class="welcome">Welcome back you've been missed!</p>
     
       <form action="/action_page.php" method="post">
 
-    <div class="container">
+    <div class="textField">
       <input type="text" placeholder="Enter Username" name="uname" required>
 
       <input type="password" placeholder="Enter Password" name="psw" required>   
     </div>
    
-    <div class ="reminder">
-      <!-- <label>
-        <br><input type="checkbox" checked="checked" name="remember"> Remember me
-      </label> -->
+    <!--<div class ="reminder">
+      <label>
+        <input type="checkbox" checked="checked" name="remember"> Remember me
+      </label>
     
       <span class="psw">Recovery <a href="#">password?</a></span>
-    </div>
+    </div>-->
    
     <div class="lgn">
       <button type="submit">Login</button>
@@ -146,6 +151,6 @@ span.psw {
       </form>
     </div>
   </div>
-
+</div>
 </body>
 </html>

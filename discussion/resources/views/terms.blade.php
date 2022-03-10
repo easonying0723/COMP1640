@@ -19,7 +19,7 @@ body{
 }
 
 .terms {
-  margin:70px 250px;
+  margin:95px 300px;
   padding: 30px;
   border: 2px F4F6FB;
   border-radius: 15px 15px;
@@ -28,8 +28,8 @@ body{
 
 div.ex1 {
   background-color: white;
-  width: 670px;
-  height: 100px;
+  width: 565px;
+  height: 150px;
   overflow: scroll;
   padding: 10px;
 }
@@ -55,8 +55,7 @@ button {
     <h1>Terms & Condition.</h1><br>
     <p>Please check terms and condition to proceed to Login.</p>
       <div class="ex1">When you agree to terms and conditions, you are basically agreeing to all sorts of things. In order to know exactly what you have agreed to, you have to read and make sure you understand everything in the terms and conditions. Most people are usually surprised when they find out what they have agreed to.
-
-When you agree to terms and conditions, you are basically agreeing to all sorts of things. In order to know exactly what you have agreed to, you have to read and make sure you understand everything in the terms and conditions. Most people are usually surprised when they find out what they have agreed to.
+        <br><br>When you agree to terms and conditions, you are basically agreeing to all sorts of things. In order to know exactly what you have agreed to, you have to read and make sure you understand everything in the terms and conditions. Most people are usually surprised when they find out what they have agreed to.
       </div>
 
       <label>
