@@ -1,0 +1,164 @@
+
+  
+  h2.title{
+    text-align: right;
+  }*/
+  
+  .empty {
+    background-color: purple;
+}
+
+  .profileForm {
+  border: 10px solid #F4F6FB;
+  background-color: #F4F6FB;
+  border-radius: 10px;
+  box-shadow:1px 1px 3px 1px rgba(1,1,1,0.2);
+  padding: 20px 20px 30px 20px;
+  }
+  
+  table {
+    border-collapse: collapse;
+    margin: 0 auto;
+  }
+  
+  td, th {
+    text-align: left;
+    padding: 10px;
+  }
+  
+  input[type=text], input[type=password] {
+    padding: 10px 50px;
+    margin: 5px 0;
+    display: inline-block;
+    border: 1px #ffff;
+    border-radius: 5px 5px 5px 5px;
+    box-sizing: border-box;
+  }
+  
+  button:hover {
+    opacity: 0.8;
+  }
+  
+  .pswBtn{
+    background-color: #C1AEC3;
+    color: #3C3541;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 5px 5px 5px 5px;
+    cursor: pointer;
+  }
+  
+  .userid{
+    float: right;
+    margin-top: 0px;
+  }
+  
+  .name{
+    text-align: center;
+  }
+  
+  .imgcontainer {
+    display: flex; /* or display:grid */
+    justify-content: center;
+  }
+  
+  img.avatar {
+    width: 15%;
+    border-radius: 50%;
+  }
+  
+  .submitProfile {
+    background-color: #424473;
+    color: white;
+    padding: 10px 90px;
+    border: none;
+    border-radius: 5px 5px 5px 5px;
+    cursor: pointer;
+    float: right;
+  }
+  
+  .updateProfile{
+    background-color: #F4F6FB;
+    margin: 5px 0 30px 0;
+  }
+  
+  /* The Modal (background) */
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 50px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    background-color: #F4F6FB;
+    margin: auto;
+    padding: 10px 20px 10px 20px;
+    width: 50%;
+    border: none;
+    border-radius: 8px;
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  /*h2{
+    color: black;
+  }*/
+  
+  input[type=password] {
+    padding: 10px 50px;
+    display: inline-block;
+    border: 1px #ffff;
+    border-radius: 5px 5px 5px 5px;
+    box-sizing: border-box;
+  }
+  
+  .passform{
+   margin: 30px 200px;
+  }
+  
+  .updatePassword{
+    background-color: #F4F6FB;
+    margin: 5px 0 50px 0;
+  }
+  
+  .submitPassword{
+    background-color: #424473;
+    color: white;
+    padding: 10px 50px;
+    border: none;
+    border-radius: 5px 5px 5px 5px;
+    cursor: pointer;
+    float: right;
+  }
+  
+  .cancelPassword{
+    background-color: #F4F7FF;
+    color: #424473;
+    padding: 10px 50px ;
+    border: none;
+    border-radius: 5px 5px 5px 5px;
+    cursor: pointer;
+    float: right;
+  }

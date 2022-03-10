@@ -13,13 +13,16 @@ use App\Http\Controllers\MainController;
 |
 */
 
-Route::get('usercontrol', function () {
-    return view('usercontrol');
+
+Route::get('/', function () {
+    return view('profile');
 });
 
-Route::get('test', function () {
-    return view('test');
+/*
+Route::get('/', function () {
+    return view('Testing');
 });
+*/
 
 Route::get('homepage', function () {
     return view('homepage');
@@ -33,7 +36,5 @@ Route::get('sidebar', function () {
     return view('sidebar');
 });
 
-Route::get('/auth/login', [MainController::class,'login'])->name('auth.login'); //view at main controller
-Route::post('/auth/check', [MainController::class,'check'])->name('auth.check'); //view at main controller
 
 

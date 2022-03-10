@@ -1,9 +1,7 @@
 @extends ('layouts/sidebar')
 
 @section('title', 'Profile')
-<!DOCTYPE html>
-<html>
-<head>
+
 <!-- Link css file -->
 <link href="{{ URL::asset('css/profile.css') }}" rel="stylesheet">
 
@@ -11,12 +9,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
 
-</head>
-<body>
 @section('profilecontent')
+<body>
 <!--<h2 class="title">Profile Setting</h2>-->
-<div class="empty">
-  <p>lala</p>
+<div class="profileContainer">
 <form class="profileForm" action="/action_page.php" method="post">
   <div class="container">
     <!-- Trigger/Open The Modal -->
@@ -56,6 +52,7 @@
 <div class="updateProfile">
   <button type="submit" class="submitProfile">Update</button>
 </div>
+
 </form>
 </div>
 
@@ -107,6 +104,7 @@
          <input type="submit" name="cancel" value="Cancel" class="cancelPassword">
        </div>
      </div>
+
 </div>
 
 <script>
