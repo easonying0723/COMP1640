@@ -1,0 +1,34 @@
+.termsBody{
+    background-color: #E7E6F3;
+  }
+  
+  .termsTitle {
+    margin:65px 300px;
+    padding: 30px;
+    border: 2px F4F6FB;
+    border-radius: 15px 15px;
+    background-color: #F4F6FB;
+  }
+  
+  div.termsContent {
+    background-color: white;
+    width: 565px;
+    height: 150px;
+    overflow: scroll;
+    padding: 10px;
+  }
+  
+  button {
+    background-color: #5A5EAA;
+    color: white;
+    padding: 10px 0;
+    border: none;
+    border-radius: 10px 10px 10px 10px;
+    cursor: pointer;
+    width: 30%;
+    float: right;
+  }
+  
+  .lgn{
+      margin: 10px 0 50px 0;
+  }

@@ -13,9 +13,16 @@ use App\Http\Controllers\MainController;
 |
 */
 
+
 Route::get('/', function () {
-    return view('terms');
+    return view('profile');
 });
+
+/*
+Route::get('/', function () {
+    return view('Testing');
+});
+*/
 
 Route::get('homepage', function () {
     return view('homepage');

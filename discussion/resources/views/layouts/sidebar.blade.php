@@ -90,6 +90,7 @@
 
       <div class="content">
          @yield ('usercontrolcontent')
+         @yield ('profilecontent')
          @yield ('homepage')
          @yield ('category')
       </div>

@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <link href="{{ URL::asset('css/terms.css') }}" rel="stylesheet">
+
   <!-- All format -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   
@@ -13,48 +15,17 @@
   <!-- Fonts -->
   <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
 
-<style>
-body{
-  background-color: #E7E6F3;
-}
+  <!-- Bootstrap 5 -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
+        <script charset="utf8" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 
-.terms {
-  margin:95px 300px;
-  padding: 30px;
-  border: 2px F4F6FB;
-  border-radius: 15px 15px;
-  background-color: #F4F6FB;
-}
-
-div.ex1 {
-  background-color: white;
-  width: 565px;
-  height: 150px;
-  overflow: scroll;
-  padding: 10px;
-}
-
-button {
-  background-color: #5A5EAA;
-  color: white;
-  padding: 10px 0;
-  border: none;
-  border-radius: 10px 10px 10px 10px;
-  cursor: pointer;
-  width: 30%;
-  float: right;
-}
-
-.lgn{
-    margin: 10px 0 50px 0;
-}
-</style>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
 </head>
-<body>
-  <div class="terms">
+<body class="termsBody">
+  <div class="termsTitle">
     <h1>Terms & Condition.</h1><br>
     <p>Please check terms and condition to proceed to Login.</p>
-      <div class="ex1">When you agree to terms and conditions, you are basically agreeing to all sorts of things. In order to know exactly what you have agreed to, you have to read and make sure you understand everything in the terms and conditions. Most people are usually surprised when they find out what they have agreed to.
+      <div class="termsContent">When you agree to terms and conditions, you are basically agreeing to all sorts of things. In order to know exactly what you have agreed to, you have to read and make sure you understand everything in the terms and conditions. Most people are usually surprised when they find out what they have agreed to.
         <br><br>When you agree to terms and conditions, you are basically agreeing to all sorts of things. In order to know exactly what you have agreed to, you have to read and make sure you understand everything in the terms and conditions. Most people are usually surprised when they find out what they have agreed to.
       </div>
 
