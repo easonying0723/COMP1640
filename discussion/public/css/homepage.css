@@ -6,6 +6,9 @@
   background-color: #5E5267;
 }
 
+.accordion{
+  color: #F4F7FF;
+}
 /* --------------------Scrollbar----------------------- */
 
 /* width */
@@ -38,7 +41,7 @@
 }
 
 .ideascontent{
-  display: -webkit-box;
+    display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;

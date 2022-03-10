@@ -1,3 +1,66 @@
+$('#createcategory').on( 'click',function () {
+   $("#successModal").modal("show");
+});
+
+$('#createcategory').on( 'click',function () {
+   $("#categoryModal").modal("hide");
+});
+
+$('#addtitle').on( 'click',function () {
+   $("#titleModal").modal("show");
+});
+
+$('#createcategory').on( 'click',function () {
+   $("#successModal").modal("show");
+});
+
+$('#createcategory').on( 'click',function () {
+   $("#categoryModal").modal("hide");
+});
+
+//----------------------------Datepicker----------------------------//
+
+$('[data-toggle="datepicker"]').datepicker({
+   autoHide: true,
+   });
+   
+   var $startDate = $('.start-date');
+   var $endDate = $('.end-date');
+
+   $startDate.datepicker({
+      autoHide: true,
+      zIndex: 2048,
+   });
+
+   $endDate.datepicker({
+      autoHide: true,
+      startDate: $startDate.datepicker('getDate'),
+      zIndex: 2048,
+   });
+
+   $startDate.on('change', function () {
+      $endDate.datepicker('setStartDate', $startDate.datepicker('getDate'));
+   });
+
+//----------------------------Multiselect Option----------------------------//
+
+$(document).ready(function() {
+
+   //Promo multiselect
+   $('#multidepartment').multiselect({
+      includeSelectAllOption: true,
+      enableClickableOptGroups: true,
+      enableFiltering: true,
+      enableResetButton: true,
+
+      dropDown: true,
+      buttonContainer: '<div class="btn-group w-100" />',
+      maxHeight: 200,
+      widthSynchronizationMode: 'ifPopupIsSmaller',
+   });
+});
+
+
 // $('#demo').likeDislike({
 //     reverseMode: true,
 //      disabledClass: 'disable',
