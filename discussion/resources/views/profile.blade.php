@@ -33,28 +33,38 @@
   <div>
     <p id="profileName" class="name">SCPG1700562</p>
   </div>
-
-<table>
-  <tr class="mb-4">
-    <td><label for="uname" class="leftsection"><b>First Name:</b></label><br>
-      <input type="text" name="fname" class="leftsection"></td>
-    <td><label for="lname" class="rightsection"><b>Last Name:</b></label><br>
-      <input type="text" name="lname" class="rightsection"></td>
-  </tr>
-  <tr class="mb-4">
-    <td><label for="email" class="leftsection"><b>Email:</b></label><br>
-      <input type="text" name="email" class="leftsection"></td>
-    <td><label for="contact" class="rightsection"><b>Contact:</b></label><br>
-      <input type="text" name="contact" class="rightsection"></td>
-  </tr>
-  <tr class="mb-4">
-    <td><label for="department" class="leftsection"><b>Department:</b></label><br>
-    <input type="text" name="department" class="leftsection" style="background-color: #E6E6E5"></td>
-    <td><label for="position" class="rightsection"><b>Position:</b></label><br>
-    <input type="text" name="position" class ="rightsection" style="background-color: #E6E6E5"></td>
-  </tr>
-</table>
-
+  <div class="small-middle-container">
+  <div class="row">
+    <div class="col ">
+    <label for="uname" class="leftsection"><b>First Name:</b></label><br>
+    <input type="text" name="fname" >
+    </div>
+    <div class="col ">
+      <label for="lname" class="rightsection"><b>Last Name:</b></label><br>
+      <input type="text" name="lname"></td>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <label for="email" class="leftsection"><b>Email:</b></label><br>
+      <input type="text" name="email" >
+    </div>
+    <div class="col">
+    <label for="contact" class="rightsection"><b>Contact:</b></label><br>
+      <input type="text" name="contact" class="rightsection">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+    <label for="department" class="leftsection"><b>Department:</b></label><br>
+    <input type="text" name="department" class="leftsection" style="background-color: #E6E6E5">
+    </div>
+    <div class="col">
+    <label for="position" class="rightsection"><b>Position:</b></label><br>
+    <input type="text" name="position" class ="rightsection" style="background-color: #E6E6E5">
+    </div>
+  </div>
+</div>
 <div class="updateProfile">
   <button type="submit" class="submitProfile">Update</button>
 </div>

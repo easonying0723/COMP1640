@@ -15,6 +15,10 @@
   box-shadow:1px 1px 3px 1px rgba(1,1,1,0.2);
   padding: 20px 20px 30px 20px;
   }
+  .small-middle-container{
+    margin: auto;
+    width: 40%;
+  }
   
   table {
     border-collapse: collapse;
