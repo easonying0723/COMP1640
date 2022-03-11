@@ -18,11 +18,11 @@ Route::get('/', function () {
     return view('profile');
 });
 
-/*
-Route::get('/', function () {
-    return view('Testing');
+
+Route::get('usercontrol', function () {
+    return view('usercontrol');
 });
-*/
+
 
 Route::get('homepage', function () {
     return view('homepage');
