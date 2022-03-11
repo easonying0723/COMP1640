@@ -27,7 +27,10 @@
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
         <script charset="utf8" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+        <!-- Bootstrap 4 -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
         <!-- Own -->
         <link href="{{ URL::asset('css/sidebar.css') }}" rel="stylesheet">
@@ -44,6 +47,7 @@
             <h4>@yield ('title')</h4>
          </div>
          <div>
+            <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
             <button type="button" class="btn btn-light position-relative">
                <i class='bx bx-bell' style="font-size: 1.5rem;"></i> <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">+99 <span class="visually-hidden">unread messages</span></span>
              </button>
@@ -94,6 +98,25 @@
          @yield ('homepage')
          @yield ('category')
       </div>
+
+
+
+{{---------------------------- Toast ----------------------------}}
+<div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">
+   <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+     <div class="toast-header">
+       <img src="..." class="rounded mr-2" alt="...">
+       <strong class="mr-auto">Bootstrap</strong>
+       <small>11 mins ago</small>
+       <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+       </button>
+     </div>
+     <div class="toast-body">
+       Hello, world! This is a toast message.
+     </div>
+   </div>
+ </div>
 
     </body>
 </html>
