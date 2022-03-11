@@ -28,13 +28,44 @@
       <div class="termsContent">When you agree to terms and conditions, you are basically agreeing to all sorts of things. In order to know exactly what you have agreed to, you have to read and make sure you understand everything in the terms and conditions. Most people are usually surprised when they find out what they have agreed to.
         <br><br>When you agree to terms and conditions, you are basically agreeing to all sorts of things. In order to know exactly what you have agreed to, you have to read and make sure you understand everything in the terms and conditions. Most people are usually surprised when they find out what they have agreed to.
       </div>
-
-      <label>
-        <br><input type="checkbox" name="agree"> I agree to the terms and conditions.
-      </label>
-      <div class ="lgn">
-        <button type="submit">Proceed</button>
+      
+      <form class="needs-validation" novalidate>
+      <div class="form-check termsCheck" novalidate>
+        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+        <label class="form-check-label" for="invalidCheck">
+        I agree to the terms and condition.
+        </label>
+          <div class="invalid-feedback">
+        You must agree before submitting.
+          </div>
       </div>
+
+      <div class ="lgn">
+        <button class="lgnButton" type="submit">Proceed</button>
+      </div>
+      </form>
   </div>
 </body>
+<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var checkTerms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(checkTerms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+</script>
 </html>

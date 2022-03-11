@@ -3,7 +3,7 @@
   }
   
   .termsTitle {
-    margin:65px 300px;
+    margin:90px 300px;
     padding: 30px;
     border: 2px F4F6FB;
     border-radius: 15px 15px;
@@ -17,8 +17,12 @@
     overflow: scroll;
     padding: 10px;
   }
+
+  .termsCheck {
+    margin: 10px 0 0 0;
+  }
   
-  button {
+  .lgnButton {
     background-color: #5A5EAA;
     color: white;
     padding: 10px 0;

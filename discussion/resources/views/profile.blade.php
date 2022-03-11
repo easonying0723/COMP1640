@@ -4,6 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <!-- Link css file -->
 <link href="{{ URL::asset('css/profile.css') }}" rel="stylesheet">
 
@@ -16,7 +19,6 @@
 @section('profilecontent')
 <!--<h2 class="title">Profile Setting</h2>-->
 <div class="empty">
-  <p>lala</p>
 <form class="profileForm" action="/action_page.php" method="post">
   <div class="container">
     <!-- Trigger/Open The Modal -->
@@ -39,7 +41,7 @@
     <td><label for="lname" class="rightsection"><b>Last Name:</b></label><br>
       <input type="text" name="lname" class="rightsection"></td>
   </tr>
-  <tr class=“mb-4”>
+  <tr class="mb-4">
     <td><label for="email" class="leftsection"><b>Email:</b></label><br>
       <input type="text" name="email" class="leftsection"></td>
     <td><label for="contact" class="rightsection"><b>Contact:</b></label><br>
