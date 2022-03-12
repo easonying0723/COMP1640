@@ -14,6 +14,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
 
+<!-- Bootstrap 5 -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
+        <script charset="utf8" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 <body>
 @section('profilecontent')
@@ -33,6 +37,7 @@
   <div>
     <p id="profileName" class="name">SCPG1700562</p>
   </div>
+
   <div class="small-middle-container">
   <div class="row">
     <div class="col ">
@@ -65,6 +70,7 @@
     </div>
   </div>
 </div>
+
 <div class="updateProfile">
   <button type="submit" class="submitProfile">Update</button>
 </div>
