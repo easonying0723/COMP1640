@@ -4,8 +4,12 @@
 
 <link href="{{ URL::asset('css/homepage.css') }}" rel="stylesheet">
 <script src="{{ URL::asset('js/homepage.js') }}" type="module"></script>
+<script src="{{ URL::asset('js/Suneditor-WYSIWYG.js') }}" type="module"></script>
 
 @section('category')
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/css/suneditor.min.css">
+<script src="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/suneditor.min.js"></script>
 
 <!-- Datepickers -->
 <script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
@@ -330,7 +334,7 @@
                         </label>
                      </div>
                   </div>
-               </div>                         
+               </div>
             </div>
          </div>
          <div class="modal-footer">
