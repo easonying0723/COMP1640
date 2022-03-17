@@ -46,18 +46,6 @@ $('#addidea').on( 'click',function () {
 
 });
 
-$('#createidea').on( 'click',function () {
-
-   $("#ideaModal").modal("hide");
-
-});
-
-$('#createidea').on( 'click',function () {
-
-   $("#successModal").modal("show");
-
-});
-
 // View Toggle
 
 $('#view').on( 'click',function () {
@@ -119,6 +107,7 @@ $(document).on("click", ".browse", function() {
  
  $("#uploadphoto").change(function(e) {
    var fileName = e.target.files[0].name;
+   
    $("#photo").val(fileName);
 
    var reader = new FileReader();

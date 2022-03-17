@@ -211,11 +211,9 @@ canvas#myChart5 {
     <div class="custom-select" style="width:200px;">
   <select>
     <option value="0">All (Titles)</option>
-    <option value="1">title 1</option>
-    <option value="2">title 2</option>
-    <option value="3">title 3</option>
-    <option value="4">title 4</option>
-    <option value="5">title 5</option>
+    @foreach($titles as $title)
+    <option value="{{$title['id']}}">{{$title['name']}}</option>
+    @endforeach
   </select>
 </div>
 
@@ -243,10 +241,9 @@ canvas#myChart5 {
 <div class="table-dash">
 <select name="department" id="departments">
     <option value="all-department">All (Department)</option>
-    <option value="department1">Department 1</option>
-    <option value="department2">Department 2</option>
-    <option value="department3">Department 3</option>
-    <option value="department4">Department 4</option>
+    @foreach($departments as $department)
+      <option value="{{$department['id']}}">{{$department['name']}}</option>
+    @endforeach
   </select>
   <div class="search-container">
     <form action="/action_page.php">
@@ -274,40 +271,12 @@ canvas#myChart5 {
     <th>Ideas Post</th>
   </tr>
 
+  @foreach($ideasWithoutComment as $idea)
   <tr>
-    <td>001</td>
-    <td>This assignment is very many thing</td>
+    <td>{{$idea['ID']}}</td>
+    <td>{{$idea['idea']}}</td>
   </tr>
- 
-  <tr>
-    <td>002</td>
-    <td>Laravel woohoo</td>
-  </tr>
-
-  <tr>
-    <td>003</td>
-    <td>haiz</td>
-  </tr>
-  
-  <tr>
-    <td>004</td>
-    <td>limjiu?</td>
-  </tr>
-  
-  <tr>
-    <td>005</td>
-    <td>example only</td>
-  </tr>
-
-  <tr>
-    <td>006</td>
-    <td>ignore all these</td>
-  </tr>
-
-  <tr>
-    <td>006</td>
-    <td>i just want to make a table</td>
-  </tr>
+@endforeach
   
 </table>
   <div id="linechart"></div>
@@ -323,28 +292,15 @@ canvas#myChart5 {
     <th>Total of Thumbsup</th>
     <th>Total of ThumbsDown</th>
   </tr>
- 
+  @foreach($anonymous as $idea)
   <tr>
-    <td>002</td>
-    <td>HEHE 1</td>
-    <td>HEHE 2</td>
-    <td>30</td>
-    <td>20</td>
+    <td>{{$idea['id']}}</td>
+    <td>{{$idea['idea']}}</td>
+    <td>{{$idea['comment']}}</td>
+    <td>{{$idea['thumbsup']}}</td>
+    <td>{{$idea['thumbsdown']}}</td>
   </tr>
-  <tr>
-    <td>006</td>
-    <td>HEHE 1</td>
-    <td>This is a Comments</td>
-    <td>2</td>
-    <td>5</td>
-  </tr>
-  <tr>
-    <td>02</td>
-    <td>Ideas Post 1</td>
-    <td>This is a comment</td>
-    <td>5</td>
-    <td>10</td>
-  </tr>
+  @endforeach
 
 </table>
 <div id="barchart"></div>
@@ -356,9 +312,9 @@ canvas#myChart5 {
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
-var xValues = ["January", "February", "March", "April", "May","June","July"];
-var yValues = [65, 58, 80, 83, 55,53,40];
-var barColors = ["red", "green","blue","orange","brown","purple","yellow"];
+var xValues = <?php echo(json_encode($chart1XValues)); ?>;
+var yValues = <?php echo(json_encode($chart1yValues)); ?>;
+var barColors = <?php echo(json_encode($chart1Colors)); ?>;
 
 
 $('#chart1').append(' <canvas id="myChart1" width="50" height="50" ></canvas>');
@@ -429,9 +385,9 @@ $('#chart1').append(' <canvas id="myChart1" width="50" height="50" ></canvas>');
                     }
                 });
 
-var xTitle = ["Title 1", "Title 2", "Title 3", "Title 4", "Title 5","Title 6","Title 7"];
-var yTitle = [65, 58, 80, 83, 55,53,40];
-var barColors = ["red", "green","blue","orange","brown","purple","yellow"];
+var xTitle = <?php echo json_encode($chart2xTitle); ?>;
+var yTitle = <?php echo json_encode($chart2yTitle); ?>;
+var barColors = <?php echo json_encode($chart2barColors); ?>;
 
 $('#piechart').append(' <canvas id="myChart2" width="100" height="100" ></canvas>');
                 var ctx = document.getElementById('myChart2');

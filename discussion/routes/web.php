@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,14 +29,10 @@ Route::get('usercontrol', function () {
     return view('usercontrol');
 });
 
+Route::get('/homepage', [HomeController::class, 'index'])->name('home');
+Route::post('/homepage/idea/store', [HomeController::class, 'store_idea']);
 
-Route::get('homepage', function () {
-    return view('homepage');
-});
-
-Route::get('dashboard', function () {
-    return view('dashboard');
-});
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('sidebar', function () {
     return view('sidebar');
