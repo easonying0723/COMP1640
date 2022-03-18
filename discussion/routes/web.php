@@ -15,7 +15,7 @@ use App\Http\Controllers\MainController;
 
 
 Route::get('/', function () {
-    return view('profile');
+    return view('terms');
 });
 
 

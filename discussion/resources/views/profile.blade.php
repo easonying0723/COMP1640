@@ -23,10 +23,10 @@
 @section('profilecontent')
 <!--<h2 class="title">Profile Setting</h2>-->
 <div class="empty">
-<form class="profileForm" action="/action_page.php" method="post">
+<form class="profileForm">
   <div class="container">
     <!-- Trigger/Open The Modal -->
-    <button id="passwordBtn" class="pswBtn" onclick="document.location='default.asp'">Change password <span class="iconify" data-icon="akar-icons:key"></span> </button>
+    <button type="button" class="pswBtn" data-bs-toggle="modal" data-bs-target="#changePassword_modal">Change password <span class="iconify" data-icon="akar-icons:key"></span> </button>
     <p class="userid">UserID: UID001</p>
   </div>
 
@@ -77,82 +77,43 @@
 </form>
 </div>
 
-<!-- The Modal -->
-<div id="myModal" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-      <h2>Change Password</h2>
-      <hr>
-      <form class="passform" name="frmChange" method="post" action="" onSubmit="return validatePassword()">
-        <div style="width:500px;">
-        <div class="message"><?php if(isset($message)) { echo $message; } ?>
-        </div>
-
-        <table boarder="0" cellpadding="10" cellspacing="0" width="500" text-align="center" class="tblSaveForm">
-          <tr>
-            <td><label>Current Password:</label></td>
-          </tr>
-
-          <tr>
-            <td><input type="password" name="currentPassword" class="txtField"/><span id="currentPassword"  class="required"></span></td>
-          </tr>
-
-          <tr>
-             <td><label>New Password:</label></td>
-          </tr>
-
-          <tr>
-            <td><input type="password" name="newPassword" class="txtField"/><span id="newPassword" class="required"></span></td>
-          </tr>
-
-          <tr>
-            <td><label>Confirm Password:</label></td>
-          </tr>
-
-          <tr>
-            <td><input type="password" name="confirmPassword" class="txtField"/><span id="confirmPassword" class="required"></span>               </td>
-          </tr>
-        </table>
-       </div>
-     </form>
-
-     <hr>
-
-       <div class="updatePassword">
-         <input type="submit" name="submit" value="Submit" class="submitPassword">
-         <input type="submit" name="cancel" value="Cancel" class="cancelPassword">
-       </div>
+<!-- Modal -->
+<div class="modal fade" id="changePassword_modal" tabindex="-1" aria-labelledby="changePasswordLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modalContent">
+    
+      <div class="modal-header modalHeader">
+        <h5 class="modal-title" id="changePasswordLabel"><b>Change Password</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+      <div class="modal-body modalBody">
+        <form>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Current Password : </label>
+            <input type="password" class="form-control" id="exampleInputPassword1">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">New Password : </label>
+            <input type="password" class="form-control" id="exampleInputPassword1">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Confirm New-Password : </label>
+            <input type="password" class="form-control" id="exampleInputPassword1">
+          </div>
+        </form>
+      </div>
+      
+      <div class="modal-footer modalFooter">
+        <button type="button" class="cancelPasswordBtn" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="submitPasswordBtn">Submit</button>
      </div>
+    </div>
+  </div>
 </div>
 
 <script>
-// Get the modal
-var modal = document.getElementById("myModal");
 
-// Get the button that opens the modal
-var btn = document.getElementById("passwordBtn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
 </script>
 @endsection
 </body>
