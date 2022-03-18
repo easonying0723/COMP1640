@@ -4,8 +4,12 @@
 
 <link href="{{ URL::asset('css/homepage.css') }}" rel="stylesheet">
 <script src="{{ URL::asset('js/homepage.js') }}" type="module"></script>
+<script src="{{ URL::asset('js/Suneditor-WYSIWYG.js') }}" type="module"></script>
 
 @section('category')
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/css/suneditor.min.css">
+<script src="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/suneditor.min.js"></script>
 
 <!-- Datepickers -->
 <script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
@@ -121,23 +125,24 @@
                      </div>
                    </div>
                </div>
+               @foreach($ideas as $index => $idea)
                <div class="col-sm-4">
                   <div class="card">
                      <div class="card-header">
-                        <strong class="me-auto">Why FYP use Wordpress?</strong>
+                        <strong class="me-auto">{{$idea->subject}}</strong>
                         <br>
-                        <small>11 mins ago</small>
+                        <small>{{$idea->created_at}}</small>
                      </div>
                      <div class="card-body">
                         <div>
-                           <h6 class="card-subtitle mb-2 text-muted fw-bold">Yee YingYing
+                           <h6 class="card-subtitle mb-2 text-muted fw-bold">{{$idea->anonymous == 1 ? 'Anonymous' : $idea->name}}
                               <img src="images/ironman.png" id="userimg">
                            </h6>
                            <button type="button" class="btn btn-info btn-sm" disabled>IT Department</button>
                         </div>
                         <br>
-                        <p class="card-text ideascontent">The high-level management of SEGi so sucks. Keep kicking ball over. SEGi really is a sampah school.</p>
-                        <button type="button" class="btn btn-secondary" data-toggle="modal" id="view">View</button>
+                        <p class="card-text ideascontent">{{$idea->idea}}</p>
+                        <button type="button" class="btn btn-secondary" data-toggle="modal" id="view" data-target="#view_idea_modal{{ $index }}">View</button>
                         
                         <small style="float: right; margin: 10px">23 Views</small>
                      </div>
@@ -150,34 +155,13 @@
                      </div>
                   </div>
                </div>
-               <div class="col-sm-4">
-                  
-               </div>
-               <div class="col-sm-4">
-                  
-               </div>
-               <div class="col-sm-4">
-                  
-               </div>
-               <div class="col-sm-4">
-                  
-               </div>
+               @endforeach
             </div>
          </div>
          <br>
-         <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-end">
-              <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-              </li>
-            </ul>
-         </nav>
+         <div class="d-flex justify-content-end">
+            {!! $ideas->links("pagination::bootstrap-4") !!}
+         </div>      
          <br>
       </div>
    </div>
@@ -278,23 +262,31 @@
 <div class="modal fade" id="ideaModal" tabindex="-1" aria-labelledby="ideaModallLabel" aria-hidden="true">
    <div class="modal-dialog modal-lg">
       <div class="modal-content">
+      <form action="{{ url('homepage/idea/store') }}" method="POST" enctype="multipart/form-data">
          <div class="modal-header">
          <h5 class="modal-title" id="ideaModalLabel">Add New Idea</h5>
          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
          </div>
          <div class="modal-body">
             <div class="container-fluid">
+            <div class="row">
+                  <div class="col-md-12">
+                     <label for="">Name:</label>
+                     <input type="text" class="form-control" id="name" name="name" placeholder="Please enter name">
+                  </div>
+               </div>
+               <br>
                <div class="row">
                   <div class="col-md-12">
                      <label for="">Subject:</label>
-                     <input type="text" class="form-control" id="subject" placeholder="Please enter subject" required>
+                     <input type="text" class="form-control" id="subject" name="subject" placeholder="Please enter subject">
                   </div>
                </div>
                <br>
                <div class="row">
                   <div class="col-md-12">
                      <label for="">Idea:</label>
-                     <textarea class="form-control" rows="3" placeholder="Creative Ideas, Creative DISCUSS.ION." required></textarea>
+                     <textarea name="idea" class="form-control" rows="3" placeholder="Creative Ideas, Creative DISCUSS.ION."></textarea>
                   </div>
                </div>
                <br>
@@ -302,41 +294,37 @@
                   <div class="col-md-12">
                      <div class="mb-3">
                         <label for="uploadfile" class="form-label">Upload File</label>
-                        <input class="form-control" type="file" id="uploadfile" multiple>
+                        <input class="form-control" type="file" id="uploadfile" name="file[]" multiple>
                       </div>
                   </div>
                </div>                                   
                <div class="row">
                   <div class="col-md-12">
-                     <form method="post" id="image-form">
                         <label for="itemupload">Upload Photo:</label><br>
                         <input type="file" name="img[]" class="file" accept="image/*" id="uploadphoto">
                         <div class="input-group my-3">
-                          <input type="text" class="form-control" disabled placeholder="Upload Photo" id="photo" multiple>
-                          <div class="input-group-append">
-                            <button type="button" class="browse btn btn-primary">Upload</button>
-                          </div>
+                          <!-- <input type="text" class="form-control" disabled placeholder="Upload Photo" id="photo" multiple> -->
                         </div>
-                        <img src="images/uploadphoto.png" id="preview" class="img-thumbnail"> 
-                      </form>
+                        <img src="images/uploadphoto.png" id="preview" width="50%" class="img-thumbnail"> 
                   </div>
                </div>
                <div class="row">
                   <div class="col-md-12">
                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault" name="anonymous">
                         <label class="form-check-label" for="flexCheckDefault">
                            Do you want to post anonymously?
                         </label>
                      </div>
                   </div>
-               </div>                         
+               </div>
             </div>
          </div>
          <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="createidea">Create</button>
+            <button type="submit" class="btn btn-primary" id="createidea">Create</button>
          </div>
+         </form>
       </div>
    </div>
 </div>
@@ -344,34 +332,35 @@
 
 
 {{---------------------------- View Idea Modal ----------------------------}}
-<div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="viewModallLabel" aria-hidden="true">
+@foreach($ideas as $index => $idea)
+<div class="modal fade" id="view_idea_modal{{ $index }}" tabindex="-1" aria-labelledby="viewModallLabel" aria-hidden="true">
    <div class="modal-dialog modal-xl">
       <div class="modal-content">
          <div class="modal-header">
             <strong>
-               <h4 class="modal-title fw-bold" id="viewModalLabel">Why FYP use Wordpress?</h4>
+               <h4 class="modal-title fw-bold" id="viewModalLabel">{{$idea->subject}}</h4>
             </strong>
-         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" data-dismiss="modal"></button>
          </div>
          <div class="modal-body">
             <div class="container-fluid">
                <div class="row">
                   <div class="col-md-12">
                      <div>
-                        <h6 class="mb-2 text-muted fw-bold">Yee YingYing
+                        <h6 class="mb-2 text-muted fw-bold">{{$idea->anonymous == 1 ? 'Anonymous' : $idea->name}}
                            <img src="images/ironman.png" id="userimg">
                         </h6>
                         <button type="button" class="btn btn-info btn-sm" disabled>IT Department</button>
                         <br><br>
-                        <small>11 mins ago (Date/Time)</small>
+                        <small>{{$idea->created_at}}</small>
                      </div>
                   </div>
                </div>
                <br>  
                <div class="row">
                   <div class="col-md-12 d-flex justify-content-center" id="photosec">
-                     <a href="images/molly.jpg" target="_blank">
-                        <img class="img-fluid" src="images/molly.jpg" id="pictureshow">
+                     <a href="{{'images/idea/' .$idea->photo}}" target="_blank">
+                        <img width="100%" class="img-fluid" src="{{'images/idea/' .$idea->photo}}" id="pictureshow">
                      </a>
                   </div>
                </div>
@@ -379,49 +368,29 @@
                <div class="container">
                   <div class="row">
                      <div class="col-md-12" id="ideasec">
-                        <h5 class="card-text" id="ideascontent">The high-level management of SEGi so sucks. Keep kicking ball over. SEGi really is a sampah school. Mobile application I does really touch tiok yet GG already la. This semester very stressfull. Working + Studying especially the Final Year Project in it. REALLY REALLY stressfull. Alamak</h5>
+                        <h5 class="card-text" id="ideascontent">{{$idea->idea}}</h5>
                      </div>
                   </div>
                </div>
                <br>
                <div class="container">
                   <div class="row row-cols-3">
+                     @if($idea->file)
+                     @foreach( (explode(',',$idea->file)) as $index => $file)
                      <div class="col-md-2" id="filedownloadsec">
                         <div class="card">
-                           <a href="images/hicb.docx" target="_blank" download>
+                           <a href="{{ 'file/idea/' . $file }}" target="_blank" download>
                               <img class="card-img-top" src="images/folder.png" alt="Image cap">
                               <div class="card-body">
-                                 <a href="images/hicb.docx" target="_blank" download>
-                                    <p class="card-text">hicb.docx</p>
+                                 <a href="{{ 'file/idea/' . $file }}" target="_blank" download>
+                                    <p class="card-text">{{$file}}</p>
                                  </a>
                               </div>
                            </a>
                         </div>
                      </div>
-                     <div class="col-md-2" id="filedownloadsec">
-                        <div class="card">
-                           <a href="images/hicb.pdf" target="_blank" download>
-                              <img class="card-img-top" src="images/folder.png" alt="Image cap">
-                              <div class="card-body">
-                                 <a href="images/hicb.pdf" target="_blank" download>
-                                    <p class="card-text">hicb.pdf</p>
-                                 </a>
-                              </div>
-                           </a>
-                        </div>
-                     </div>
-                     <div class="col-md-2" id="filedownloadsec">
-                        <div class="card">
-                           <a href="images/hicb.txt" target="_blank" download>
-                              <img class="card-img-top" src="images/folder.png" alt="Image cap">
-                              <div class="card-body">
-                                 <a href="images/hicb.txt" target="_blank" download>
-                                    <p class="card-text">hicb.txt</p>
-                                 </a>
-                              </div>
-                           </a>
-                        </div>
-                     </div>
+                     @endforeach
+                     @endif
                   </div>
                </div>
             </div>
@@ -487,6 +456,7 @@
       </div>
    </div>
 </div>
+@endforeach
 
 
 
