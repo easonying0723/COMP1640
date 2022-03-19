@@ -180,8 +180,10 @@
             <div class="container-fluid">
                <div class="row">
                   <div class="col-md-6">
-                     <label for="">Category Name:</label>
+                  <label for="">Category Name:</label>
+                    <div id="newtask">
                      <input type="text" class="form-control" id="" placeholder="Please enter category name" required>
+                    </div>
                   </div>
                   <div class="col-md-6">
                      <label for="">Department:</label>
