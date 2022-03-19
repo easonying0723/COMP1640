@@ -210,13 +210,13 @@
             </div><br>
          </div>
          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="createcategory">Create</button>
+         <button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" id="addC">Add</button>
          </div>
       </div>
    </div>
 </div>
-
+<div id="tasks">
 
 
 {{---------------------------- Add Title Modal ----------------------------}}
@@ -507,6 +507,56 @@
       setLikeText("likeValue", 0);
       }
    });
+
+
+
+   //Create Category Show
+   document.querySelector('#addC').onclick = function(){
+    if(document.querySelector('#newtask input').value.length == 0){
+        alert("Please Enter a Task")
+ 
+    }
+    else{<!-------This is the function part------->
+         document.querySelector('#tasks').innerHTML += `
+            <div class="task">
+<div id="accordion-1" class="accordion" role="tablist" style="width: 500px; >
+    <div class="accordion-item">
+        <h2 class="accordion-header" role="tab" style="width: 500px;">
+          <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-1" aria-expanded="true" aria-controls="accordion-1 .item-1">#${document.querySelector('#newtask input').value}
+  <span class="position-absolute top-10 start-100 translate-middle p-1 bg-warning rounded-circle">
+                        <span class="visually-hidden">New alerts</span>
+                      </span>
+                   </button>
+  </button>
+  </h2>
+
+</div>
+</div>
+<button class="delete">
+                    <i class="far fa-trash-alt"></i>
+                </button>
+               
+            </div>
+
+        `;
+ var current_tasks = document.querySelectorAll(".delete");
+        for(var i=0; i<current_tasks.length; i++){
+            current_tasks[i].onclick = function(){
+                this.parentNode.remove();
+            }
+        }
+
+        var tasks = document.querySelectorAll(".task");
+        for(var i=0; i<tasks.length; i++){
+            tasks[i].onclick = function(){
+                this.classList.toggle('completed');
+ 
+            }
+        }
+
+        document.querySelector("#newtask input").value = "";
+    }
+}
 </script>
 
 @endsection
