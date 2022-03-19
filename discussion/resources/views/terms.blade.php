@@ -29,19 +29,23 @@
         <br><br>When you agree to terms and conditions, you are basically agreeing to all sorts of things. In order to know exactly what you have agreed to, you have to read and make sure you understand everything in the terms and conditions. Most people are usually surprised when they find out what they have agreed to.
       </div>
       
-      <form class="needs-validation" novalidate>
+      <form class="needs-validation" action ="/profile" novalidate>
       <div class="form-check termsCheck" novalidate>
         <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
         <label class="form-check-label" for="invalidCheck">
         I agree to the terms and condition.
         </label>
           <div class="invalid-feedback">
-        You must agree before submitting.
+        You must agree before proceed.
           </div>
       </div>
 
       <div class ="lgn">
-        <button class="lgnButton" type="submit">Proceed</button>
+        <button onclick="window.location.href='profile'">Click me</button>
+
+        <button type="submit" onclick="window.location='{{ url("/profile") }}'">Button</button>
+
+        <button class="lgnButton" type="submit" >Proceed</button>
       </div>
       </form>
   </div>

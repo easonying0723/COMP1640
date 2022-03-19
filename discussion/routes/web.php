@@ -20,6 +20,10 @@ Route::get('/', function () {
     return view('terms');
 });
 
+Route::get('profile', function () {
+    return view('profile');
+});
+
 Route::get('login', function () {
     return view('login');
 });

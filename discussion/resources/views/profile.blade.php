@@ -26,7 +26,7 @@
 <form class="profileForm">
   <div class="container">
     <!-- Trigger/Open The Modal -->
-    <button type="button" class="pswBtn" data-bs-toggle="modal" data-bs-target="#changePassword_modal">Change password <span class="iconify" data-icon="akar-icons:key"></span> </button>
+    <button type="button" id="changePassBtn" class="pswBtn" data-bs-toggle="modal" data-bs-target="#changePassword_modal">Change password <span class="iconify" data-icon="akar-icons:key"></span> </button>
     <p class="userid">UserID: UID001</p>
   </div>
 
@@ -78,36 +78,68 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="changePassword_modal" tabindex="-1" aria-labelledby="changePasswordLabel" aria-hidden="true">
+<!--<div class="modal fade" id="changePassword_modal" tabindex="-1" aria-labelledby="changePasswordLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modalContent">
     
       <div class="modal-header modalHeader">
         <h5 class="modal-title" id="changePasswordLabel"><b>Change Password</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
       </div>
       
       <div class="modal-body modalBody">
         <form>
           <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Current Password : </label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
+            <label for="InputPassword1" class="col-form-label">Current Password : </label>
+            <input type="password" class="form-control" id="InputPassword1">
           </div>
           <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">New Password : </label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
+            <label for="InputPassword1" class="col-form-label">New Password : </label>
+            <input type="password" class="form-control" id="InputPassword1">
           </div>
           <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Confirm New-Password : </label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
+            <label for="InputPassword1" class="col-form-label">Confirm New-Password : </label>
+            <input type="password" class="form-control" id="InputPassword1">
           </div>
         </form>
       </div>
       
       <div class="modal-footer modalFooter">
-        <button type="button" class="cancelPasswordBtn" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="cancelPasswordBtn" data-dismiss="modal">Cancel</button>
         <button type="button" class="submitPasswordBtn">Submit</button>
      </div>
+    </div>
+  </div>
+</div>-->
+
+<!-- Modal -->
+<div class="modal fade" id="changePassword_modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="background-color: #F4F6FB;">
+      <div class="modal-header modalHeader">
+        <h5 class="modal-title" id="modalLabel">Change Password</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body modalBody">
+        <form>
+          <div class="mb-3">
+            <label for="InputPassword1" class="col-form-label">Current Password : </label>
+            <input type="password" class="form-control" id="InputPassword1">
+          </div>
+          <div class="mb-3">
+            <label for="InputPassword1" class="col-form-label">New Password : </label>
+            <input type="password" class="form-control" id="InputPassword1">
+          </div>
+          <div class="mb-3">
+            <label for="InputPassword1" class="col-form-label">Confirm New-Password : </label>
+            <input type="password" class="form-control" id="InputPassword1">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer modalFooter">
+        <button type="button" class="cancelPasswordBtn" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="submitPasswordBtn">Submit</button>
+      </div>
     </div>
   </div>
 </div>

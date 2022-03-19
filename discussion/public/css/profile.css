@@ -83,27 +83,13 @@ img.avatar {
   float: right;
 }
 
-/*h2{
-  color: black;
-}*/
-.modalContent{
-  padding: 20px;
-  background-color: #F4F6FB;
-  border-radius: 10px;
-}
-
-.modalHeader .modalBody .modalFooter{
-  background-color: #F4F6FB;
-}
-
 .modalBody{
   margin:10px 100px;
 }
 
 input[type=password] {
-  padding: 10px 50px;
+  padding: 10px 10px;
   display: inline-block;
-  border: 1px #ffff;
   border-radius: 5px 5px 5px 5px;
   box-sizing: border-box;
 }
