@@ -16,7 +16,7 @@
 
 <!-- Bootstrap 5 -->
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
-        <script charset="utf8" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+<script charset="utf8" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
 <body>
@@ -24,27 +24,32 @@
 <!--<h2 class="title">Profile Setting</h2>-->
 <div class="empty">
 <form class="profileForm">
-  <div class="container">
+  <div class="profileContent">
     <!-- Trigger/Open The Modal -->
     <button type="button" id="changePassBtn" class="pswBtn" data-bs-toggle="modal" data-bs-target="#changePassword_modal">Change password <span class="iconify" data-icon="akar-icons:key"></span> </button>
     <p class="userid">UserID: UID001</p>
   </div>
 
-  <div class="imgcontainer">
-  <img src="/images/profile3.png" class="avatar">
+  <div class="profile-pic">
+    <label class="-label" for="file">
+      <span class="glyphicon glyphicon-camera"></span>
+      <span>Change Image</span>
+    </label>
+    <input id="file" type="file" onchange="loadFile(event)"/>
+    <img src="https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg" id="profilePic" width="200" />
   </div>
   
-  <div>
+  <div class="row">
     <p id="profileName" class="name">SCPG1700562</p>
   </div>
 
   <div class="small-middle-container">
   <div class="row">
-    <div class="col ">
+    <div class="col">
     <label for="uname" class="leftsection"><b>First Name:</b></label><br>
     <input type="text" name="fname" >
     </div>
-    <div class="col ">
+    <div class="col">
       <label for="lname" class="rightsection"><b>Last Name:</b></label><br>
       <input type="text" name="lname"></td>
     </div>
@@ -76,41 +81,6 @@
 </div>
 </form>
 </div>
-
-<!-- Modal -->
-<!--<div class="modal fade" id="changePassword_modal" tabindex="-1" aria-labelledby="changePasswordLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modalContent">
-    
-      <div class="modal-header modalHeader">
-        <h5 class="modal-title" id="changePasswordLabel"><b>Change Password</h5>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
-      </div>
-      
-      <div class="modal-body modalBody">
-        <form>
-          <div class="mb-3">
-            <label for="InputPassword1" class="col-form-label">Current Password : </label>
-            <input type="password" class="form-control" id="InputPassword1">
-          </div>
-          <div class="mb-3">
-            <label for="InputPassword1" class="col-form-label">New Password : </label>
-            <input type="password" class="form-control" id="InputPassword1">
-          </div>
-          <div class="mb-3">
-            <label for="InputPassword1" class="col-form-label">Confirm New-Password : </label>
-            <input type="password" class="form-control" id="InputPassword1">
-          </div>
-        </form>
-      </div>
-      
-      <div class="modal-footer modalFooter">
-        <button type="button" class="cancelPasswordBtn" data-dismiss="modal">Cancel</button>
-        <button type="button" class="submitPasswordBtn">Submit</button>
-     </div>
-    </div>
-  </div>
-</div>-->
 
 <!-- Modal -->
 <div class="modal fade" id="changePassword_modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
@@ -145,7 +115,10 @@
 </div>
 
 <script>
-
+var loadFile = function (event) {
+var image = document.getElementById("profilePic");
+image.src = URL.createObjectURL(event.target.files[0]);
+};
 </script>
 @endsection
 </body>

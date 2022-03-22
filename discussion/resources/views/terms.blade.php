@@ -41,10 +41,6 @@
       </div>
 
       <div class ="lgn">
-        <button onclick="window.location.href='profile'">Click me</button>
-
-        <button type="submit" onclick="window.location='{{ url("/profile") }}'">Button</button>
-
         <button class="lgnButton" type="submit" >Proceed</button>
       </div>
       </form>
