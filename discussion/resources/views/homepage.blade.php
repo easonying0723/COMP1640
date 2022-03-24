@@ -4,7 +4,6 @@
 
 <link href="{{ URL::asset('css/homepage.css') }}" rel="stylesheet">
 <script src="{{ URL::asset('js/homepage.js') }}" type="module"></script>
-<script src="{{ URL::asset('js/Suneditor-WYSIWYG.js') }}" type="module"></script>
 
 @section('category')
 
