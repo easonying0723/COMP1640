@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\User;
 class DashboardController extends Controller
 {
     /**
@@ -33,7 +33,11 @@ class DashboardController extends Controller
         $chart2xTitle = array("Title 1", "Title 2", "Title 3", "Title 4", "Title 5","Title 6","Title 7");
         $chart2yTitle = array(65, 58, 80, 83, 55,53,40);
         $chart2barColors = array("red", "green","blue","orange","brown","purple","yellow");
+        
+        $data = ['LoggedUserInfo'=>User::where('id','=', session('LoggedUser'))->first()];
 
-        return view('dashboard', compact('titles','departments','ideasWithoutComment','chart1XValues','chart1yValues','chart1Colors','chart2xTitle','chart2yTitle','chart2barColors','anonymous'));
+        return view('dashboard', compact('titles','departments','ideasWithoutComment','chart1XValues','chart1yValues','chart1Colors','chart2xTitle','chart2yTitle','chart2barColors','anonymous'),  $data);
     }
+
+
 }

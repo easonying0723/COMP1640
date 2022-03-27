@@ -10,17 +10,6 @@
    <br>
       <div class="content">
          <div class="container">
-         @if(Session::get('success'))
-             <div class="alert alert-success">
-                {{ Session::get('success') }}
-             </div>
-           @endif
-
-           @if(Session::get('fail'))
-             <div class="alert alert-danger">
-                {{ Session::get('fail') }}
-             </div>
-           @endif
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color: #414372">
             <i class='bx bx-plus-circle' style="color: white;"></i>
@@ -78,27 +67,24 @@
                         <div class="col-md-6">
                            <label for="">Pre-set Username:</label>
                            <input type="text" class="form-control" name="name" placeholder="Please insert..." required>
-                           <span class="text-danger">@error('name'){{ $message }} @enderror</span>
                         </div>
                         <div class="col-md-6">
                            <label for="">Pre-set Password:</label>
-                           <input type="password" class="form-control" name="password" placeholder="Please insert..." required>
-                           <span class="text-danger">@error('password'){{ $message }} @enderror</span>
+                           <input type="text" class="form-control" name="password" placeholder="Please insert..." required>
                         </div>
                      </div><br>
                      <div class="row">
                         <div class="col-md-6">
                            <label for="">User Email:</label>
-                           <input type="email" class="form-control" name="email" placeholder="Please insert..." required>
-                           <span class="text-danger">@error('email'){{ $message }} @enderror</span>
+                           <input type="text" class="form-control" name="email" placeholder="Please insert..." required>
                         </div>
                         <div class="col-md-6">
                            <label for="">Department:</label>
                            <select class="form-select" name="department"aria-label="Default select example">
                               <option selected>Please Choose...</option>
-                              <option value="IT">IT</option>
-                              <option value="Marketing">Marketing</option>
-                              <option value="Accounting Finance">Accounting Finance</option>
+                              <option value="1">IT</option>
+                              <option value="2">Marketing</option>
+                              <option value="3">Accounting Finance</option>
                            </select>
                         </div>
                      </div><br>
@@ -107,10 +93,10 @@
                            <label for="">Position:</label>
                            <select class="form-select" name="position" aria-label="Default select example">
                               <option selected>Please Choose...</option>
-                              <option value="manager">Manager</option>
-                              <option value="coordinator">Coordinator</option>
-                              <option value="admin">Admin</option>
-                              <option value="staff">Staff</option>
+                              <option value="1">Manager</option>
+                              <option value="2">Coordinator</option>
+                              <option value="3">Admin</option>
+                              <option value="3">Staff</option>
                            </select>
                         </div>
                         <!-- <div class="col-md-6">
@@ -123,7 +109,6 @@
                            </select>
                         </div> -->
                         </div>
-                        <br>
                         <button type="submit" class="btn btn-primary" id="createusercontrol">Create</button>
                     </form>
                     </div>
