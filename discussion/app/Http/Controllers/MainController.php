@@ -23,8 +23,11 @@ class MainController extends Controller
          $request->validate([
              'name'=>'required',
              'email'=>'required|email|unique:users',
-             'password'=>'required|min:5|max:12'
+             'password'=>'required|min:5|max:12',
+             
          ]);
+
+        
 
           //Insert data into database
           $users = new User;
@@ -39,6 +42,7 @@ class MainController extends Controller
           }else{
               return back()->with('fail','Something went wrong, try again later');
           }
+         
     }
 
      function check(Request $request){
@@ -54,8 +58,9 @@ class MainController extends Controller
              //check password
              if(Hash::check($request->password, $userInfo->password)){
                  $request->session()->put('LoggedUser', $userInfo->id);
-                 echo $userInfo->id;
+                 //echo session('LoggedUser');
                  return redirect('dashboard');
+                 
              }else{
                  return back()->with('fail','Incorrect password');
              }

@@ -13,10 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('idea', function (Blueprint $table) {
             $table->id();
-            $table->mediumText('comments');
-            $table->tinyInteger('anonymity');
+            $table->integer('user_id');
+            $table->string('name');
+            $table->string('subject');
+            $table->mediumText('idea');
+            $table->mediumText('file');
+            $table->mediumText('photo');
+            $table->tinyInteger('anonymous');
             $table->timestamps();
         });
     }
@@ -28,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('idea');
     }
 };

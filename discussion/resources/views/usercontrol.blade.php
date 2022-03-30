@@ -22,7 +22,7 @@
              </div>
            @endif
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color: #414372">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createUserModal" style="background-color: #414372">
             <i class='bx bx-plus-circle' style="color: white;"></i>
             CREATE USER
             </button>
@@ -62,13 +62,13 @@
       </div>
 
       <!-- ------------------------------------- Create user-control (Modal Box)--------------------------------------- -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="createUserModal" tabindex="-1" aria-labelledby="createUserModalLabel" aria-hidden="true">
          <div class="modal-dialog modal-lg">
             <form action="{{ route('auth.save') }}" method="post">
                @csrf
             <div class="modal-content">
                <div class="modal-header">
-               <h5 class="modal-title" id="exampleModalLabel">Create User Control</h5>
+               <h5 class="modal-title" id="exampleModalLabel">Create User</h5>
                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                </div>
                <div class="modal-body">

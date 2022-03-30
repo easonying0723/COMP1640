@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Idea;
+use App\Models\Comment;
+use Illuminate\Contracts\View\View;
 
 class HomeController extends Controller
 {
@@ -23,9 +25,34 @@ class HomeController extends Controller
      */
     public function index()
     {
+
         $ideas = Idea::paginate(5);
-        return view('homepage',compact('ideas'));
+        $comments = Comment::paginate(5);
+        return view('homepage',compact('ideas'), compact('comments'));
+
     }
+
+    public function idea_details($id){
+        return Idea::where('id','=', $id)->get();
+    }
+
+    public function comment_details($id){
+        return Comment::join('idea', 'comments.idea_id','=','idea.id')
+        ->join('users', 'comments.user_id','=','users.id')
+        ->where('comments.idea_id','=', $id)
+        ->get();
+       
+        //return Comment::where('idea_id','=', $id)->get();
+    }
+
+    
+    // public function show(Idea $idea):View
+    // {
+    //     return view('homepage.show', [
+    //         'comments' => Comment::where('idea_id','=', $idea->id)->get(),
+    //     ]);
+    // }
+
     
     public function store_idea(Request $request){
         $image = '';
@@ -44,8 +71,11 @@ class HomeController extends Controller
                 $files_name[] = $file_name ;
             }
         }
+        //echo session('LoggedUser');
+
         $files_name = implode(",",$files_name);
         Idea::create([
+            'user_id' => (int)$request->session()->get('LoggedUser'),
             'name' =>  $request->name,
             'subject' =>  $request->subject,
             'photo' => strval($image),
@@ -55,5 +85,19 @@ class HomeController extends Controller
         ]);
         return redirect()->route('home');
 
+    }
+    public function store_comment(Request $request,$idea_id)
+    {
+        $comment = new Comment;
+        $comment->comment = $request->comment;
+        $comment->anonymity = $request->anonymity? 1 : 0;
+        $comment->idea_id = $idea_id;
+        $comment->user_id = (int)$request->session()->get('LoggedUser');
+        $save = $comment->save();
+        if($save){
+            return back()->with('success','New user has been successfuly added to database');
+         }else{
+             return back()->with('fail','Something went wrong, try again later');
+         }
     }
 }

@@ -40,12 +40,18 @@ Route::get('usercontrol', function () {
 Route::get('/homepage', [HomeController::class, 'index'])->name('home');
 Route::post('/homepage/idea/store', [HomeController::class, 'store_idea']);
 
+Route::get('homepage/idea_details/{id}', [HomeController::class, 'idea_details'])->name('homepage.idea_details');
+Route::get('homepage/comment_details/{id}', [HomeController::class, 'comment_details'])->name('homepage.comment_details');
+
+Route::post('/homepage/store_comment/{id}',[HomeController::class, 'store_comment'])->name('homepage.store_comment');
+
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/usercontrol', [MainController::class, 'usercontrol'])->name('usercontrol');
 
 Route::post('/auth/save',[MainController::class, 'save'])->name('auth.save');
 Route::post('/auth/check',[MainController::class, 'check'])->name('auth.check');
 Route::get('/auth/logout',[MainController::class, 'logout'])->name('auth.logout');
+
 
 Route::get('sidebar', function () {
     return view('sidebar');
