@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use App\Models\Idea;
 use App\Models\Comment;
 use Illuminate\Contracts\View\View;
+use App\Models\Cactegory;
+use DB;
 
 class HomeController extends Controller
 {
@@ -99,5 +101,26 @@ class HomeController extends Controller
          }else{
              return back()->with('fail','Something went wrong, try again later');
          }
+    }
+
+    public function Categoryindex()
+    {
+        $data = Cactegory::all();
+        return view('homepage')->with('data',$data);
+    }
+
+    public function category_store(Request $request)
+    {
+        $data = new Cactegory;
+        $data->cate_name = $request->input('cate_name');
+        $data->cate_option = $request->input('cate_option');
+
+        $data->save();
+        return redirect('/homepage')->with('success','Category added successfully');
+    }
+    public function category_delete($id)
+    {
+            DB::delete('delete from category_details where id = ? ', [$id]);
+            return redirect('/homepage')->with('success','Category deleted successfully');
     }
 }

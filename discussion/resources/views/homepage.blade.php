@@ -199,6 +199,8 @@
             <h5 class="modal-title" id="categoryModalLabel">Add New Category</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
          </div>
+         <form action="{{url ('/homepage/category/stored')}}" method="POST">
+            @csrf
          <div class="modal-body">
             <div class="container-fluid">
                <div class="row">
@@ -236,6 +238,7 @@
             <button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary" id="addC">Add</button>
          </div>
+         </form>
       </div>
    </div>
 </div>
