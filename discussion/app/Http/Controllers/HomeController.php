@@ -28,11 +28,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-
-
         $ideas = Idea::paginate(5);
         $comments = Comment::paginate(10);
-        return view('homepage',compact('ideas'), compact('comments'),);
+        return view('homepage',compact('ideas'), compact('comments'));
 
     }
 
