@@ -57,6 +57,11 @@ Route::post('/auth/save',[MainController::class, 'save'])->name('auth.save');
 Route::post('/auth/check',[MainController::class, 'check'])->name('auth.check');
 Route::get('/auth/logout',[MainController::class, 'logout'])->name('auth.logout');
 
+Route::get('/homepage',[HomeController::class,'Categoryindex']);
+Route::post('/homepage/category/stored',[HomeController::class,'category_store']);
+
+Route::get('/delete/{id}',[HomeController::class,'category_delete']);
+
 
 Route::get('sidebar', function () {
     return view('sidebar');
