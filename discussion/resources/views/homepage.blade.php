@@ -34,8 +34,11 @@
                   <i class='bx bx-plus-circle' style="color: #F4F7FF"></i>
                </button>
             </p>
+            
          </div>
-         <!-----------Accordion part---------->
+         
+</div>
+
    </div>
    <div class="col-md-9 content" style="background-color: #A7B7CD">
       <br>
@@ -61,6 +64,7 @@
                </div>
             </div>
             @foreach($ideas as $index => $idea)
+            
             <div class="col-sm-4">
                <div class="card">
                   <div class="card-header">
@@ -125,12 +129,12 @@
                   <div class="col-md-6">
                      <label for="">Category Name:</label>
                      <div id="newtask">
-                        <input type="text" class="form-control" id="" placeholder="Please enter category name" required>
+                        <input type="text" class="form-control" id="" placeholder="Please enter category name" name="cate_name" required>
                      </div>
                   </div>
                   <div class="col-md-6">
                      <label for="">Department:</label>
-                     <select id="multidepartment" multiple="multiple" hidden>
+                     <select id="multidepartment" multiple="multiple" name="cate_option" hidden>
                         <optgroup label="Series 1" class="group-1">
                            <option value="1-1">Option 1.1</option>
                            <option value="1-2">Option 1.2</option>
@@ -160,7 +164,7 @@
       </div>
    </div>
 </div>
-<div id="tasks">
+   <div id="tasks">
 
 
    {{---------------------------- Add Title Modal ----------------------------}}
@@ -480,54 +484,6 @@
       });
 
 
-
-      //Create Category Show
-      document.querySelector('#addC').onclick = function () {
-         if (document.querySelector('#newtask input').value.length == 0) {
-            alert("Please Enter a Task")
-
-         }
-         else {//This is the function part
-            document.querySelector('#tasks').innerHTML += `
-            <div class="task">
-<div id="accordion-1" class="accordion" role="tablist" style="width: 500px; >
-    <div class="accordion-item">
-        <h2 class="accordion-header" role="tab" style="width: 500px;">
-          <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-1" aria-expanded="true" aria-controls="accordion-1 .item-1">#${document.querySelector('#newtask input').value}
-  <span class="position-absolute top-10 start-100 translate-middle p-1 bg-warning rounded-circle">
-                        <span class="visually-hidden">New alerts</span>
-                      </span>
-                   </button>
-  </button>
-  </h2>
-
-</div>
-</div>
-<button class="delete">
-                    <i class="far fa-trash-alt"></i>
-                </button>
-               
-            </div>
-
-        `;
-            var current_tasks = document.querySelectorAll(".delete");
-            for (var i = 0; i < current_tasks.length; i++) {
-               current_tasks[i].onclick = function () {
-                  this.parentNode.remove();
-               }
-            }
-
-            var tasks = document.querySelectorAll(".task");
-            for (var i = 0; i < tasks.length; i++) {
-               tasks[i].onclick = function () {
-                  this.classList.toggle('completed');
-
-               }
-            }
-
-            document.querySelector("#newtask input").value = "";
-         }
-      }
    </script>
 
    @endsection
