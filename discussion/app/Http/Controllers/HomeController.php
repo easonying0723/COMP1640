@@ -31,7 +31,10 @@ class HomeController extends Controller
         $ideas = Idea::paginate(5);
         $comments = Comment::paginate(10);
         $data = Cactegory::all();
-        
+        foreach ($ideas as $key => $idea) {
+            $number_of_comment = Comment::where('idea_id',$idea->id)->get()->count();
+            $ideas[$key]->number_of_comment = $number_of_comment;
+        }
         return view('homepage',compact('ideas','comments','data'));
 
     }

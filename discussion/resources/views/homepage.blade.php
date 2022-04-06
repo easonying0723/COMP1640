@@ -184,7 +184,7 @@
                         <button id="dislike" class="btn dislike btn-danger btn-sm" style="margin:1px;"><span
                               class="bx bx-dislike" aria-hidden="true"></span><span class="dislikes" id="dislikeValue"
                               enabled='false'></span></button>
-                        <small style="float: right; margin: 10px">78 Comments</small>
+                        <small style="float: right; margin: 10px">{{$idea->number_of_comment}} {{$idea->number_of_comment > 1 ? 'comments' : 'comment'}}</small>
                      </div>
                   </div>
                </div>
