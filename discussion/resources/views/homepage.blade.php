@@ -36,110 +36,13 @@
             </p>
             
          </div>
-<<<<<<< HEAD
          
 </div>
 
-=======
-         <div class="accordion accordion-flush overflow-auto p-2 bg-transparent" style="max-height: 630px;"
-            id="accordionFlushExample">
-            <div class="accordion-item flex">
-               <h5 class="accordion-header" id="flush-headingOne">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                     data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                     #FACILITIES
-                     <span class="position-absolute top-10 start-100 translate-middle p-1 bg-warning rounded-circle">
-                        <span class="visually-hidden">New alerts</span>
-                     </span>
-                  </button>
-               </h5>
-               <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
-                  data-bs-parent="#accordionFlushExample">
-                  <div class="accordion-body">
-                     <div class="list-group" id="categoryListGroup">
-                        <a href="#"
-                           class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                           #CBEASON
-                           <span class="badge badge-primary badge-pill">
-                              11
-                           </span>
-                        </a>
-                        <a href="#"
-                           class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                           #TOILET
-                           <span class="badge badge-primary badge-pill">
-                              2
-                           </span>
-                        </a>
-                        <a href="#"
-                           class="list-group-item list-group-item-dark list-group-item-action d-flex justify-content-between align-items-center"
-                           id="addtitle">
-                           + ADD TITLE
-                        </a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="accordion-item">
-               <h2 class="accordion-header" id="flush-headingTwo">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                     data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                     #LECTURER
-                     <span class="position-absolute top-10 start-100 translate-middle p-1 bg-warning rounded-circle">
-                        <span class="visually-hidden">New alerts</span>
-                     </span>
-                  </button>
-               </h2>
-               <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
-                  data-bs-parent="#accordionFlushExample">
-                  <div class="accordion-body">
-                     <a href="#"
-                        class="list-group-item list-group-item-dark list-group-item-action d-flex justify-content-between align-items-center"
-                        id="addtitle">
-                        + ADD TITLE
-                     </a>
-                  </div>
-               </div>
-            </div>
-            <div class="accordion-item">
-               <h2 class="accordion-header" id="flush-headingThree">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                     data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                     #NOTHING
-                     <span class="position-absolute top-10 start-100 translate-middle p-1 bg-warning rounded-circle">
-                        <span class="visually-hidden">New alerts</span>
-                     </span>
-                  </button>
-               </h2>
-               <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
-                  data-bs-parent="#accordionFlushExample">
-                  <div class="accordion-body">
-                     <a href="#"
-                        class="list-group-item list-group-item-dark list-group-item-action d-flex justify-content-between align-items-center"
-                        id="addtitle">
-                        + ADD TITLE
-                     </a>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
->>>>>>> a124cfc4a465c50d26ba04e90bb30fa225ef23c0
    </div>
    <div class="col-md-9 content" style="background-color: #A7B7CD">
       <br>
       <div class="container">
-         @if(Session::get('success'))
-             <div class="alert alert-success">
-                {{ Session::get('success') }}
-             </div>
-           @endif
-
-           @if(Session::get('fail'))
-             <div class="alert alert-danger">
-                {{ Session::get('fail') }}
-             </div>
-           @endif
          <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
             <div class="btn-group me-2" role="group" aria-label="Second group">
                <button type="button" class="btn btn-secondary"> Recent View </button>
@@ -160,7 +63,6 @@
                   </div>
                </div>
             </div>
-            
             @foreach($ideas as $index => $idea)
             
             <div class="col-sm-4">
@@ -172,7 +74,8 @@
                   </div>
                   <div class="card-body">
                      <div>
-                        <h6 class="card-subtitle mb-2 text-muted fw-bold">{{$idea->anonymous == 1 ? 'Anonymous' : $idea->name}}
+                        <h6 class="card-subtitle mb-2 text-muted fw-bold">{{$idea->anonymous == 1 ? 'Anonymous' :
+                           $idea->name}}
                            <img src="images/ironman.png" id="userimg">
                         </h6>
                         <button type="button" class="btn btn-info btn-sm" disabled>IT Department</button>
@@ -180,7 +83,7 @@
                      <br>
                      <p class="card-text ideascontent">{{$idea->idea}}</p>
                      <button type="button" class="btn btn-secondary view-btn" data-toggle="modal" id="view"
-                        data-target="#view_idea_modal{{$idea->id}}" data-id="{{$idea->id}}">View</button>
+                        data-target="#view_idea_modal" data-id="{{ $idea->id }}">View</button>
 
                      <small style="float: right; margin: 10px">23 Views</small>
                   </div>
@@ -192,12 +95,11 @@
                         <button id="dislike" class="btn dislike btn-danger btn-sm" style="margin:1px;"><span
                               class="bx bx-dislike" aria-hidden="true"></span><span class="dislikes" id="dislikeValue"
                               enabled='false'></span></button>
-                        <small style="float: right; margin: 10px">{{$idea->number_of_comment}} {{$idea->number_of_comment > 1 ? 'comments' : 'comment'}}</small>
+                        <small style="float: right; margin: 10px">78 Comments</small>
                      </div>
                   </div>
                </div>
             </div>
-
             @endforeach
          </div>
       </div>
@@ -219,6 +121,8 @@
             <h5 class="modal-title" id="categoryModalLabel">Add New Category</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
          </div>
+         <form action="{{url ('/homepage/category/stored')}}" method="POST">
+            @csrf
          <div class="modal-body">
             <div class="container-fluid">
                <div class="row">
@@ -256,6 +160,7 @@
             <button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary" id="addC">Add</button>
          </div>
+         </form>
       </div>
    </div>
 </div>
@@ -385,7 +290,7 @@
    {{---------------------------- View Idea Modal ----------------------------}}
 
    @foreach($ideas as $index => $idea)
-   <div class="modal fade" id="view_idea_modal{{$idea->id}}" tabindex="-1" aria-labelledby="viewModallLabel"
+   <div class="modal fade" id="view_idea_modal" tabindex="-1" aria-labelledby="viewModallLabel"
       aria-hidden="true">
       <div class="modal-dialog modal-xl">
          <div class="modal-content">
@@ -402,9 +307,7 @@
                      <div class="col-md-12">
                         <div>
                            <h6 class="mb-2 text-muted fw-bold">{{$idea->anonymous == 1 ? 'Anonymous' : $idea->name}}
-                              <img src="images/ironman.png" id="userimg
-                              
-                              ">
+                              <img src="images/ironman.png" id="userimg">
                            </h6>
                            <button type="button" class="btn btn-info btn-sm" disabled>IT Department</button>
                            <br><br>
@@ -454,18 +357,15 @@
             <hr />
             <div class="container">
                <div id="numbersec">
-                  <a href="{{ route('homepage.liked', ['id' => $idea->id ])}}" class="btn like btn-warning" style="margin:1px;"><span class="bx bx-like"
-                        aria-hidden="true"></span> Like <span class="likes">0</span></a>
-
-                  <a href="{{ route('homepage.disliked', ['id' => $idea->id ])}}" class="btn dislike btn-danger" style="margin:1px;"><span class="bx bx-dislike"
-                        aria-hidden="true"></span> Dislike <span class="dislikes">0</span></a>
+                  <button class="btn like btn-warning" style="margin:1px;"><span class="bx bx-like"
+                        aria-hidden="true"></span> Like <span class="likes">0</span></button>
+                  <button class="btn dislike btn-danger" style="margin:1px;"><span class="bx bx-dislike"
+                        aria-hidden="true"></span> Dislike <span class="dislikes">0</span></button>
                   <small style="float: right; margin: 10px">13 Views</small>
                   <small style="float: right; margin: 10px">78 Comments</small>
                </div>
             </div>
             <hr />
-
-            
             <div class="container">
                <div class="modal-body" id="footersec">
                   <form action="{{ route('homepage.store_comment', ['id' => $idea->id ])}}" method="post">
@@ -495,7 +395,7 @@
                </div>
                <br><br>
 
-               <div class="container" id="comment-section{{$idea->id}}">
+               <div class="container" id="comment-section">
 
                  
                </div>
@@ -511,8 +411,7 @@
    <script>
       //pass id to controller to display comment of the clicked idea
       $('.view-btn').click(function () {
-         var id = $(this).attr('data-id');
-         console.log(id);
+         const id = $(this).attr('data-id');
 
          $.ajax({
             url: 'homepage/comment_details/' + id,
@@ -520,7 +419,8 @@
             data: { "id": id },
             success: function (data) {
                console.log(data);
-               var commentcontainer =document.getElementById('comment-section'+id);
+
+               var commentcontainer = document.getElementById('comment-section');
                commentcontainer.innerHTML="";
                var name = "";
                for (var i = 0; i < data.length; i++) {
@@ -539,7 +439,6 @@
          })
       });
 
-  
       function setLikeText(id, newvalue) {
          var s = document.getElementById(id);
          s.innerHTML = newvalue;
