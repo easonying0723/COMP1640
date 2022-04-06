@@ -32,7 +32,9 @@ class HomeController extends Controller
 
         $ideas = Idea::paginate(5);
         $comments = Comment::paginate(10);
-        return view('homepage',compact('ideas'), compact('comments'),);
+        $data = Cactegory::all();
+        
+        return view('homepage',compact('ideas','comments','data'));
 
     }
 
@@ -144,12 +146,6 @@ class HomeController extends Controller
          }else{
              return back()->with('fail','Something went wrong, try again later');
          }
-    }
-
-    public function Categoryindex()
-    {
-        $data = Cactegory::all();
-        return view('homepage')->with('data',$data);
     }
 
     public function category_store(Request $request)
