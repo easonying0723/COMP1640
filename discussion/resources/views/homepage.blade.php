@@ -35,34 +35,7 @@
                </button>
             </p>
          </div>
-         <div class="accordion accordion-flush overflow-auto p-2 bg-transparent" style="max-height: 630px;"
-            id="accordionFlushExample">
-            @foreach($data as $categoryData)
-            <div class="accordion-item flex">
-
-               <h5 class="accordion-header" id="flush-headingOne">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                     data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                     #{{$categoryData->cate_name}}
-                           <button>
-                              <a href="/delete/{{$categoryData->id}}" class="la la-times">Delete</a>
-                           </button>
-                     
-                     <span class="position-absolute top-10 start-100 translate-middle p-1 bg-warning rounded-circle">
-                        <span class="visually-hidden">New alerts</span>
-                     </span>
-                  </button>
-               </h5>---->
-               <!--------------LIST GROUP INSIDE---------
-                <a href="#"
-                           class="list-group-item list-group-item-dark list-group-item-action d-flex justify-content-between align-items-center"
-                           id="addtitle">
-                           + ADD TITLE
-                        </a>
-                     </div>
-                  @endforeach
-               </div>--->
-      </div>
+         <!-----------Accordion part---------->
    </div>
    <div class="col-md-9 content" style="background-color: #A7B7CD">
       <br>
