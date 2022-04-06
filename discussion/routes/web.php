@@ -37,6 +37,10 @@ Route::get('usercontrol', function () {
     return view('usercontrol');
 });
 
+Route::get('/homepage/liked/{id}', [HomeController::class, 'liked'])->name('homepage.liked');
+Route::get('/homepage/disliked/{id}',[HomeController::class, 'disliked'])->name('homepage.disliked');
+
+
 Route::get('/homepage', [HomeController::class, 'index'])->name('home');
 Route::post('/homepage/idea/store', [HomeController::class, 'store_idea']);
 
@@ -48,11 +52,11 @@ Route::post('/homepage/store_comment/{id}',[HomeController::class, 'store_commen
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/usercontrol', [MainController::class, 'usercontrol'])->name('usercontrol');
 
+
 Route::post('/auth/save',[MainController::class, 'save'])->name('auth.save');
 Route::post('/auth/check',[MainController::class, 'check'])->name('auth.check');
 Route::get('/auth/logout',[MainController::class, 'logout'])->name('auth.logout');
 
-Route::get('/homepage',[HomeController::class,'Categoryindex']);
 Route::post('/homepage/category/stored',[HomeController::class,'category_store']);
 
 Route::get('/delete/{id}',[HomeController::class,'category_delete']);
