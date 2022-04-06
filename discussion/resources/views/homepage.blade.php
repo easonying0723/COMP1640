@@ -122,6 +122,17 @@
    <div class="col-md-9 content" style="background-color: #A7B7CD">
       <br>
       <div class="container">
+         @if(Session::get('success'))
+             <div class="alert alert-success">
+                {{ Session::get('success') }}
+             </div>
+           @endif
+
+           @if(Session::get('fail'))
+             <div class="alert alert-danger">
+                {{ Session::get('fail') }}
+             </div>
+           @endif
          <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
             <div class="btn-group me-2" role="group" aria-label="Second group">
                <button type="button" class="btn btn-secondary"> Recent View </button>
@@ -143,6 +154,7 @@
                </div>
             </div>
             @foreach($ideas as $index => $idea)
+
             <div class="col-sm-4">
                <div class="card">
                   <div class="card-header">
@@ -161,7 +173,7 @@
                      <br>
                      <p class="card-text ideascontent">{{$idea->idea}}</p>
                      <button type="button" class="btn btn-secondary view-btn" data-toggle="modal" id="view"
-                        data-target="#view_idea_modal" data-id="{{ $idea->id }}">View</button>
+                        data-target="#view_idea_modal{{$idea->id}}" data-id="{{$idea->id}}">View</button>
 
                      <small style="float: right; margin: 10px">23 Views</small>
                   </div>
@@ -178,6 +190,7 @@
                   </div>
                </div>
             </div>
+
             @endforeach
          </div>
       </div>
@@ -365,7 +378,7 @@
    {{---------------------------- View Idea Modal ----------------------------}}
 
    @foreach($ideas as $index => $idea)
-   <div class="modal fade" id="view_idea_modal" tabindex="-1" aria-labelledby="viewModallLabel"
+   <div class="modal fade" id="view_idea_modal{{$idea->id}}" tabindex="-1" aria-labelledby="viewModallLabel"
       aria-hidden="true">
       <div class="modal-dialog modal-xl">
          <div class="modal-content">
@@ -382,7 +395,9 @@
                      <div class="col-md-12">
                         <div>
                            <h6 class="mb-2 text-muted fw-bold">{{$idea->anonymous == 1 ? 'Anonymous' : $idea->name}}
-                              <img src="images/ironman.png" id="userimg">
+                              <img src="images/ironman.png" id="userimg
+                              
+                              ">
                            </h6>
                            <button type="button" class="btn btn-info btn-sm" disabled>IT Department</button>
                            <br><br>
@@ -432,15 +447,18 @@
             <hr />
             <div class="container">
                <div id="numbersec">
-                  <button class="btn like btn-warning" style="margin:1px;"><span class="bx bx-like"
-                        aria-hidden="true"></span> Like <span class="likes">0</span></button>
-                  <button class="btn dislike btn-danger" style="margin:1px;"><span class="bx bx-dislike"
-                        aria-hidden="true"></span> Dislike <span class="dislikes">0</span></button>
+                  <a href="{{ route('homepage.liked', ['id' => $idea->id ])}}" class="btn like btn-warning" style="margin:1px;"><span class="bx bx-like"
+                        aria-hidden="true"></span> Like <span class="likes">0</span></a>
+
+                  <a href="{{ route('homepage.disliked', ['id' => $idea->id ])}}" class="btn dislike btn-danger" style="margin:1px;"><span class="bx bx-dislike"
+                        aria-hidden="true"></span> Dislike <span class="dislikes">0</span></a>
                   <small style="float: right; margin: 10px">13 Views</small>
                   <small style="float: right; margin: 10px">78 Comments</small>
                </div>
             </div>
             <hr />
+
+            
             <div class="container">
                <div class="modal-body" id="footersec">
                   <form action="{{ route('homepage.store_comment', ['id' => $idea->id ])}}" method="post">
@@ -470,7 +488,7 @@
                </div>
                <br><br>
 
-               <div class="container" id="comment-section">
+               <div class="container" id="comment-section{{$idea->id}}">
 
                  
                </div>
@@ -486,7 +504,8 @@
    <script>
       //pass id to controller to display comment of the clicked idea
       $('.view-btn').click(function () {
-         const id = $(this).attr('data-id');
+         var id = $(this).attr('data-id');
+         console.log(id);
 
          $.ajax({
             url: 'homepage/comment_details/' + id,
@@ -494,8 +513,7 @@
             data: { "id": id },
             success: function (data) {
                console.log(data);
-
-               var commentcontainer = document.getElementById('comment-section');
+               var commentcontainer =document.getElementById('comment-section'+id);
                commentcontainer.innerHTML="";
                var name = "";
                for (var i = 0; i < data.length; i++) {
@@ -512,6 +530,17 @@
                }
             }
          })
+      });
+
+      $(document).ready(function(){
+         $.ajax({ 
+            url: 'homepage/show_vote',
+            type: 'GET',
+            
+            success: function(data){
+               console.log(data, 'hi')
+             }
+         });
       });
 
       function setLikeText(id, newvalue) {
