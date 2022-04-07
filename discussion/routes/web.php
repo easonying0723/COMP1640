@@ -24,18 +24,15 @@ Route::get('profile', function () {
     return view('profile');
 });
 
-// Route::get('login', function () {
-//     return view('login');
-// });
+ Route::get('login', function () {
+     return view('login');
+ });
 
 
 Route::get('usercontrol', function () {
     return view('usercontrol');
 });
 
-Route::get('usercontrol', function () {
-    return view('usercontrol');
-});
 
 Route::get('/homepage/liked/{id}', [HomeController::class, 'liked'])->name('homepage.liked');
 Route::get('/homepage/disliked/{id}',[HomeController::class, 'disliked'])->name('homepage.disliked');
@@ -71,4 +68,3 @@ Route::get('/auth/login',[MainController::class, 'login'])->name('auth.login');
      Route::get('/auth/login',[MainController::class, 'login'])->name('auth.login');
 
  });
-

@@ -28,7 +28,6 @@ class MainController extends Controller
          ]);
 
         
-
           //Insert data into database
           $users = new User;
           $users->name = $request->name;
