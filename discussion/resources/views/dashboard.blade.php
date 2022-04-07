@@ -200,8 +200,9 @@ canvas#myChart5 {
 <form action="/action_page.php" method="post">
 <div class="container">
   <div class="banner">
-<h3> Welcome Yee !<h3>
+<h3> Welcome {{ $LoggedUserInfo['name'] }} !<h3>
   <p>Here's whats happening in your account today! </p>
+  <a href="{{ route('auth.logout') }}">Logout</a>
 </div>
 
 <h2> Dashboard </h2>
