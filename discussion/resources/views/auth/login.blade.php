@@ -25,7 +25,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
 </head>
 <body>
-<div class="container">
+<div class="container d-flex aligns-items-center justify-content-center">
   <div class="row">
     <div class="column1 col-6" style="background-color:#424473;">
       <img src="/images/login.png" class="lgnImage">
@@ -63,8 +63,8 @@
       <span class="psw">Recovery <a href="#">password?</a></span>
     </div>-->
    
-    <div class="lgn">
-      <button type="submit">Login</button>
+    <div class="d-flex aligns-items-center justify-content-center">
+      <button class="lgn" type="submit">Login</button>
     </div>
       </form>
     </div>

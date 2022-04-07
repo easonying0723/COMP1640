@@ -33,13 +33,29 @@
                   data-bs-toggle="modal" data-bs-target="#categoryModal" style="border: none">
                   <i class='bx bx-plus-circle' style="color: #F4F7FF"></i>
                </button>
-            </p>
+            </p>  
             
+         </div>  
+         <div id="accordion-1" class="accordion" role="tablist" style="width: 282px;">
+            @foreach($data as $categoryData)
+               <div class="accordion-item">
+                  <h2 class="accordion-header" role="tab">
+                     <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-1" aria-expanded="true"
+                        aria-controls="accordion-1 .item-1">#{{$categoryData -> cate_name}}<i class="la la-times" style="margin-left: 71px;"></i>
+                     </button>
+                  </h2>
+                  <div class="accordion-collapse collapse show item-1" role="tabpanel" data-bs-parent="#accordion-1">
+                     <div class="accordion-body">
+                        <p class="mb-0">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
+                     </div>
+                  </div>
+               </div>@endforeach
          </div>
-         
-</div>
-
+      </div>
+      <!--------------BEFORE 這裏---------------------->
    </div>
+
+   
    <div class="col-md-9 content" style="background-color: #A7B7CD">
       <br>
       <div class="container">
@@ -365,7 +381,13 @@
                   <small style="float: right; margin: 10px">78 Comments</small>
                </div>
             </div>
+<<<<<<< Updated upstream
             <hr />
+=======
+            <hr/>
+
+            
+>>>>>>> Stashed changes
             <div class="container">
                <div class="modal-body" id="footersec">
                   <form action="{{ route('homepage.store_comment', ['id' => $idea->id ])}}" method="post">
