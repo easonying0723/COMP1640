@@ -59,12 +59,13 @@ Route::get('homepage/comment_details/{id}', [HomeController::class, 'comment_det
 Route::post('/homepage/store_comment/{id}',[HomeController::class, 'store_comment'])->name('homepage.store_comment');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/usercontrol', [MainController::class, 'usercontrol'])->name('usercontrol');
+Route::get('/usercontrol', [MainController::class, 'usercontrol'])->name('usercontrol'); //
 
+Route::post('/auth/save',[MainController::class, 'save'])->name('auth.save');//
+Route::post('/auth/check',[MainController::class, 'check'])->name('auth.check');//
+Route::get('/auth/logout',[MainController::class, 'logout'])->name('auth.logout');//
 
-Route::post('/auth/save',[MainController::class, 'save'])->name('auth.save');
-Route::post('/auth/check',[MainController::class, 'check'])->name('auth.check');
-Route::get('/auth/logout',[MainController::class, 'logout'])->name('auth.logout');
+Route::get('/','MainController@save');//
 
 Route::post('/homepage/category/stored',[HomeController::class,'category_store']);
 
@@ -74,9 +75,10 @@ Route::get('/delete/{id}',[HomeController::class,'category_delete']);
 Route::get('sidebar', function () {
     return view('sidebar');
 });
+
 Route::get('/auth/login',[MainController::class, 'login'])->name('auth.login');
 
- Route::group(['middleware'=>['AuthCheck']], function(){ //store page in this group to prevent page access without logging in
-     Route::get('/auth/login',[MainController::class, 'login'])->name('auth.login');
+Route::group(['middleware'=>['AuthCheck']], function(){ //store page in this group to prevent page access without logging in
+Route::get('/auth/login',[MainController::class, 'login'])->name('auth.login');
 
  });

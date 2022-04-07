@@ -3,7 +3,7 @@
 @section('title', 'User Control')
 
 <!-- Own -->
-<script src="{{ URL::asset('js/usercontrol.js') }}" type="module"></script>
+{{-- <script src="{{ URL::asset('js/usercontrol.js') }}" type="text/javascript"></script> --}}
 
 @section('usercontrolcontent')
 <!-- ----------------------------------------Content---------------------------------------- -->
@@ -38,7 +38,6 @@
                               <th>User Email</th>
                               <th>Department</th>
                               <th>Position</th>
-                              <th>Accesibility</th>
                               <th>Status</th>
                               <th></th>
                            </tr>
@@ -50,7 +49,6 @@
                               <td>scpg1700562@segi4u.my</td>
                               <td>Information Technology</td>
                               <td>Manager</td>
-                              <td>Level3</td>
                               <td></td>
                               <td></td>
                            </tr>
@@ -134,23 +132,37 @@
 
             </div>
          </div>
-
-      <!-- ------------------------------------- Success (Modal Box)--------------------------------------- -->
-      <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-         <div class="modal-dialog">
-            <div class="modal-content">
-               <div class="modal-header">
-               <h5 class="modal-title" id="exampleModalLabel">Succesfully Created.</h5>
-               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-               </div>
-               <div class="modal-body">
-                  <label>New User created.</label>
-                  <label>Notification will be send for user through email.</label>
-               </div>
-               <div class="modal-footer">
-               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Notice</button>
-               </div>
-            </div>
-         </div>
-      </div>
     @endsection
+
+
+<script type="module">
+   $('#usercontrolTable').DataTable({//call table id
+
+   scroll: true,
+   responsive: true,
+   searching: true,
+   paging: true,
+
+   columnDefs: [ {
+      targets: 6,
+      data: null,
+      defaultContent:'<input type="checkbox" id="userstatus" data-toggle="toggle" data-on="On" data-off="Off" data-size="sm" checked required>'
+      },
+
+   {
+      targets: -1,
+      data: null,
+      defaultContent: '<button class="btn btn-light" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="bx bx-trash"></i></button>'
+   }],
+
+   });
+
+   $('#createusercontrol').on( 'click',function () {
+   $("#successModal").modal("show");
+   });
+
+   $('#createusercontrol').on( 'click',function () {
+   $("#exampleModal").modal("hide");
+   });
+
+</script>
