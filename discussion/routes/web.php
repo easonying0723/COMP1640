@@ -17,7 +17,19 @@ use App\Http\Controllers\DashboardController;
 
 
 Route::get('/', function () {
+    return view('homepage');
+});
+
+Route::get('login', function () {
+    return view('login');
+});
+
+Route::get('terms', function () {
     return view('terms');
+});
+
+Route::get('homepage', function () {
+    return view('homepage');
 });
 
 Route::get('profile', function () {

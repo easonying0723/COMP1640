@@ -5,10 +5,10 @@
   body{
     background-color: #E7E6F3;
   }
-  
-  .row {
-    margin: 0 auto;
-  }
+
+.row{
+  padding: 50px 0 0 0;
+}
   
   /* Create two equal columns that sits next to each other */
   .column1 {
@@ -43,7 +43,7 @@
   }
   
   input[type=text], input[type=password] {
-    width: 65%;
+    width: 80%;
     padding: 8px 30px;
     margin: 20px 0 0 0;
     display: inline-block;
@@ -76,10 +76,10 @@
   }
   
   .lgn {
-    padding: 30px 0 0 0;
-    width: 60%;
-    display:block;
-    margin: 0 auto;
+    width: 50%;
+    border: none;
+    border-radius: 10px;
+    margin: 30px 0 0 0;
   }
   
   /*Remember or forget password*/
