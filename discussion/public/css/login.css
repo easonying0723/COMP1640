@@ -1,6 +1,5 @@
 .container {
   height: 100%;
-<<<<<<< HEAD
   width:80%;
   display: flex;
   justify-content: center;
@@ -8,8 +7,6 @@
 }
 
 .row {
-=======
->>>>>>> 5fa3d33c1ed676bb263ec4a7656988e084011fb1
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,13 +18,8 @@
 
 html,
 body{
-<<<<<<< HEAD
   height: 100%;
   width: 100%;
-=======
-  background-color: #E7E6F3;
-  height: 100%
->>>>>>> 5fa3d33c1ed676bb263ec4a7656988e084011fb1
 }
 
 /* .row{
@@ -36,30 +28,19 @@ padding: 50px 0 0 0;
 
 /* Create two equal columns that sits next to each other */
 .column1 {
-<<<<<<< HEAD
   /* margin: 60px 0 0 0; */
   /* padding: 0 50px; */
   min-width:500px;
   line-height: 315px; /*Should be removed. Only for demonstration */
-=======
-  margin: 60px 0 0 0;
-  padding: 10px;
-  line-height: 475px; /*Should be removed. Only for demonstration */
->>>>>>> 5fa3d33c1ed676bb263ec4a7656988e084011fb1
   border: 2px #424473;
   border-radius: 15px 0 0 15px;
   text-align: center;
 }
 
 .column2 {
-<<<<<<< HEAD
   /* margin: 60px 0 0 0; */
   /* padding: 100px 10px 0 10px; */
   min-width:500px;
-=======
-  margin: 60px 0 0 0;
-  padding: 100px 10px 0 10px;
->>>>>>> 5fa3d33c1ed676bb263ec4a7656988e084011fb1
   border: 2px #F4F6FB;
   border-radius: 0 15px 15px 0;
 }
@@ -73,21 +54,12 @@ height:310px;
 /*Welcome text*/
 .welcome{
   text-align: center;
-<<<<<<< HEAD
 }
 
 /* form {
 background-color: #F4F6FB;
 } */
 
-=======
-}
-
-form {
-background-color: #F4F6FB;
-}
-
->>>>>>> 5fa3d33c1ed676bb263ec4a7656988e084011fb1
 input[type=text], input[type=password] {
   width: 80%;
   padding: 8px 30px;
