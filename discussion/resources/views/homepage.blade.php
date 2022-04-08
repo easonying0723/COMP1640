@@ -381,13 +381,7 @@
                   <small style="float: right; margin: 10px">78 Comments</small>
                </div>
             </div>
-<<<<<<< Updated upstream
             <hr />
-=======
-            <hr/>
-
-            
->>>>>>> Stashed changes
             <div class="container">
                <div class="modal-body" id="footersec">
                   <form action="{{ route('homepage.store_comment', ['id' => $idea->id ])}}" method="post">
