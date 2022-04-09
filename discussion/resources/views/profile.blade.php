@@ -59,11 +59,11 @@
   <!-- <div class="row">
     <div class="col">
     <label for="uname" class="leftsection"><b>First Name:</b></label><br>
-    <input type="text" name="fname" >
+    <input readonly type="text" name="fname" >
     </div>
     <div class="col">
       <label for="lname" class="rightsection"><b>Last Name:</b></label><br>
-      <input type="text" name="lname"></td>
+      <input readonly type="text" name="lname"></td>
     </div>
   </div> -->
   <div class="row">

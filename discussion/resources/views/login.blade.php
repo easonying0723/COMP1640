@@ -25,13 +25,13 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
 </head>
 <body>
-<div class="container d-flex aligns-items-center justify-content-center">
+<div class="container">
   <div class="row">
-    <div class="column1 col-6" style="background-color:#424473;">
+    <div class="column1 col-6 p-5" style="background-color:#424473;">
       <img src="/images/login.png" class="lgnImage">
     </div>
 
-    <div class="column2 col-6" style="background-color:#F4F6FB;">
+    <div class="column2 col-6 p-5" style="background-color:#F4F6FB;">
       <h2 class="welcome">Hello Again!</h2>
       <p class="welcome">Welcome back you've been missed!</p>
     

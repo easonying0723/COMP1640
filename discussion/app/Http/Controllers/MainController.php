@@ -5,7 +5,9 @@ use App\Rules\MatchOldPassword;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Mail\ContactMe;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class MainController extends Controller
 {
@@ -41,6 +43,8 @@ class MainController extends Controller
              'password'=>'required|min:5|max:12',
          ]);
 
+          
+         
           $defaultimg = 'ironman.png';
           //Insert data into database
           $users = new User;
@@ -50,6 +54,7 @@ class MainController extends Controller
           $users->department = $request->department;
           $users->position = $request->position;
           $users->profilepic = $defaultimg;
+          $users->position = $request ->position;
 
           $save = $users->save();
           if($save){
@@ -57,7 +62,10 @@ class MainController extends Controller
           }else{
               return back()->with('fail','Something went wrong, try again later');
           }
-         
+          
+          $data=$request->all();
+          Mail::to(request('email'))->send(new ContactMe($data));
+          
     }
 
      function check(Request $request){
