@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\Idea;
 use App\Models\Comment;
 use App\Models\Like;
+use App\Models\User;
 use Illuminate\Contracts\View\View;
 use App\Models\Cactegory;
 use DB;
@@ -28,14 +29,15 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $udata = ['LoggedUserInfo'=>User::where('id','=', session('LoggedUser'))->first()];
         $ideas = Idea::paginate(5);
-        $comments = Comment::paginate(10);
+        $comments = Comment::paginate(7);
         $data = Cactegory::all();
         foreach ($ideas as $key => $idea) {
             $number_of_comment = Comment::where('idea_id',$idea->id)->get()->count();
             $ideas[$key]->number_of_comment = $number_of_comment;
         }
-        return view('homepage',compact('ideas','comments','data'));
+        return view('homepage',compact('ideas','comments','data'), $udata);
 
     }
 
@@ -101,7 +103,6 @@ class HomeController extends Controller
         
     }
 
-    
     public function store_idea(Request $request){
         $image = '';
         if ($request->hasFile('img')) {
@@ -122,10 +123,12 @@ class HomeController extends Controller
         //echo session('LoggedUser');
 
         $files_name = implode(",",$files_name);
+        echo (int)$request->category;
         Idea::create([
             'user_id' => (int)$request->session()->get('LoggedUser'),
-            'name' =>  $request->name,
-            'subject' =>  $request->subject,
+            'cat_id' => (int)$request->category, //to fixx
+            'name' => $request->name,
+            'subject' => $request->subject,
             'photo' => strval($image),
             'file' => strval($files_name),
             'idea' => $request->idea,

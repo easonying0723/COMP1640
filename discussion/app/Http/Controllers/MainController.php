@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Rules\MatchOldPassword;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -14,7 +14,22 @@ class MainController extends Controller
     }
 
     function usercontrol(){
-        return view('usercontrol');
+        $udata = ['LoggedUserInfo'=>User::where('id','=', session('LoggedUser'))->first()];// pass to sidebar
+        $users = User::all();
+        return view('usercontrol',['users' => $users],$udata);
+    }
+
+    function profile(Request $request){
+        $udata = ['LoggedUserInfo'=>User::where('id','=', session('LoggedUser'))->first()];// pass to sidebar
+        $user_id = (int)$request->session()->get('LoggedUser');
+        $users =  User::where('id','=', $user_id)->get();
+        return view('profile',['users' => $users],$udata);
+    }
+
+    function delete($id){
+        $data = User::find($id);
+        $data->delete();
+        return redirect('usercontrol');
     }
 
     function save(Request $request){
@@ -24,18 +39,18 @@ class MainController extends Controller
              'name'=>'required',
              'email'=>'required|email|unique:users',
              'password'=>'required|min:5|max:12',
-             
          ]);
 
-        
-
+          $defaultimg = 'ironman.png';
           //Insert data into database
           $users = new User;
           $users->name = $request->name;
           $users->email = $request->email;
           $users->password = Hash::make($request->password);
           $users->department = $request->department;
-          $users->position = $request ->position;
+          $users->position = $request->position;
+          $users->profilepic = $defaultimg;
+
           $save = $users->save();
           if($save){
              return back()->with('success','New user has been successfuly added to database');
@@ -59,13 +74,30 @@ class MainController extends Controller
              if(Hash::check($request->password, $userInfo->password)){
                  $request->session()->put('LoggedUser', $userInfo->id);
                  //echo session('LoggedUser');
-                 return redirect('dashboard');
+                 return redirect('homepage');
                  
              }else{
                  return back()->with('fail','Incorrect password');
              }
          }
         }
+
+        function changePassword(Request $request){
+            $request->validate([
+                'currentpw'=>['required', new MatchOldPassword],
+                'newpw'=>['required'],
+                'confirmpw'=>['same:newpw'],
+            ]);
+            $user_id = (int)$request->session()->get('LoggedUser');
+            $update= User::where('id','=',$user_id)->update(['password'=> Hash::make($request->newpw)]);
+            if($update){
+                return back()->with('success','Password changed successfully.');
+            }
+            else{
+                return back()->with('fail','Password change failed.');
+            }
+        }
+
      function logout(){
          if(session()->has('LoggedUser')){
              session()->pull('LoggedUser');

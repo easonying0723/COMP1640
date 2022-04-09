@@ -58,6 +58,17 @@
    
    <div class="col-md-9 content" style="background-color: #A7B7CD">
       <br>
+      @if(Session::get('success'))
+             <div class="alert alert-success">
+                {{ Session::get('success') }}
+             </div>
+           @endif
+
+           @if(Session::get('fail'))
+             <div class="alert alert-danger">
+                {{ Session::get('fail') }}
+             </div>
+           @endif
       <div class="container">
          <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
             <div class="btn-group me-2" role="group" aria-label="Second group">
@@ -263,6 +274,18 @@
                      <br>
                      <div class="row">
                         <div class="col-md-12">
+                           <label for="category">Category:</label>
+                           <select name="category" id="category" class="form-control">
+                           <option selected>Please Choose...</option>
+                           @foreach($data as $categoryData)
+                             <option value="{{$categoryData ->id}}">{{$categoryData -> cate_name}}</option>
+                           @endforeach
+                           </select>
+                        </div>
+                     </div>
+                     <br>
+                     <div class="row">
+                        <div class="col-md-12">
                            <div class="mb-3">
                               <label for="uploadfile" class="form-label">Upload File</label>
                               <input class="form-control" type="file" id="uploadfile" name="file[]" multiple>
@@ -381,13 +404,9 @@
                   <small style="float: right; margin: 10px">78 Comments</small>
                </div>
             </div>
-<<<<<<< Updated upstream
-            <hr />
-=======
             <hr/>
 
             
->>>>>>> Stashed changes
             <div class="container">
                <div class="modal-body" id="footersec">
                   <form action="{{ route('homepage.store_comment', ['id' => $idea->id ])}}" method="post">
@@ -447,7 +466,7 @@
                var name = "";
                for (var i = 0; i < data.length; i++) {
 
-                   if(data[i].anonymous == 0)
+                   if(data[i].anonymity == 0)
                    {
                       name = data[i].name;
                    }
@@ -455,7 +474,7 @@
                    {
                       name = "Anonymous";
                    }
-               commentcontainer.innerHTML+='<div class="container"><div class="row" id="viewcommentsec"><div class="col-md-1"><img src="images/profile3.png" style="object-fit:contain;width:100%;height:100%" class="commentimg"></div><div class="col-md-11"><h6 class="mb-2 text-muted fw-bold" class="comment-username">'+ name+'</h6><h6 class="comment-content">'+data[i].comment+'</h6><small><span class="comment-dt">'+data[i].created_at+'</span></small></div></div></div><br>';
+               commentcontainer.innerHTML+='<div class="container"><div class="row" id="viewcommentsec"><div class="col-md-1"><img src="images/'+data[i].profilepic+'" style="object-fit:contain;width:100%;height:100%" class="commentimg"></div><div class="col-md-11"><h6 class="mb-2 text-muted fw-bold" class="comment-username">'+ name+'</h6><h6 class="comment-content">'+data[i].comment+'</h6><small><span class="comment-dt">'+data[i].created_at+'</span></small></div></div></div><br>';
                }
             }
          })

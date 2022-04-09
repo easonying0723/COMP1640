@@ -202,7 +202,7 @@ canvas#myChart5 {
   <div class="banner">
 <h3> Welcome {{ $LoggedUserInfo['name'] }} !<h3>
   <p>Here's whats happening in your account today! </p>
-  <a href="{{ route('auth.logout') }}">Logout</a>
+  
 </div>
 
 <h2> Dashboard </h2>
@@ -594,14 +594,13 @@ $('#barchart').append(' <canvas id="myChart5" width="50" height="50" ></canvas>'
                         }]
                     },
                     options: {
-                      
                       responsive: true,
                       maintainAspectRatio: false,
                         plugins: {
                             labels: false,
                             datalabels: {
                                 backgroundColor: function(context) {
-                                    return context.dataset.backgroundColor;
+                                  return context.dataset.backgroundColor;
                                 },
                                 borderRadius: 4,
                                 color: 'white',
