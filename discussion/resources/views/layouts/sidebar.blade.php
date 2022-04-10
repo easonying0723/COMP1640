@@ -57,22 +57,22 @@
                   <span class="nav_logo-name">DISCUSS.ION</span>
                </a>
                <div class="nav_list">
-                  <a href="#" class="nav_link active">
+                  <a href="dashboard" class="nav_link">
                      <i class='bx bx-grid-alt nav_icon'></i>
                      <span class="nav_name">Dashboard</span>
                   </a>
-                  <a href="#" class="nav_link"> 
+                  <a href="homepage" class="nav_link"> 
                      <i class='bx bx-home nav_icon'></i>
                      <span class="nav_name">Home</span>
                   </a>
-                  <a href="#" class="nav_link">
+                  <a href="usercontrol" class="nav_link">
                      <i class='bx bxs-user-badge nav_icon'></i>
                      <span class="nav_name">Users Control</span>
                   </a>
                </div>
             </div>
             <form>
-            <a href="#" class="nav_link">
+            <a href="profile" class="nav_link">
                <img src="/images/ironman.png" class="userimg">
                <div>
                   <br>
@@ -92,6 +92,7 @@
          @yield ('usercontrolcontent')
          @yield ('profilecontent')
          @yield ('homepage')
+         @yield ('dashboard')
          @yield ('category')
       </div>
 
@@ -116,3 +117,14 @@
     </body>
 </html>
 
+
+<script type="text/javascript">
+   $(document).ready(function() {
+      $('.nav_link').each(function(i, obj) {
+         if (window.location.href.indexOf($(this).attr('href')) > -1) {
+         $(this).addClass('active');
+      }
+      });
+      
+   })
+</script>
