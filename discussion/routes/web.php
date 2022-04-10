@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
+use Illuminate\Support\Facades\View;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,12 +19,24 @@ use App\Http\Controllers\DashboardController;
 
 
 Route::get('/', function () {
+    return view('homepage');
+});
+
+Route::get('login', function () {
+    return view('login');
+});
+
+Route::get('terms', function () {
     return view('terms');
 });
 
-// Route::get('profile', function () {
-//     return view('profile');
-// });
+Route::get('homepage', function () {
+    return view('homepage');
+});
+
+Route::get('profile', function () {
+    return view('profile');
+});
 
  Route::get('login', function () {
      return view('login');
@@ -33,13 +47,10 @@ Route::get('usercontrol', function () {
     return view('usercontrol');
 });
 
-Route::get('/profile', [MainController::class, 'profile'])->name('profile');
-
 
 Route::get('/homepage/liked/{id}', [HomeController::class, 'liked'])->name('homepage.liked');
 Route::get('/homepage/disliked/{id}',[HomeController::class, 'disliked'])->name('homepage.disliked');
 
-Route::get('/usercontrol/delete/{id}',[MainController::class, 'delete'])->name('usercontrol.delete');
 
 Route::get('/homepage', [HomeController::class, 'index'])->name('home');
 Route::post('/homepage/idea/store', [HomeController::class, 'store_idea']);
@@ -49,8 +60,6 @@ Route::get('homepage/comment_details/{id}', [HomeController::class, 'comment_det
 
 Route::post('/homepage/store_comment/{id}',[HomeController::class, 'store_comment'])->name('homepage.store_comment');
 
-
-Route::post('profile/changePassword', [MainController::class, 'changePassword'])->name('profile.changePassword');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/usercontrol', [MainController::class, 'usercontrol'])->name('usercontrol'); //
 
@@ -58,25 +67,16 @@ Route::post('/auth/save',[MainController::class, 'save'])->name('auth.save');//
 Route::post('/auth/check',[MainController::class, 'check'])->name('auth.check');//
 Route::get('/auth/logout',[MainController::class, 'logout'])->name('auth.logout');//
 
-Route::get('/','MainController@save');//
+Route::get('/a','MainController@save');//email retrieve data
+Route::get('/b','HomeController@store_idea');//email retrieve data
 
 Route::post('/homepage/category/stored',[HomeController::class,'category_store']);
 
 Route::get('/delete/{id}',[HomeController::class,'category_delete']);
 
+Route::get('/auth/login',[MainController::class, 'login'])->name('auth.login');
 
-Route::get('sidebar', function () {
-    return view('sidebar');
-});
+Route::group(['middleware'=>['AuthCheck']], function(){ //store page in this group to prevent page access without logging in
+Route::get('/auth/login',[MainController::class, 'login'])->name('auth.login');
 
- Route::group(['middleware'=>['AuthCheck']], function(){ //store page in this group to prevent page access without logging in
-     Route::get('/auth/login',[MainController::class, 'login'])->name('auth.login');
-     Route::get('/usercontrol', [MainController::class, 'usercontrol'])->name('usercontrol');
-     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
  });
-// Route::get('/auth/login',[MainController::class, 'login'])->name('auth.login');
-
-// Route::group(['middleware'=>['AuthCheck']], function(){ //store page in this group to prevent page access without logging in
-// Route::get('/auth/login',[MainController::class, 'login'])->name('auth.login');
-
-// });

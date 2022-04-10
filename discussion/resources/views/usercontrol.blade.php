@@ -38,20 +38,20 @@
                               <th>User Email</th>
                               <th>Department</th>
                               <th>Position</th>
+                              <th>Status</th>
                               <th></th>
                            </tr>
                      </thead>
                      <tbody id="stockadjBody"> 
-                        @foreach($users as $data)
-                        <tr>
-                           <td>{{$data->id}}</td>
-                           <td>{{$data->name}}</td>
-                           <td>{{$data->email}}</td>
-                           <td>{{$data->department}}</td>
-                           <td>{{$data->position}}</td>
-                           <td><a href="{{ 'usercontrol/delete/' . $data->id }}">Delete</a></td>
-                        </tr> 
-                        @endforeach
+                           <tr>
+                              <td>SCPG1700562</td>
+                              <td>Yvette Yee YingYing</td>
+                              <td>scpg1700562@segi4u.my</td>
+                              <td>Information Technology</td>
+                              <td>Manager</td>
+                              <td></td>
+                              <td></td>
+                           </tr>
                      </tbody>
                   </table>
                </div>
@@ -97,19 +97,18 @@
                               <option value="IT">IT</option>
                               <option value="Marketing">Marketing</option>
                               <option value="Accounting Finance">Accounting Finance</option>
-                              <option value="Sales">Sales</option>
                            </select>
                         </div>
                      </div><br>
                      <div class="row">
                         <div class="col-md-6">
-                           <label for="position">Position:</label>
+                           <label for="">Position:</label>
                            <select class="form-select" name="position" aria-label="Default select example">
                               <option selected>Please Choose...</option>
-                              <option value="Manager">Manager</option>
-                              <option value="Coordinator">Coordinator</option>
-                              <option value="Admin">Admin</option>
-                              <option value="Staff">Staff</option>
+                              <option value="manager">Manager</option>
+                              <option value="coordinator">Coordinator</option>
+                              <option value="admin">Admin</option>
+                              <option value="staff">Staff</option>
                            </select>
                         </div>
                         <!-- <div class="col-md-6">
@@ -133,6 +132,7 @@
 
             </div>
          </div>
+
     @endsection
 
 

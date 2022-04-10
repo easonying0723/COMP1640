@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+
 use App\Models\Idea;
 use App\Models\Comment;
 use App\Models\Like;
 use App\Models\User;
-use Illuminate\Contracts\View\View;
+
+use App\Mail\EmailIdea;
+
+use Illuminate\Support\Facades\Mail;
+
 use App\Models\Cactegory;
 use DB;
 
@@ -104,6 +109,15 @@ class HomeController extends Controller
     }
 
     public function store_idea(Request $request){
+
+        $userid = (int)$request->session()->get('LoggedUser');
+
+        $userdepartment = User::select('department')->where('id','=', $userid)->first();//get user's department
+
+        $coordinatoremail = User::select('email')->where('position','=','coordinator')->where('department','=',$userdepartment)->first(); //get user's coordinator email
+
+        Mail::to($coordinatoremail->email)->send(new EmailIdea());
+
         $image = '';
         if ($request->hasFile('img')) {
             $file = $request->file('img');
@@ -121,7 +135,6 @@ class HomeController extends Controller
             }
         }
         //echo session('LoggedUser');
-
         $files_name = implode(",",$files_name);
         echo (int)$request->category;
         Idea::create([
@@ -134,6 +147,7 @@ class HomeController extends Controller
             'idea' => $request->idea,
             'anonymous' => $request->anonymous ? 1 : 0
         ]);
+
         return redirect()->route('home');
 
     }
@@ -148,7 +162,7 @@ class HomeController extends Controller
         if($save){
             return back()->with('success','New user has been successfuly added to database');
          }else{
-            return back()->with('fail','Something went wrong, try again later');
+             return back()->with('fail','Something went wrong, try again later');
          }
     }
 
@@ -161,9 +175,9 @@ class HomeController extends Controller
         $data->save();
         return redirect('/homepage')->with('success','Category added successfully');
     }
-    // public function category_delete($id)
-    // {
-    //         DB::delete('delete from category_details where id = ? ', [$id]);
-    //         return redirect('/homepage')->with('success','Category deleted successfully');
-    // }
+    public function category_delete($id)
+    {
+            // DB::delete('delete from category_details where id = ? ', [$id]);
+            // return redirect('/homepage')->with('success','Category deleted successfully');
+    }
 }
