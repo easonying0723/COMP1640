@@ -112,11 +112,13 @@ class HomeController extends Controller
 
         $userid = (int)$request->session()->get('LoggedUser');
 
-        $userdepartment = User::select('department')->where('id','=', $userid)->first();//get user's department
+        $userdepartment = User::select('department')->where('id','=', $userid)->get();//get user's department
 
-        $coordinatoremail = User::select('email')->where('position','=','coordinator')->where('department','=',$userdepartment)->first(); //get user's coordinator email
+        $coordinatoremail = User::select('email')->where('position','=','coordinator')->where('department','=',$userdepartment[0]->department)->first();; //get user's coordinator email
 
-        Mail::to($coordinatoremail->email)->send(new EmailIdea());
+        $data=$request->all();
+        
+        Mail::to($coordinatoremail->email)->send(new EmailIdea($data));
 
         $image = '';
         if ($request->hasFile('img')) {
@@ -151,6 +153,7 @@ class HomeController extends Controller
         return redirect()->route('home');
 
     }
+
     public function store_comment(Request $request,$idea_id)
     {
         $comment = new Comment;

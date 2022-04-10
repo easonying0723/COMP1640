@@ -1,7 +1,10 @@
 @component('mail::message')
 # Ding dong~
 
-Someone has posted an idea in #FACILITIES #AAAAAA.
+Someone in your department has post new idea.
+<br>
+
+"{{$subject}}"
 
 @component('mail::button', ['url' => 'http://127.0.0.1:8000/homepage'])
 Visit DISCUSS.ION

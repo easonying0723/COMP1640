@@ -30,6 +30,5 @@ class EmailIdea extends Mailable
     public function build()
     {
         return $this->markdown('emails.idea')->subject('Someone has post idea.');
-
     }
 }
