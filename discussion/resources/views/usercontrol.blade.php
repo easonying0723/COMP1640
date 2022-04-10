@@ -43,15 +43,16 @@
                            </tr>
                      </thead>
                      <tbody id="stockadjBody"> 
-                           <tr>
-                              <td>SCPG1700562</td>
-                              <td>Yvette Yee YingYing</td>
-                              <td>scpg1700562@segi4u.my</td>
-                              <td>Information Technology</td>
-                              <td>Manager</td>
-                              <td></td>
-                              <td></td>
-                           </tr>
+                        @foreach($users as $data)
+                        <tr>
+                           <td>{{$data->id}}</td>
+                           <td>{{$data->name}}</td>
+                           <td>{{$data->email}}</td>
+                           <td>{{$data->department}}</td>
+                           <td>{{$data->position}}</td>
+                           <td><a href="{{ 'usercontrol/delete/' . $data->id }}">Delete</a></td>
+                        </tr> 
+                        @endforeach
                      </tbody>
                   </table>
                </div>

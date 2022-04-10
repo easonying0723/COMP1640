@@ -15,10 +15,25 @@ class MainController extends Controller
         return view('auth.login');
     }
 
+
     function usercontrol(){
-        return view('usercontrol');
+        $udata = ['LoggedUserInfo'=>User::where('id','=', session('LoggedUser'))->first()];// pass to sidebar
+        $users = User::all();
+        return view('usercontrol',['users' => $users],$udata);
     }
 
+    function profile(Request $request){
+        $udata = ['LoggedUserInfo'=>User::where('id','=', session('LoggedUser'))->first()];// pass to sidebar
+        $user_id = (int)$request->session()->get('LoggedUser');
+        $users =  User::where('id','=', $user_id)->get();
+        return view('profile',['users' => $users],$udata);
+    }
+
+    function delete($id){
+        $data = User::find($id);
+        $data->delete();
+        return redirect('usercontrol');
+    }
     function save(Request $request){
 
         // //Validate requests
