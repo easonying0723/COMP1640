@@ -9,6 +9,7 @@ use App\Models\Like;
 use App\Models\User;
 
 use App\Mail\EmailIdea;
+use App\Mail\CommentIdea;
 
 use Illuminate\Support\Facades\Mail;
 
@@ -200,8 +201,10 @@ class HomeController extends Controller
 
         $coordinatoremail = User::select('email')->where('position','=','coordinator')->where('department','=',$userdepartment[0]->department)->first();; //get user's coordinator email
 
-        Mail::to($coordinatoremail->email)->send(new EmailIdea());
-        
+        dd($userid, $userdepartment, $coordinatoremail);
+
+        // Mail::to($coordinatoremail->email)->send(new EmailIdea());
+
         $setting = Setting::firstOrCreate([
             'setting' => 'idea_closure_date',
             'extra' => date('Y')
@@ -244,6 +247,13 @@ class HomeController extends Controller
 
     public function store_comment(Request $request,$idea_id)
     {
+
+        $userid = Idea::select('user_id')->where('id','=', $idea_id)->get(); //get idea id
+
+        $commentidea = User::select('email')->where('id','=',$userid[0]->user_id)->first(); //get user's coordinator email
+
+        Mail::to($commentidea->email)->send(new CommentIdea());
+
         $setting = Setting::firstOrCreate([
             'setting' => 'comment_closure_date'
         ]);

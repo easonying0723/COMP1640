@@ -1,9 +1,9 @@
 @component('mail::message')
 # Ding dong~
 <br>
-Dear, QA coordinator.
+Halo, DISCUSS.ION's users.
 <br>
-Someone in your department has post new idea.
+Someone has comment in your idea.
 <br>
 
 @component('mail::button', ['url' => 'http://127.0.0.1:8000/homepage'])
