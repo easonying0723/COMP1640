@@ -29,10 +29,13 @@
       <div class="categoryContainer">
          <div class="container">
             <p class="justify-content-between" style="color: #D0D4E3; font-weight: bold;">Category
+            @if($LoggedUserInfo->position == 'manager' || "admin")
                <button type="button" id="addcategory" class="btn btn-primary btn-lg bg-transparent float-right"
                   data-bs-toggle="modal" data-bs-target="#categoryModal" style="border: none">
                   <i class='bx bx-plus-circle' style="color: #F4F7FF"></i>
                </button>
+            @endif
+
             </p>  
             
          </div>  
@@ -619,17 +622,20 @@
                var commentcontainer = document.getElementById(idea_id);
                commentcontainer.innerHTML="";
                var name = "";
+               var profilepic="";
                for (var i = 0; i < data.length; i++) {
 
                    if(data[i].anonymity == 0)
                    {
+                      profilepic = data[i].profilepic;
                       name = data[i].name;
                    }
                    else
                    {
+                      profilepic = "profile3.png";
                       name = "Anonymous";
                    }
-                  commentcontainer.innerHTML += '<div class="container"><div class="row" id="viewcommentsec"><div class="col-md-1"><img src="images/' + data[i].profilepic + '" style="object-fit:contain;width:100%;height:100%" class="commentimg"></div><div class="col-md-11"><h6 class="mb-2 text-muted fw-bold" class="comment-username">' + name + '</h6><h6 class="comment-content">' + data[i].comment + '</h6><small><span class="comment-dt">' + data[i].created_at + '</span></small></div></div></div><br>';
+                  commentcontainer.innerHTML += '<div class="container"><div class="row" id="viewcommentsec"><div class="col-md-1"><img src="images/' + profilepic + '" style="object-fit:contain;width:100%;height:100%" class="commentimg"></div><div class="col-md-11"><h6 class="mb-2 text-muted fw-bold" class="comment-username">' + name + '</h6><h6 class="comment-content">' + data[i].comment + '</h6><small><span class="comment-dt">' + data[i].created_at + '</span></small></div></div></div><br>';
                }
             }
          })
