@@ -7,21 +7,18 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ContactMe extends Mailable
+class EmailIdea extends Mailable
 {
     use Queueable, SerializesModels;
+
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct()
     {
-
-        $this->name = $data['name'];
-        $this->email = $data['email'];
-        $this->password = $data['password'];
 
     }
 
@@ -32,7 +29,6 @@ class ContactMe extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.contact')->subject('Temporary Password for DISCUSS.ION')->with('name', $this->name)->with('password', $this->password)->with('email', $this->email);
-
+        return $this->markdown('emails.idea')->subject('Someone has post idea.');
     }
 }

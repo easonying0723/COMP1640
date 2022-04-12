@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
+use Illuminate\Support\Facades\View;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -65,16 +67,13 @@ Route::post('/auth/save',[MainController::class, 'save'])->name('auth.save');//
 Route::post('/auth/check',[MainController::class, 'check'])->name('auth.check');//
 Route::get('/auth/logout',[MainController::class, 'logout'])->name('auth.logout');//
 
-Route::get('/','MainController@save');//
+Route::get('/a','MainController@save');//email retrieve data
+Route::get('/b','HomeController@store_idea');//email retrieve data
+Route::get('/c','HomeController@store_comment');//email retrieve data
 
 Route::post('/homepage/category/stored',[HomeController::class,'category_store']);
 
 Route::get('/delete/{id}',[HomeController::class,'category_delete']);
-
-
-Route::get('sidebar', function () {
-    return view('sidebar');
-});
 
 Route::get('/auth/login',[MainController::class, 'login'])->name('auth.login');
 

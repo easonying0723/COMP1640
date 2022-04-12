@@ -15,15 +15,22 @@ class Idea extends Model
     protected $fillable = [
         'user_id',
         'name',
+        'cat_id',
         'subject',
         'idea',
         'file',
         'photo',
         'anonymous',
+        'number_of_view'
     ];
 
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User','user_id');
     }
 }

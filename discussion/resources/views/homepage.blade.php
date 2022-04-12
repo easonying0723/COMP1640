@@ -29,10 +29,13 @@
       <div class="categoryContainer">
          <div class="container">
             <p class="justify-content-between" style="color: #D0D4E3; font-weight: bold;">Category
+            @if($LoggedUserInfo->position == 'manager' || "admin")
                <button type="button" id="addcategory" class="btn btn-primary btn-lg bg-transparent float-right"
                   data-bs-toggle="modal" data-bs-target="#categoryModal" style="border: none">
                   <i class='bx bx-plus-circle' style="color: #F4F7FF"></i>
                </button>
+            @endif
+
             </p>  
             
          </div>  
@@ -58,13 +61,57 @@
    
    <div class="col-md-9 content" style="background-color: #A7B7CD">
       <br>
+      @if(Session::get('success'))
+             <div class="alert alert-success">
+                {{ Session::get('success') }}
+             </div>
+           @endif
+
+           @if(Session::get('fail'))
+             <div class="alert alert-danger">
+                {{ Session::get('fail') }}
+             </div>
+           @endif
       <div class="container">
          <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
             <div class="btn-group me-2" role="group" aria-label="Second group">
-               <button type="button" class="btn btn-secondary"> Recent View </button>
-               <button type="button" class="btn btn-secondary"> Hottest Topics </button>
-               <button type="button" class="btn btn-secondary"> Most Liked </button>
+               <a class="btn btn-secondary" href="{{route('home', array('filter' => 'recent-view'))}}"> 
+               @if(Request::get('filter') == 'recent-view')
+                  <strong class = 'text-warning'><red>Recently Viewed<red></strong></a>
+               @else
+               Recently Viewed</a>
+               @endif
+               <a class="btn btn-secondary" href="{{route('home', array('filter' => 'hottest-topic'))}}"> 
+               @if(Request::get('filter') == 'hottest-topic')
+                  <strong class = 'text-warning'><red>Hottest Topics <red></strong></a>
+               @else
+               Hottest Topics </a>
+               @endif</a>
+               <a class="btn btn-secondary" href="{{route('home', array('filter' => 'most-liked'))}}">
+               @if(Request::get('filter') == 'most-liked')
+                  <strong class = 'text-warning'><red>Most Liked <red></strong></a>
+               @else
+               Most Liked </a>
+               @endif
+               <a class="btn btn-secondary" href="{{route('home', array('filter' => 'most-viewed'))}}">
+               @if(Request::get('filter') == 'most-viewed')
+                  <strong class = 'text-warning'><red>Most Viewed <red></strong></a>
+               @else
+               Most Viewed </a>
+               @endif
             </div>
+
+            @if($LoggedUserInfo->position == 'admin')
+            <div class="ms-auto">
+               <a class="btn btn-primary" id="buttonClosureDate">Set Closure Date</a>
+            </div>
+            @endif
+
+            @if($LoggedUserInfo->position == 'manager')
+            <div class="ms-auto">
+               <a id="buttonExport" class="btn btn-primary">Export All Data</a>
+            </div>
+            @endif
          </div>
       </div>
       <div class="container">
@@ -73,14 +120,17 @@
                <div class="card" style="width: 18rem;">
                   <img src="images/add.png" class="card-img-top" style="">
                   <div class="card-body">
+                     @if(date('Y-m-d',strtotime($idea_closure_date->detail)) >= date('Y-m-d'))
                      <button type="button" class="btn btn-primary" data-toggle="modal" id="addidea">
                         + New Idea
                      </button>
+                     @else
+                     <p>Adding idea is no longer allowed after closure date.</p>
+                     @endif
                   </div>
                </div>
             </div>
             @foreach($ideas as $index => $idea)
-            
             <div class="col-sm-4">
                <div class="card">
                   <div class="card-header">
@@ -90,28 +140,45 @@
                   </div>
                   <div class="card-body">
                      <div>
-                        <h6 class="card-subtitle mb-2 text-muted fw-bold">{{$idea->anonymous == 1 ? 'Anonymous' :
-                           $idea->name}}
+                        <h6 class="card-subtitle mb-2 text-muted fw-bold">{{$idea->anonymous == 1 ? 'Anonymous' : (isset($idea->user) ? $idea->user->name : $idea->user_name)}}
                            <img src="images/ironman.png" id="userimg">
                         </h6>
-                        <button type="button" class="btn btn-info btn-sm" disabled>IT Department</button>
+                        <button type="button" class="btn btn-info btn-sm" disabled>{{ $idea->department}} Department</button>
                      </div>
                      <br>
                      <p class="card-text ideascontent">{{$idea->idea}}</p>
-                     <button type="button" class="btn btn-secondary view-btn" data-toggle="modal" id="view"
-                        data-target="#view_idea_modal" data-id="{{ $idea->id }}">View</button>
+                     <button type="button" class="btn btn-secondary view-btn" data-toggle="modal" id="view" data-target="{{'#idea-'.$idea->id}}" data-id="{{ $idea->id }}">View</button>
 
-                     <small style="float: right; margin: 10px">23 Views</small>
+                     <small style="float: right; margin: 10px">{{$idea->number_of_view}} {{$idea->number_of_view > 1 ? 'views' : 'view'}}</small>
                   </div>
                   <div class="card-footer">
                      <div>
-                        <button id="like" class="btn like btn-warning btn-sm" style="margin:1px;"><span
-                              class="bx bx-like" aria-hidden="true"></span><span class="likes"
-                              id="likeValue"></span></button>
-                        <button id="dislike" class="btn dislike btn-danger btn-sm" style="margin:1px;"><span
-                              class="bx bx-dislike" aria-hidden="true"></span><span class="dislikes" id="dislikeValue"
-                              enabled='false'></span></button>
-                        <small style="float: right; margin: 10px">78 Comments</small>
+                        <button id="like" onClick="like({{$idea->id}},false)" class="btn like btn-warning btn-sm" style="margin:1px;">
+                           @if($idea->user_like == 1)
+                           <span class="bx bxs-like" aria-hidden="true"></span>
+                           @else
+                           <span class="bx bx-like" aria-hidden="true"></span>
+                           @endif
+                           <span class="likes" id="likeValue"></span>
+                           @if($idea->user_like == 1)
+                           <span id="{{'number_of_like_'.$idea->id}}"><strong>{{$idea->number_of_like}}</strong></span>
+                           @else
+                           <span id="{{'number_of_like_'.$idea->id}}"> {{$idea->number_of_like}}</span>
+                           @endif
+                        </button>
+                        <button id="dislike" onClick="dislike({{$idea->id}},false)" class="btn dislike btn-danger btn-sm" style="margin:1px;">
+                           @if($idea->user_like == 0)
+                           <span class="bx bxs-dislike" aria-hidden="true"></span>
+                           @else
+                           <span class="bx bx-dislike" aria-hidden="true"></span>
+                           @endif
+                           <span class="dislikes" id="dislikeValue" enabled='false'></span>
+                           @if($idea->user_like == 0)
+                           <span id="{{'number_of_dislike_'.$idea->id}}"><strong>{{$idea->number_of_dislike}}</strong></span>
+                           @else
+                           <span id="{{'number_of_dislike_'.$idea->id}}"> {{$idea->number_of_dislike}}</span>
+                           @endif</button>
+                        <small style="float: right; margin: 10px">{{$idea->number_of_comment}} {{$idea->number_of_comment > 1 ? 'comments' : 'comment'}}</small>
                      </div>
                   </div>
                </div>
@@ -239,17 +306,9 @@
                   <div class="container-fluid">
                      <div class="row">
                         <div class="col-md-12">
-                           <label for="">Name:</label>
-                           <input type="text" class="form-control" id="name" name="name"
-                              placeholder="Please enter name">
-                        </div>
-                     </div>
-                     <br>
-                     <div class="row">
-                        <div class="col-md-12">
                            <label for="">Subject:</label>
                            <input type="text" class="form-control" id="subject" name="subject"
-                              placeholder="Please enter subject">
+                              placeholder="Please enter subject" required>
                         </div>
                      </div>
                      <br>
@@ -257,7 +316,19 @@
                         <div class="col-md-12">
                            <label for="">Idea:</label>
                            <textarea name="idea" class="form-control" rows="3"
-                              placeholder="Creative Ideas, Creative DISCUSS.ION."></textarea>
+                              placeholder="Creative Ideas, Creative DISCUSS.ION." required></textarea>
+                        </div>
+                     </div>
+                     <br>
+                     <div class="row">
+                        <div class="col-md-12">
+                           <label for="category">Category:</label>
+                           <select name="category" id="category" class="form-control">
+                           <option selected>Please Choose...</option>
+                           @foreach($data as $categoryData)
+                             <option value="{{$categoryData ->id}}">{{$categoryData -> cate_name}}</option>
+                           @endforeach
+                           </select>
                         </div>
                      </div>
                      <br>
@@ -290,6 +361,17 @@
                            </div>
                         </div>
                      </div>
+                     <div class="row">
+                        <div class="col-md-12">
+                           <div class="form-check">
+                              <input class="form-check-input" type="checkbox" value="true" id="checkboxTNC"
+                                 name="checkboxTNC" required>
+                              <label class="form-check-label" for="checkboxTNC">
+                                 I agree to the<span> <a id='buttontnc' href="{{URL::to('/terms-idea')}}" target="_blank">Terms & Conditions</a></span> 
+                              </label>
+                           </div>
+                        </div>
+                     </div>
                   </div>
                </div>
                <div class="modal-footer">
@@ -301,13 +383,56 @@
       </div>
    </div>
 
+   {{---------------------------- Closure Date Modal ----------------------------}}
+   <div class="modal fade" id="modalClosureDate" tabindex="-1" aria-labelledby="ideaModallLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+         <div class="modal-content">
+            <form action="{{ url('homepage/closure_date') }}" method="POST" enctype="multipart/form-data">
+               @csrf
+               <div class="modal-header">
+                  <h5 class="modal-title" id="ideaModalLabel">Set Closure Date</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body">
+                  <div class="container-fluid">
+                     <p>Closure date for academic year {{date('Y')}}</p>
+                     <div class="row">
+                        <div class="col-md-12">
+                           <label for="">Idea Closure Date:</label>
+                           <input type="date" id="idea_closure_date" name="idea_closure_date" value="{{$idea_closure_date->detail}}" required>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-md-12">
+                           <label for="">Comment Closure Date:</label>
+                           <input type="date" id="comment_closure_date" name="comment_closure_date" value="{{$comment_closure_date->detail}}" required>
+                        </div>
+                     </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+
+   <div class="modal fade" id="modaltnc" tabindex="-1" aria-labelledby="ideaModallLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+         <div class="modal-content">
+            Terms and condition
+         </div>
+      </div>
+   </div>
+   </div>
+
 
 
    {{---------------------------- View Idea Modal ----------------------------}}
 
    @foreach($ideas as $index => $idea)
-   <div class="modal fade" id="view_idea_modal" tabindex="-1" aria-labelledby="viewModallLabel"
-      aria-hidden="true">
+   <div class="modal fade" id="{{'idea-'.$idea->id}}" data tabindex="-1" aria-labelledby="viewModallLabel" aria-hidden="true">
       <div class="modal-dialog modal-xl">
          <div class="modal-content">
             <div class="modal-header">
@@ -322,10 +447,10 @@
                   <div class="row">
                      <div class="col-md-12">
                         <div>
-                           <h6 class="mb-2 text-muted fw-bold">{{$idea->anonymous == 1 ? 'Anonymous' : $idea->name}}
+                           <h6 class="mb-2 text-muted fw-bold">{{$idea->anonymous == 1 ? 'Anonymous' : (isset($idea->user) ? $idea->user->name : $idea->user_name)}}
                               <img src="images/ironman.png" id="userimg">
                            </h6>
-                           <button type="button" class="btn btn-info btn-sm" disabled>IT Department</button>
+                           <button type="button" class="btn btn-info btn-sm" disabled>{{$idea->department}} Department</button>
                            <br><br>
                            <small>{{$idea->created_at}}</small>
                         </div>
@@ -334,9 +459,11 @@
                   <br>
                   <div class="row">
                      <div class="col-md-12 d-flex justify-content-center" id="photosec">
+                        @if($idea->photo)
                         <a href="{{'images/idea/' .$idea->photo}}" target="_blank">
                            <img width="100%" class="img-fluid" src="{{'images/idea/' .$idea->photo}}" id="pictureshow">
                         </a>
+                        @endif
                      </div>
                   </div>
                   <br>
@@ -373,17 +500,35 @@
             <hr />
             <div class="container">
                <div id="numbersec">
-                  <button class="btn like btn-warning" style="margin:1px;"><span class="bx bx-like"
-                        aria-hidden="true"></span> Like <span class="likes">0</span></button>
-                  <button class="btn dislike btn-danger" style="margin:1px;"><span class="bx bx-dislike"
-                        aria-hidden="true"></span> Dislike <span class="dislikes">0</span></button>
-                  <small style="float: right; margin: 10px">13 Views</small>
-                  <small style="float: right; margin: 10px">78 Comments</small>
+                  <button class="btn like btn-warning" onClick="like({{$idea->id}},true)" style="margin:1px;">
+                     @if($idea->user_like == 1)
+                     <span class="bx bxs-like" aria-hidden="true"></span>
+                     <span class="likes"><strong>Like {{$idea->number_of_like}}</strong></span>
+                     @else
+                     <span class="bx bx-like" aria-hidden="true"></span>
+                     <span class="likes">Like {{$idea->number_of_like}}</span>
+                     @endif
+                  </button>
+                  <button class="btn dislike btn-danger" onClick="dislike({{$idea->id}},true)" style="margin:1px;">
+                     @if($idea->user_like == 0)
+                     <span class="bx bxs-dislike" aria-hidden="true"></span>
+                     <span class="dislikes"><strong>Dislike {{$idea->number_of_dislike}}</strong></span>
+                     @else
+                     <span class="bx bx-dislike" aria-hidden="true"></span>
+                     <span class="dislikes">Dislike {{$idea->number_of_dislike}}</span>
+                     @endif
+
+                  </button>
+                  <small style="float: right; margin: 10px">{{$idea->number_of_view}} {{$idea->number_of_view > 1 ? 'views' : 'view'}}</small>
+                  <small style="float: right; margin: 10px">{{$idea->number_of_comment}} {{$idea->number_of_comment > 1 ? 'comments' : 'comment'}}</small>
                </div>
             </div>
-            <hr />
+            <hr/>
+
+            
             <div class="container">
                <div class="modal-body" id="footersec">
+               @if(date('Y-m-d',strtotime($comment_closure_date->detail)) >= date('Y-m-d'))
                   <form action="{{ route('homepage.store_comment', ['id' => $idea->id ])}}" method="post">
                      @csrf
                      <div class="row" id="commentsec">
@@ -408,10 +553,11 @@
                         </div>
                      </div>
                   </form>
+                  @endif
                </div>
                <br><br>
 
-               <div class="container" id="comment-section">
+               <div class="container" id="{{'comment-section-'.$idea->id}}">
 
                  
                </div>
@@ -425,81 +571,161 @@
 
 
    <script>
+      $('#buttonExport').on('click',function () {
+         var base_url = window.location.origin;
+         window.location.href=base_url +'/homepage/export_data';
+         setTimeout(() => {
+            window.location.href=base_url+'/homepage/export_file';
+         }, 1000);
+      });
+
+      $('#buttonClosureDate').on( 'click',function () {
+         $("#modalClosureDate").modal("show");
+      });
+      
+      $(document).on("click", ".browse", function() {
+         var photo = $(this).parents().find("#photo");
+         photo.trigger("click");
+      });
+      
+      $("#uploadphoto").change(function(e) {
+         var fileName = e.target.files[0].name;
+         
+         $("#photo").val(fileName);
+
+         var reader = new FileReader();
+         reader.onload = function(e) {
+         // get loaded data and render thumbnail.
+         document.getElementById("preview").src = e.target.result;
+         };
+         // read the image file as a data URL.
+         reader.readAsDataURL(this.files[0]);
+      });
+
+      $(document).ready(function() {
+         if (window.location.hash) {
+            var hash = window.location.hash;
+            idea_id = hash.substring(6);
+            $('[data-id="'+idea_id+'"]').click();
+            window.location.href.split('#')[0];
+         }
+      });
       //pass id to controller to display comment of the clicked idea
       $('.view-btn').click(function () {
          const id = $(this).attr('data-id');
-
          $.ajax({
             url: 'homepage/comment_details/' + id,
             type: 'GET',
             data: { "id": id },
             success: function (data) {
-               console.log(data);
-
-               var commentcontainer = document.getElementById('comment-section');
+               var idea_id = 'comment-section-' + id;
+               var commentcontainer = document.getElementById(idea_id);
                commentcontainer.innerHTML="";
                var name = "";
+               var profilepic="";
                for (var i = 0; i < data.length; i++) {
 
-                   if(data[i].anonymous == 0)
+                   if(data[i].anonymity == 0)
                    {
+                      profilepic = data[i].profilepic;
                       name = data[i].name;
                    }
                    else
                    {
+                      profilepic = "profile3.png";
                       name = "Anonymous";
                    }
-               commentcontainer.innerHTML+='<div class="container"><div class="row" id="viewcommentsec"><div class="col-md-1"><img src="images/profile3.png" style="object-fit:contain;width:100%;height:100%" class="commentimg"></div><div class="col-md-11"><h6 class="mb-2 text-muted fw-bold" class="comment-username">'+ name+'</h6><h6 class="comment-content">'+data[i].comment+'</h6><small><span class="comment-dt">'+data[i].created_at+'</span></small></div></div></div><br>';
+                  commentcontainer.innerHTML += '<div class="container"><div class="row" id="viewcommentsec"><div class="col-md-1"><img src="images/' + profilepic + '" style="object-fit:contain;width:100%;height:100%" class="commentimg"></div><div class="col-md-11"><h6 class="mb-2 text-muted fw-bold" class="comment-username">' + name + '</h6><h6 class="comment-content">' + data[i].comment + '</h6><small><span class="comment-dt">' + data[i].created_at + '</span></small></div></div></div><br>';
                }
             }
          })
       });
 
-      function setLikeText(id, newvalue) {
-         var s = document.getElementById(id);
-         s.innerHTML = newvalue;
+      function like(id, open_modal) {
+         $.ajax({
+            url: 'homepage/liked/' + id,
+            type: 'GET',
+            success: function(data) {
+               if(data != 'success'){
+                  alert(data);
+                  return;
+               }
+               if (open_modal == false){
+                  window.location.href = window.location.href.split('#')[0]
+               }
+               else if (open_modal == true) {
+                  window.location.hash = '#idea-' + id;
+                  window.location.reload(true);
+               }
+            }
+         })
       }
 
-      function setDislikeText(id, newvalue) {
-         var s = document.getElementById(id);
-         s.innerHTML = newvalue;
+      function dislike(id, open_modal) {
+         $.ajax({
+            url: 'homepage/disliked/' + id,
+            type: 'GET',
+            success: function(data) {
+               if(data != 'success'){
+                  alert(data);
+                  return;
+               }
+               if (open_modal == false){
+                  window.location.href = window.location.href.split('#')[0]
+               }
+               else if (open_modal == true) {
+                  window.location.hash = '#idea-' + id;
+                  window.location.reload(true);
+               }
+            }
+         })
       }
 
-      window.onload = function () {
-         setLikeText("likeValue", 0);
-         setDislikeText("dislikeValue", 0);
-      }
-
-      var currentLike = document.getElementById("likeValue").textContent;
-      var currentDislike = document.getElementById("dislikeValue").textContent;
-
-      $('#like').click(function () {
-         console.log(currentLike);
-         console.log(currentDislike);
-
-         if (currentLike > 0) {
-            setLike("likeValue", 0);
-         }
-
-         else {
-            setLikeText("likeValue", 1);
-            setDislikeText("dislikeValue", 0);
-         }
-
-      });
 
 
-      $('#dislike').click(function () {
-         if (currentDislike > 0) {
-            setDislikeText("dislikeValue", 1);
-         }
-         else {
-            setDislikeText("dislikeValue", 1);
-            setLikeText("likeValue", 0);
-         }
-      });
+      // function setLikeText(id, newvalue) {
+      //    var s = document.getElementById(id);
+      //    s.innerHTML = newvalue;
+      // }
+
+      // function setDislikeText(id, newvalue) {
+      //    var s = document.getElementById(id);
+      //    s.innerHTML = newvalue;
+      // }
+
+      // window.onload = function () {
+      //    setLikeText("likeValue", 0);
+      //    setDislikeText("dislikeValue", 0);
+      // }
+
+      // var currentLike = document.getElementById("likeValue").textContent;
+      // var currentDislike = document.getElementById("dislikeValue").textContent;
+
+      // $('#like').click(function () {
+      //    console.log(currentLike);
+      //    console.log(currentDislike);
+
+      //    if (currentLike > 0) {
+      //       setLike("likeValue", 0);
+      //    }
+
+      //    else {
+      //       setLikeText("likeValue", 1);
+      //       setDislikeText("dislikeValue", 0);
+      //    }
+
+      // });
 
 
+      // $('#dislike').click(function () {
+      //    if (currentDislike > 0) {
+      //       setDislikeText("dislikeValue", 1);
+      //    }
+      //    else {
+      //       setDislikeText("dislikeValue", 1);
+      //       setLikeText("likeValue", 0);
+      //    }
+      // });
    </script>
 
    @endsection

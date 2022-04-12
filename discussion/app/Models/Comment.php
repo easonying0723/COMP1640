@@ -17,5 +17,15 @@ class Comment extends Model
         'idea_id', 
         'user_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User','user_id');
+    }
+
+    public function idea()
+    {
+        return $this->belongsTo('App\Models\Idea','idea_id');
+    }
 }
 
