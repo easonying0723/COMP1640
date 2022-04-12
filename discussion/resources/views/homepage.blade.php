@@ -24,7 +24,14 @@
 <div class="row homepagecontent">
    <div class="col-md-3 categorynav">
       <br>
-      <input type="text" class="form-control" placeholder="Search">
+      <form type="" action="">
+        @csrf
+      <input type="search" class="form-control" placeholder="Search" name="search" value="" />
+      <button class="btn btn-outline-light" type="submit" style="margin-left: 60%;margin-top: 10px;">Search</button>
+      <a href="/homepage">
+      <button class="btn btn-outline-light" type="button" style=" margin-top: 10px;">RESET</button>
+      </a>
+      </form>
       <br>
       <div class="categoryContainer">
          <div class="container">
