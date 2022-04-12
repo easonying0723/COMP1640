@@ -145,7 +145,7 @@ class HomeController extends Controller
         if($save){
             return back()->with('success','New user has been successfuly added to database');
          }else{
-            return back()->with('fail','Something went wrong, try again later');
+             return back()->with('fail','Something went wrong, try again later');
          }
     }
 
@@ -158,9 +158,13 @@ class HomeController extends Controller
         $data->save();
         return redirect('/homepage')->with('success','Category added successfully');
     }
-    // public function category_delete($id)
-    // {
-    //         DB::delete('delete from category_details where id = ? ', [$id]);
-    //         return redirect('/homepage')->with('success','Category deleted successfully');
-    // }
+    public function category_delete($id)
+    {
+            DB::delete('delete from category_details where id = ? ', [$id]);
+            return redirect('/homepage')->with('success','Category deleted successfully');
+    }
+    public function category_search()
+    {
+        
+    }
 }
