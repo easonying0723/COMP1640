@@ -70,7 +70,7 @@ Route::get('/auth/logout',[MainController::class, 'logout'])->name('auth.logout'
 Route::get('/a','MainController@save');//email retrieve data
 Route::get('/b','HomeController@store_idea');//email retrieve data
 Route::get('/c','HomeController@store_comment');//email retrieve data
-
+Route::get('/homepage',[HomeController::class,'Categoryindex']);
 Route::post('/homepage/category/stored',[HomeController::class,'category_store']);
 
 Route::get('/delete/{id}',[HomeController::class,'category_delete']);

@@ -299,6 +299,19 @@ class HomeController extends Controller
             return back()->with('fail','Something went wrong, try again later');
          }
     }
+    public function Categoryindex(Request $request)
+    {
+       $search = $request['search'] ?? "";
+       if($search !="")
+        {
+            //where clause
+            $data = Cactegory::where('cate_name','LIKE', "%$search%")->get();
+       }else{
+            $data = Cactegory::all();
+        }
+        
+        return view('homepage')->with('data',$data);
+    }
 
     public function category_store(Request $request)
     {
