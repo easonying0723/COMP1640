@@ -56,7 +56,7 @@
                   </h2>
                   <div class="accordion-collapse collapse show item-1" role="tabpanel" data-bs-parent="#accordion-1">
                      <div class="accordion-body">
-                        <p class="mb-0">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
+                        <p class="mb-0">.</p>
                      </div>
                   </div>
                </div>@endforeach
