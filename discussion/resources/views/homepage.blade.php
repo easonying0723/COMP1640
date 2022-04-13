@@ -56,7 +56,12 @@
                   </h2>
                   <div class="accordion-collapse collapse show item-1" role="tabpanel" data-bs-parent="#accordion-1">
                      <div class="accordion-body">
-                        <p class="mb-0">.</p>
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#titleModals">
+                        + ADD TITLE
+                        </button>
+                        <button>
+                           <a href="/delete/{{$categoryData->id}}" class="la la-times">DELETE</a>
+                        </button>
                      </div>
                   </div>
                </div>@endforeach
