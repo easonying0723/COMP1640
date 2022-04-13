@@ -56,7 +56,12 @@
                   </h2>
                   <div class="accordion-collapse collapse show item-1" role="tabpanel" data-bs-parent="#accordion-1">
                      <div class="accordion-body">
-                        <p class="mb-0">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#titleModals">
+                        + ADD TITLE
+                        </button>
+                        <button>
+                           <a href="/delete/{{$categoryData->id}}" class="la la-times">DELETE</a>
+                        </button>
                      </div>
                   </div>
                </div>@endforeach
@@ -301,26 +306,28 @@
                <h5 class="modal-title" id="titleModalLabel">Add New Title</h5>
                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <form action="{{url ('/homepage/category/stored')}}" method="POST">
+            @csrf
             <div class="modal-body">
                <div class="container-fluid">
                   <div class="row">
                      <div class="col-md-12">
                         <label for="">Title Name:</label>
-                        <input type="text" class="form-control" id="" placeholder="Please enter category name" required>
+                        <input type="text" class="form-control" id="title_name" placeholder="Please enter category name" required>
                      </div>
                   </div>
                   <br>
                   <div class="row">
                      <div class="col-md-12">
                         <label for="promoduration">Duration:</label>
-                        <div class="input-group">
+                        <div class="input-group" >
                            <div class="input-group-prepend">
                               <span class="input-group-text"><i class="iconify" data-icon="bx:calendar-alt"></i></span>
                            </div>
                            <input type="text" placeholder="Start date" aria-label="First name"
-                              class="form-control start-date">
+                              class="form-control start-date" id="title_duration_start">
                            <input type="text" placeholder="End date" aria-label="Last name"
-                              class="form-control end-date">
+                              class="form-control end-date" id="title_duration_end">
                         </div>
                      </div>
                   </div>
@@ -330,6 +337,7 @@
                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                <button type="button" class="btn btn-primary" id="createtitle">Create</button>
             </div>
+            </form>
          </div>
       </div>
    </div>
