@@ -46,25 +46,22 @@
             </p>  
             
          </div>  
-         <div id="accordion-1" class="accordion" role="tablist" style="width: 282px;">
-            @foreach($data as $categoryData)
-               <div class="accordion-item">
-                  <h2 class="accordion-header" role="tab">
-                     <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-1" aria-expanded="true"
-                        aria-controls="accordion-1 .item-1">#{{$categoryData -> cate_name}}<i class="la la-times" style="margin-left: 71px;"></i>
+         <div class="accordion accordion-flush" id="accordionFlushExample">
+               @foreach($data as $categoryData)     
+            <div class="accordion-item">
+               <h2 class="accordion-header" id="flush-heading{{$categoryData->id}}">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$categoryData->id}}" aria-expanded="false" aria-controls="flush-collapse{{$categoryData->id}}">
+                     #{{$categoryData->cate_name}}
+                  </button>
+               </h2>
+               <div id="flush-collapse{{$categoryData->id}}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">
+                     <button type="button" data-bs-toggle="modal" data-bs-target="#titleModal">+ADD TITLE
                      </button>
-                  </h2>
-                  <div class="accordion-collapse collapse show item-1" role="tabpanel" data-bs-parent="#accordion-1">
-                     <div class="accordion-body">
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#titleModals">
-                        + ADD TITLE
-                        </button>
-                        <button>
-                           <a href="/delete/{{$categoryData->id}}" class="la la-times">DELETE</a>
-                        </button>
-                     </div>
                   </div>
-               </div>@endforeach
+               </div>
+            </div>
+               @endforeach
          </div>
       </div>
       <!--------------BEFORE 這裏---------------------->
