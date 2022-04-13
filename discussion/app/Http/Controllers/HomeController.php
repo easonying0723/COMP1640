@@ -327,6 +327,15 @@ class HomeController extends Controller
             // DB::delete('delete from category_details where id = ? ', [$id]);
             // return redirect('/homepage')->with('success','Category deleted successfully');
     }
+    public function title_store(Request $request)
+    {
+        $title = new Title;
+        $title->title_name = $request->input('title_name');
+        $title->title_duration_start = $request->input('title_duration_start');
+        $title->title_duration_end = $request->input('title_duration_end');
+        $title->save();
+        return redirect('/homepage')->with('success','Title added successfully');
+    }
 
 
     public function export_data(){
