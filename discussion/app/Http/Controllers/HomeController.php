@@ -329,11 +329,11 @@ class HomeController extends Controller
     }
     public function title_store(Request $request)
     {
-        $title = new Title;
-        $title->title_name = $request->input('title_name');
-        $title->title_duration_start = $request->input('title_duration_start');
-        $title->title_duration_end = $request->input('title_duration_end');
-        $title->save();
+        $titleC = new Title;
+        $titleC->title_name = $request->input('title_name');
+        $titleC->title_duration_start = $request->input('title_duration_start');
+        $titleC->title_duration_end = $request->input('title_duration_end');
+        $titleC->save();
         return redirect('/homepage')->with('success','Title added successfully');
     }
 
