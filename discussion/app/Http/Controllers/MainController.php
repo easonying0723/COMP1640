@@ -19,6 +19,7 @@ class MainController extends Controller
     function usercontrol(){
         $udata = ['LoggedUserInfo'=>User::where('id','=', session('LoggedUser'))->first()];// pass to sidebar
         $users = User::all();
+
         return view('usercontrol',['users' => $users],$udata);
     }
 
@@ -27,6 +28,26 @@ class MainController extends Controller
         $user_id = (int)$request->session()->get('LoggedUser');
         $users =  User::where('id','=', $user_id)->get();
         return view('profile',['users' => $users],$udata);
+    }
+
+    function change_profilepic(Request $request){
+        $user_id = (int)$request->session()->get('LoggedUser');
+
+        $image = '';
+        if ($request->hasFile('img')) {
+            $file = $request->file('img');
+            $image = date('YmdHis') . '.' . $file->getClientOriginalExtension();
+            $file->move('images/', $image);
+        }
+
+        //echo session('LoggedUser');
+        $update = User::where('id','=',$user_id)->update(['profilepic'=>strval($image)]);
+        if($update){
+            return back()->with('success','Profile picture changed successfully.');
+        }
+        else{
+            return back()->with('fail','Profile picture change failed.');
+        }
     }
 
     function delete($id){
@@ -47,12 +68,14 @@ class MainController extends Controller
           $data=$request->all();
           Mail::to(request('email'))->send(new ContactMe($data));
 
+          $profilepic = 'ironman.png';
           //Insert data into database
           $users = new User;
           $users->name = $request->name;
           $users->email = $request->email;
           $users->password = Hash::make($request->password);
           $users->department = $request->department;
+          $users->profilepic = $profilepic;
           $users->position = $request ->position;
 
           $save = $users->save();
@@ -94,6 +117,29 @@ class MainController extends Controller
             return redirect('/auth/login');
         }
     }
+    function changePassword(Request $request){
+            $request->validate([
+                'currentpw'=>['required'],
+                'newpw'=>['required'],
+                'confirmpw'=>['same:newpw'],
+            ]);
+            $user_id = (int)$request->session()->get('LoggedUser');
+            $userInfo = User::where('id','=', $user_id)->first();
+
+            //check if password matches with current password
+            if(Hash::check($request->currentpw, $userInfo->password)){
+                $update= User::where('id','=',$user_id)->update(['password'=> Hash::make($request->newpw)]);
+                if($update){
+                    return back()->with('success','Password changed successfully.');
+                }
+                else{
+                    return back()->with('fail','Password change failed.');
+                }
+            }
+            else{
+                return back()->with('fail','Your current password does not match');
+            }      
+        }
 
     //     function settings(){
     //         $data = ['LoggedUserInfo'=>Admin::where('id','=', session('LoggedUser'))->first()];

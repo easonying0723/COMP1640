@@ -12,7 +12,6 @@
   
   div.termsContent {
     background-color: white;
-    width: 565px;
     height: 150px;
     overflow: scroll;
     padding: 10px;
@@ -29,8 +28,7 @@
     border: none;
     border-radius: 10px 10px 10px 10px;
     cursor: pointer;
-    width: 30%;
-    float: right;
+    width: 30%;    
   }
   
   .lgn{

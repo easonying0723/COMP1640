@@ -39,7 +39,6 @@
                               <th>Department</th>
                               <th>Position</th>
                               <th>Status</th>
-                              <th></th>
                            </tr>
                      </thead>
                      <tbody id="stockadjBody"> 
@@ -108,7 +107,6 @@
                               <option selected>Please Choose...</option>
                               <option value="manager">Manager</option>
                               <option value="coordinator">Coordinator</option>
-                              <option value="admin">Admin</option>
                               <option value="staff">Staff</option>
                            </select>
                         </div>

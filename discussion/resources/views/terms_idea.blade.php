@@ -25,7 +25,8 @@
   <div class="termsTitle">
     <h1>Terms & Condition.</h1><br>
     <p>Please check the terms and condition before submitting new idea.</p>
-      <div class="termsContent">When you agree to terms and conditions, you are basically agreeing to all sorts of things. In order to know exactly what you have agreed to, you have to read and make sure you understand everything in the terms and conditions. Most people are usually surprised when they find out what they have agreed to.
+      <div class="termsContent">
+        DISCUSS.ION provides functionality to make available content and ideas in connection with the DISCUSS.ION sites. Any text in content should be written in English. You acknowledge and agree that you are responsible for all content and ideas you make available in connection with our website. You respresent and warrant that (1) you have the authority to grant the rights in such content and ideas as set forth in these Terms of Use, and the use of such ideas, will not violate any terms of these Terms of Use. This means you will be responsible for the legality, the accuracy , the approriateness, the originality , and your rights in any such Ideas. 
         <br><br>When you agree to terms and conditions, you are basically agreeing to all sorts of things. In order to know exactly what you have agreed to, you have to read and make sure you understand everything in the terms and conditions. Most people are usually surprised when they find out what they have agreed to.
       </div>
   </div>

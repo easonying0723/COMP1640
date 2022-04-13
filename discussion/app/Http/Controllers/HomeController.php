@@ -47,14 +47,20 @@ class HomeController extends Controller
             'setting' => 'comment_closure_date',
             'extra' => date('Y')
         ]);
+
         $udata = ['LoggedUserInfo'=>User::where('id','=', session('LoggedUser'))->first()];
-        $user_id = $udata['LoggedUserInfo']->id;
+        $user_id = (int)$udata['LoggedUserInfo']->id;
+
+
         $filter = $request->get('filter');
+
+
         if($request->get('filter') == 'recent-view'){
             $ideas = DB::table('idea_view')
             ->leftJoin('idea', 'idea.id', '=', 'idea_view.idea_id')
             ->leftJoin('users', 'users.id', '=', 'idea.user_id')
-            ->select(DB::raw('idea.*,users.name as user_name, max(idea_view.created_at) as latest,users.department'))
+            ->leftJoin('category_details','category_details.id','=','idea.cat_id')
+            ->select(DB::raw('idea.*,users.name as user_name,users.profilepic,  max(idea_view.created_at) as latest,users.department, category_details.cate_name'))
             ->where('idea_view.user_id',$user_id)
             ->groupBy('idea_view.idea_id')
             ->orderBy('latest','desc')
@@ -63,22 +69,28 @@ class HomeController extends Controller
             $ideas = DB::table('idea_view')
             ->leftJoin('idea', 'idea.id', '=', 'idea_view.idea_id')
             ->leftJoin('users', 'users.id', '=', 'idea.user_id')
-            ->select(DB::raw('idea.*,users.name as user_name, count(idea_view.id) as number_of_view,users.department'))
+            ->leftJoin('category_details','category_details.id','=','idea.cat_id')
+            ->select(DB::raw('idea.*,users.name as user_name, users.profilepic, count(idea_view.id) as number_of_view,users.department,category_details.cate_name'))
             ->groupBy('idea.id')
             ->orderBy('number_of_view','desc')            
-            ->paginate(5)->appends(request()->query());;
+            ->paginate(5)->appends(request()->query());
         }else if($request->get('filter') == 'most-liked'){
             $ideas = DB::table('idea')
             ->leftJoin('likes', 'idea.id', '=', 'likes.idea_id')
             ->leftJoin('users', 'users.id', '=', 'idea.user_id')
-            ->select(DB::raw('idea.*,users.name as user_name,count(likes.id) as number_of_like,users.department'))
+            ->leftJoin('category_details','category_details.id','=','idea.cat_id')
+            ->select(DB::raw('idea.*,users.name as user_name,users.profilepic, count(likes.id) as number_of_like,users.department, category_details.cate_name'))
             ->groupBy('idea.id')
-            ->orderBy('number_of_like','desc')->paginate(5)->appends(request()->query());;
+            ->orderBy('number_of_like','desc')->paginate(5)->appends(request()->query());
 
         }else{
-            $ideas = Idea::leftJoin('users', 'users.id', '=', 'idea.user_id')->select(DB::raw('*,idea.created_at as created_at,idea.id as id'))
-            ->paginate(5)->appends(request()->query());;
+            $ideas = Idea::leftJoin('users', 'users.id', '=', 'idea.user_id')
+            ->leftJoin('category_details','category_details.id','=','idea.cat_id')
+            ->select(DB::raw('*,idea.created_at as created_at,users.profilepic, idea.id as id, category_details.cate_name'))
+            ->paginate(5)->appends(request()->query());
         }
+        
+     
         $comments = Comment::paginate(7);
         $data = Cactegory::all();
         foreach ($ideas as $key => $idea) {
@@ -98,8 +110,11 @@ class HomeController extends Controller
             $user_like = Like::where('idea_id',$idea->id)->where('user_id',$user_id)->first();
             if($user_like){
                 $ideas[$key]->user_like = $user_like->like;
-            }else
+            }
+            else
+            {
                 $ideas[$key]->user_like = 'null';
+            }
 
             if($request->get('filter') == 'hottest-topic'){
                 $ideas[$key]->point = $number_of_like - $number_of_dislike;
@@ -193,17 +208,20 @@ class HomeController extends Controller
         
     }
 
+  
+
+
     public function store_idea(Request $request){
 
         $userid = (int)$request->session()->get('LoggedUser');
 
-        $userdepartment = User::select('department')->where('id','=', $userid)->get();//get user's department
+        $userdepartment = User::select('department')->where('id','=', $userid)->first();//get user's department
 
-        $coordinatoremail = User::select('email')->where('position','=','coordinator')->where('department','=',$userdepartment[0]->department)->first();; //get user's coordinator email
+        $coordinatoremail = User::select('email')->where('position','=','coordinator')->where('department','=',$userdepartment->department)->first(); //get user's coordinator email
 
-        dd($userid, $userdepartment, $coordinatoremail);
+        //dd($userid, $userdepartment->department, $coordinatoremail->email);
 
-        // Mail::to($coordinatoremail->email)->send(new EmailIdea());
+         Mail::to($coordinatoremail->email)->send(new EmailIdea());
 
         $setting = Setting::firstOrCreate([
             'setting' => 'idea_closure_date',
@@ -268,7 +286,7 @@ class HomeController extends Controller
         $comment->user_id = (int)$request->session()->get('LoggedUser');
         $save = $comment->save();
         if($save){
-            return back()->with('success','New user has been successfuly added to database');
+            return back()->with('success','Your comment has been posted successfully.');
          }else{
              return back()->with('fail','Something went wrong, try again later');
          }

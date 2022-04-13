@@ -36,7 +36,7 @@
       <div class="categoryContainer">
          <div class="container">
             <p class="justify-content-between" style="color: #D0D4E3; font-weight: bold;">Category
-            @if($LoggedUserInfo->position == 'manager' || "admin")
+            @if($LoggedUserInfo->position == 'manager')
                <button type="button" id="addcategory" class="btn btn-primary btn-lg bg-transparent float-right"
                   data-bs-toggle="modal" data-bs-target="#categoryModal" style="border: none">
                   <i class='bx bx-plus-circle' style="color: #F4F7FF"></i>
@@ -108,7 +108,7 @@
                @endif
             </div>
 
-            @if($LoggedUserInfo->position == 'admin')
+            @if($LoggedUserInfo->position == 'manager')
             <div class="ms-auto">
                <a class="btn btn-primary" id="buttonClosureDate">Set Closure Date</a>
             </div>
@@ -127,12 +127,17 @@
                <div class="card" style="width: 18rem;">
                   <img src="images/add.png" class="card-img-top" style="">
                   <div class="card-body">
+                     @if($LoggedUserInfo->position == 'staff' )
                      @if(date('Y-m-d',strtotime($idea_closure_date->detail)) >= date('Y-m-d'))
                      <button type="button" class="btn btn-primary" data-toggle="modal" id="addidea">
                         + New Idea
                      </button>
                      @else
                      <p>Adding idea is no longer allowed after closure date.</p>
+                     @endif
+                     
+                     @else
+                     <p>Log in as a staff to contribute.</p>
                      @endif
                   </div>
                </div>
@@ -141,14 +146,14 @@
             <div class="col-sm-4">
                <div class="card">
                   <div class="card-header">
-                     <strong class="me-auto">{{$idea->subject}}</strong>
+                     <strong class="me-auto">{{$idea->subject}}</strong><span class=" ml-3 badge bg-secondary">{{$idea->cate_name}}</span>
                      <br>
                      <small>{{$idea->created_at}}</small>
                   </div>
                   <div class="card-body">
                      <div>
                         <h6 class="card-subtitle mb-2 text-muted fw-bold">{{$idea->anonymous == 1 ? 'Anonymous' : (isset($idea->user) ? $idea->user->name : $idea->user_name)}}
-                           <img src="images/ironman.png" id="userimg">
+                           <img src="images/{{$idea->profilepic}}" id="userimg">
                         </h6>
                         <button type="button" class="btn btn-info btn-sm" disabled>{{ $idea->department}} Department</button>
                      </div>
@@ -160,6 +165,7 @@
                   </div>
                   <div class="card-footer">
                      <div>
+                     @if($LoggedUserInfo->position == 'staff' )
                         <button id="like" onClick="like({{$idea->id}},false)" class="btn like btn-warning btn-sm" style="margin:1px;">
                            @if($idea->user_like == 1)
                            <span class="bx bxs-like" aria-hidden="true"></span>
@@ -184,7 +190,37 @@
                            <span id="{{'number_of_dislike_'.$idea->id}}"><strong>{{$idea->number_of_dislike}}</strong></span>
                            @else
                            <span id="{{'number_of_dislike_'.$idea->id}}"> {{$idea->number_of_dislike}}</span>
-                           @endif</button>
+                           @endif
+                        </button>
+                     @else 
+                     <!-- if user is not staff, cannot click like -->
+                     <button id="like" class="btn like btn-warning btn-sm" style="margin:1px;" disabled>
+                           @if($idea->user_like == 1)
+                           <span class="bx bxs-like" aria-hidden="true"></span>
+                           @else
+                           <span class="bx bx-like" aria-hidden="true"></span>
+                           @endif
+                           <span class="likes" id="likeValue"></span>
+                           @if($idea->user_like == 1)
+                           <span id="{{'number_of_like_'.$idea->id}}"><strong>{{$idea->number_of_like}}</strong></span>
+                           @else
+                           <span id="{{'number_of_like_'.$idea->id}}"> {{$idea->number_of_like}}</span>
+                           @endif
+                        </button>
+                        <button id="dislike" class="btn dislike btn-danger btn-sm" style="margin:1px;" disabled>
+                           @if($idea->user_like == 0)
+                           <span class="bx bxs-dislike" aria-hidden="true"></span>
+                           @else
+                           <span class="bx bx-dislike" aria-hidden="true"></span>
+                           @endif
+                           <span class="dislikes" id="dislikeValue" enabled='false'></span>
+                           @if($idea->user_like == 0)
+                           <span id="{{'number_of_dislike_'.$idea->id}}"><strong>{{$idea->number_of_dislike}}</strong></span>
+                           @else
+                           <span id="{{'number_of_dislike_'.$idea->id}}"> {{$idea->number_of_dislike}}</span>
+                           @endif
+                        </button>
+                     @endif
                         <small style="float: right; margin: 10px">{{$idea->number_of_comment}} {{$idea->number_of_comment > 1 ? 'comments' : 'comment'}}</small>
                      </div>
                   </div>
@@ -374,7 +410,7 @@
                               <input class="form-check-input" type="checkbox" value="true" id="checkboxTNC"
                                  name="checkboxTNC" required>
                               <label class="form-check-label" for="checkboxTNC">
-                                 I agree to the<span> <a id='buttontnc' href="{{URL::to('/terms-idea')}}" target="_blank">Terms & Conditions</a></span> 
+                                 I agree to the<span> <a id='buttontnc' href="{{URL::to('/terms')}}" target="_blank">Terms & Conditions</a></span> 
                               </label>
                            </div>
                         </div>
@@ -507,6 +543,7 @@
             <hr />
             <div class="container">
                <div id="numbersec">
+               @if($LoggedUserInfo->position == 'staff' )
                   <button class="btn like btn-warning" onClick="like({{$idea->id}},true)" style="margin:1px;">
                      @if($idea->user_like == 1)
                      <span class="bx bxs-like" aria-hidden="true"></span>
@@ -523,9 +560,28 @@
                      @else
                      <span class="bx bx-dislike" aria-hidden="true"></span>
                      <span class="dislikes">Dislike {{$idea->number_of_dislike}}</span>
-                     @endif
-
                   </button>
+                     @endif
+                  @else <!-- if user is not staff, cannot click like/dislike -->
+                  <button class="btn like btn-warning" style="margin:1px;" disabled>
+                     @if($idea->user_like == 1)
+                     <span class="bx bxs-like" aria-hidden="true"></span>
+                     <span class="likes"><strong>Like {{$idea->number_of_like}}</strong></span>
+                     @else
+                     <span class="bx bx-like" aria-hidden="true"></span>
+                     <span class="likes">Like {{$idea->number_of_like}}</span>
+                     @endif
+                  </button>
+                  <button class="btn dislike btn-danger" style="margin:1px;"disabled>
+                     @if($idea->user_like == 0)
+                     <span class="bx bxs-dislike" aria-hidden="true"></span>
+                     <span class="dislikes"><strong>Dislike {{$idea->number_of_dislike}}</strong></span>
+                     @else
+                     <span class="bx bx-dislike" aria-hidden="true"></span>
+                     <span class="dislikes">Dislike {{$idea->number_of_dislike}}</span>
+                     @endif
+                  </button>
+                  @endif
                   <small style="float: right; margin: 10px">{{$idea->number_of_view}} {{$idea->number_of_view > 1 ? 'views' : 'view'}}</small>
                   <small style="float: right; margin: 10px">{{$idea->number_of_comment}} {{$idea->number_of_comment > 1 ? 'comments' : 'comment'}}</small>
                </div>
@@ -535,6 +591,7 @@
             
             <div class="container">
                <div class="modal-body" id="footersec">
+               @if($LoggedUserInfo->position == 'staff' )
                @if(date('Y-m-d',strtotime($comment_closure_date->detail)) >= date('Y-m-d'))
                   <form action="{{ route('homepage.store_comment', ['id' => $idea->id ])}}" method="post">
                      @csrf
@@ -560,6 +617,9 @@
                         </div>
                      </div>
                   </form>
+                  @endif
+                  @else
+                  <p>Log in as a staff to comment</p>
                   @endif
                </div>
                <br><br>
