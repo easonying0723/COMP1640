@@ -219,9 +219,14 @@ class HomeController extends Controller
 
         $coordinatoremail = User::select('email')->where('position','=','coordinator')->where('department','=',$userdepartment->department)->first(); //get user's coordinator email
 
+<<<<<<< Updated upstream
         //dd($userid, $userdepartment->department, $coordinatoremail->email);
 
          Mail::to($coordinatoremail->email)->send(new EmailIdea());
+=======
+
+        Mail::to($coordinatoremail->email)->send(new EmailIdea());
+>>>>>>> Stashed changes
 
         $setting = Setting::firstOrCreate([
             'setting' => 'idea_closure_date',
