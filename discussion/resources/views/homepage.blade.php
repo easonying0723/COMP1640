@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="https://fengyuanchen.github.io/datepicker/css/datepicker.css">
 <script src="https://fengyuanchen.github.io/datepicker/js/datepicker.js"></script>
 
+
 <!-- Multiselect -->
 <link href="{{ URL::asset('css/bootstrap-multiselect.css') }}" rel="text/css">
 <script src="{{ URL::asset('js/bootstrap-multiselect.js') }}" type="text/javascript"></script>
@@ -57,7 +58,9 @@
                <div id="flush-collapse{{$categoryData->id}}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                   
                <div class="accordion-body">
-                     
+                  @foreach($titleC as $title)
+                     #{{$title->title_name}}
+                  @endforeach
                   @if($LoggedUserInfo->position == 'manager')
                      <button type="button" data-bs-toggle="modal" data-bs-target="#titleModal">+ADD TITLE
                      </button>
@@ -268,23 +271,14 @@
                   </div>
                   <div class="col-md-6">
                      <label for="">Department:</label>
-                     <select id="multidepartment" multiple="multiple" name="cate_option" hidden>
-                        <optgroup label="Series 1" class="group-1">
-                           <option value="1-1">Option 1.1</option>
-                           <option value="1-2">Option 1.2</option>
-                           <option value="1-3">Option 1.3</option>
-                        </optgroup>
-                        <optgroup label="Series 2" class="group-2">
-                           <option value="2-1">Option 2.1</option>
-                           <option value="2-2">Option 2.2</option>
-                           <option value="2-3">Option 2.3</option>
-                        </optgroup>
-                        <optgroup label="Series 3" class="group-3">
-                           <option value="3-1">Option 3.1</option>
-                           <option value="3-2">Option 3.2</option>
-                           <option value="3-3">Option 3.3</option>
-                        </optgroup>
-                     </select>
+                     <label>Department</label>
+                     <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="cate_option">
+                        <option selected>Please Select</option>
+                        <option value="IT DEPARTMENT">IT DEPARTMENT</option>
+                        <option value="ACCOUNTING DEPARTMENT">ACCOUNTING DEPARTMENT</option>
+                        <option value="HUMAN RESOURCE DEPARTMENT">HUMAN RESOURCE DEPARTMENT</option>
+                  </select>
+                  <br>
                   </div>
                </div>
                <br>
@@ -309,14 +303,14 @@
                <h5 class="modal-title" id="titleModalLabel">Add New Title</h5>
                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{url ('/homepage/category/stored')}}" method="POST">
+            <form action="{{url ('/homepage/title/stored')}}" method="POST">
             @csrf
             <div class="modal-body">
                <div class="container-fluid">
                   <div class="row">
                      <div class="col-md-12">
                         <label for="">Title Name:</label>
-                        <input type="text" class="form-control" id="title_name" placeholder="Please enter category name" required>
+                        <input type="text" class="form-control" id="" name="title_name" placeholder="Please enter category name" required>
                      </div>
                   </div>
                   <br>
@@ -325,12 +319,13 @@
                         <label for="promoduration">Duration:</label>
                         <div class="input-group" >
                            <div class="input-group-prepend">
-                              <span class="input-group-text"><i class="iconify" data-icon="bx:calendar-alt"></i></span>
+                              <span class="input-group-text">Start-End</span>
                            </div>
-                           <input type="text" placeholder="Start date" aria-label="First name"
-                              class="form-control start-date" id="title_duration_start">
-                           <input type="text" placeholder="End date" aria-label="Last name"
-                              class="form-control end-date" id="title_duration_end">
+                           <input type="date" placeholder="Start date" aria-label="First name"
+                  
+                              class="form-control start-date" name="title_duration_start"/>
+                           <input type="date" placeholder="End date" aria-label="Last name"
+                              class="form-control end-date" name="title_duration_end"/>
                         </div>
                      </div>
                   </div>
@@ -338,7 +333,7 @@
             </div>
             <div class="modal-footer">
                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-               <button type="button" class="btn btn-primary" id="createtitle">Create</button>
+               <button type="submit" class="btn btn-primary" id="createtitle">Create</button>
             </div>
             </form>
          </div>
@@ -758,6 +753,8 @@
             }
          })
       }
+
+
 
 
 

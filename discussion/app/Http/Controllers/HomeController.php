@@ -14,6 +14,7 @@ use App\Mail\CommentIdea;
 use Illuminate\Support\Facades\Mail;
 
 use App\Models\Cactegory;
+use App\Models\Title;
 use App\Models\IdeaView;
 use App\Models\Setting;
 use Illuminate\Support\Facades\DB;
@@ -348,6 +349,12 @@ class HomeController extends Controller
          //if($delCategory['checkIdeaInfo']->idea != 'null'){
             //return redirect('/homepage')->with('fail','There is a record under this category');
        // }
+
+    }
+    public function titleIndex()
+    {
+        $titleC = Title::all();
+        return view('/homepage',['titleC',$titleC]);
 
     }
     public function title_store(Request $request)
