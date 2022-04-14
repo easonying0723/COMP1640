@@ -27,7 +27,7 @@
       <form type="" action="">
         @csrf
       <input type="search" class="form-control" placeholder="Search" name="search" value="" />
-      <button class="btn btn-outline-light" type="submit" style="margin-left: 60%;margin-top: 10px;">Search</button>
+      <button class="btn btn-outline-light" type="submit" style="margin-left: 50%;margin-top: 10px;">Search</button>
       <a href="/homepage">
       <button class="btn btn-outline-light" type="button" style=" margin-top: 10px;">RESET</button>
       </a>
@@ -55,11 +55,17 @@
                   </button>
                </h2>
                <div id="flush-collapse{{$categoryData->id}}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                  <div class="accordion-body">
+                  
+               <div class="accordion-body">
+                     
+                  @if($LoggedUserInfo->position == 'manager')
                      <button type="button" data-bs-toggle="modal" data-bs-target="#titleModal">+ADD TITLE
                      </button>
+                     <button type="button"><a href="/delete/{id}">DELETE</a></button>
+                  @endif
                   </div>
                </div>
+               
             </div>
                @endforeach
          </div>

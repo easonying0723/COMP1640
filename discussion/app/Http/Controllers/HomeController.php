@@ -341,8 +341,14 @@ class HomeController extends Controller
     }
     public function category_delete($id)
     {
-            // DB::delete('delete from category_details where id = ? ', [$id]);
-            // return redirect('/homepage')->with('success','Category deleted successfully');
+             //DB::delete('delete from category_details where id = ? ', [$id]);
+            //return redirect('/homepage')->with('success','Category deleted successfully');
+            
+            //$delCategory = ['checkIdeaInfo'=>Idea::where('id','=')];
+         //if($delCategory['checkIdeaInfo']->idea != 'null'){
+            //return redirect('/homepage')->with('fail','There is a record under this category');
+       // }
+
     }
     public function title_store(Request $request)
     {
@@ -438,9 +444,5 @@ class HomeController extends Controller
         $zip->close();
         return response()->download($zip_file);
     }
-    // public function category_delete($id)
-    // {
-    //         DB::delete('delete from category_details where id = ? ', [$id]);
-    //         return redirect('/homepage')->with('success','Category deleted successfully');
-    // }
+   
 }
