@@ -39,6 +39,7 @@
                               <th>Department</th>
                               <th>Position</th>
                               <th>Status</th>
+                              <!-- <th></th> -->
                            </tr>
                      </thead>
                      <tbody id="stockadjBody"> 
@@ -49,7 +50,8 @@
                            <td>{{$data->email}}</td>
                            <td>{{$data->department}}</td>
                            <td>{{$data->position}}</td>
-                           <td><a href="{{ 'usercontrol/delete/' . $data->id }}">Delete</a></td>
+                           <td>@if($data->status == 1)<a href="{{'userChangeStatus/'. $data->id}}" class="btn btn-success">Active</a> @else <a href="{{'userChangeStatus/'. $data->id}}" class="btn btn-danger">Inactive</a> @endif</a>
+                           <!-- <td><a href="{{ 'usercontrol/delete/' . $data->id }}">Delete</a></td> -->
                         </tr> 
                         @endforeach
                      </tbody>
