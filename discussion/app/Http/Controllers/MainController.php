@@ -48,11 +48,36 @@ class MainController extends Controller
     }
 
 
+
+    //user control
+    public function userChangeStatus(Request $request, $id)
+    {
+        $user = User::select('status')->where('id','=', $id)->first();
+         
+        if($user->status =='1'){
+            $status = '0';
+        }
+        else{
+            $status = '1';
+        }
+        $values = array('status'=>$status);
+        $update = User::where('id', $id)->update($values);
+
+        if($update){
+            return back()->with('success','Status changed successfully.');
+        }
+        else{
+            return back()->with('fail','Status change failed.');
+        }
+    }
+
     function delete($id){
         $data = User::find($id);
         $data->delete();
         return redirect('usercontrol');
     }
+
+
     function save(Request $request){
 
         // //Validate requests
@@ -66,7 +91,10 @@ class MainController extends Controller
           $data=$request->all();
           Mail::to(request('email'))->send(new ContactMe($data));
 
+          //default value
           $profilepic = 'ironman.png';
+          $status = 1;
+          
           //Insert data into database
           $users = new User;
           $users->name = $request->name;
@@ -75,6 +103,7 @@ class MainController extends Controller
           $users->department = $request->department;
           $users->profilepic = $profilepic;
           $users->position = $request ->position;
+          $users->status = $status;
 
           $save = $users->save();
           if($save){
@@ -82,8 +111,6 @@ class MainController extends Controller
           }else{
               return back()->with('fail','Something went wrong, try again later');
           }
-
-          
     }
 
 
@@ -93,19 +120,27 @@ class MainController extends Controller
              'email'=>'required|email',
              'password'=>'required|min:5|max:12'
         ]);
-        $userInfo = User::where('email','=', $request->email)->first();
-        if(!$userInfo){
-            return back()->with('fail','We do not recognize your email address');
-        }else{
-            //check password
-            if(Hash::check($request->password, $userInfo->password)){
-                $request->session()->put('LoggedUser', $userInfo->id);
-                //echo session('LoggedUser');
-                return redirect('homepage');   
+        $statusCheck = User::select('status')->where('email','=',  $request->email)->first();
+
+        if($statusCheck->status == '0'){
+            return back()->with('fail','your account has been disabled');
+        }
+        else{
+            $userInfo = User::where('email','=', $request->email)->first();
+            if(!$userInfo){
+                return back()->with('fail','We do not recognize your email address');
             }else{
-                return back()->with('fail','Incorrect password');
+                //check password
+                if(Hash::check($request->password, $userInfo->password)){
+                    $request->session()->put('LoggedUser', $userInfo->id);
+                    //echo session('LoggedUser');
+                    return redirect('homepage');   
+                }else{
+                    return back()->with('fail','Incorrect password');
+                }
             }
         }
+
     }
 
     function logout(){

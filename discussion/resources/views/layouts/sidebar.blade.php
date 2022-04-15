@@ -57,7 +57,7 @@
                   <span class="nav_logo-name">DISCUSS.ION</span>
                </a>
                <div class="nav_list">
-               @if($LoggedUserInfo->position == 'manager' )
+               @if($LoggedUserInfo->position == 'manager'|| $LoggedUserInfo->position == 'coordinator' )
                   <a href="dashboard" class="nav_link">
                      <i class='bx bx-grid-alt nav_icon'></i>
                      <span class="nav_name">Dashboard</span>
@@ -67,7 +67,7 @@
                      <i class='bx bx-home nav_icon'></i>
                      <span class="nav_name">Home</span>
                   </a>
-                  @if($LoggedUserInfo->position == 'coordinator' || "manager"))
+                  @if($LoggedUserInfo->position == 'coordinator'|| $LoggedUserInfo->position == 'manager'))
                   <a href="usercontrol" class="nav_link">
                      <i class='bx bxs-user-badge nav_icon'></i>
                      <span class="nav_name">Users Control</span>

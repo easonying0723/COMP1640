@@ -648,8 +648,6 @@
    </div>
    @endforeach
 
-
-
    <script>
       $('#buttonExport').on('click',function () {
          var base_url = window.location.origin;
