@@ -57,12 +57,12 @@
                </h2>
                <div id="flush-collapse{{$categoryData->id}}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                   
-               <div class="accordion-body">
+               <div class="accordion-body" id="{{$categoryData->id}}">
                   @foreach($titleC as $title)
                      #{{$title->title_name}}
                   @endforeach
                   @if($LoggedUserInfo->position == 'manager')
-                     <button type="button" data-bs-toggle="modal" data-bs-target="#titleModal">+ADD TITLE
+                     <button type="button" data-bs-toggle="modal" data-bs-target="#titleModal" id="{{$categoryData->id}}">+ADD TITLE
                      </button>
                      <button type="button"><a href="/delete/{id}">DELETE</a></button>
                   @endif

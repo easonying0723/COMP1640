@@ -15,7 +15,7 @@ class Title extends Model
         'title_name',
         'title_duration_start',
         'title_duration_end',
-
+        'id',
         
     ];
 }
