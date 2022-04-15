@@ -57,7 +57,8 @@ Route::get('terms', function () {
 });
 
 Route::post('profile/changePassword', [MainController::class, 'changePassword'])->name('profile.changePassword');
-Route::post('profile/change_profilepic', [MainController::class, 'change_profilepic'])->name('profile.change_profilepic');
+
+Route::post('profile/updateprofilepic', [MainController::class, 'updateprofilepic'])->name('profile.updateprofilepic');
 
 Route::get('/homepage/liked/{id}', [HomeController::class, 'liked'])->name('homepage.liked');
 Route::get('/homepage/disliked/{id}',[HomeController::class, 'disliked'])->name('homepage.disliked');

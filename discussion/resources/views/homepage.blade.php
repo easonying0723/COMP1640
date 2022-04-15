@@ -496,7 +496,7 @@
                      <div class="col-md-12">
                         <div>
                            <h6 class="mb-2 text-muted fw-bold">{{$idea->anonymous == 1 ? 'Anonymous' : (isset($idea->user) ? $idea->user->name : $idea->user_name)}}
-                              <img src="images/ironman.png" id="userimg">
+                              <img src="images/{{$idea->profilepic}}" id="userimg">
                            </h6>
                            <button type="button" class="btn btn-info btn-sm" disabled>{{$idea->department}} Department</button>
                            <br><br>

@@ -219,14 +219,8 @@ class HomeController extends Controller
 
         $coordinatoremail = User::select('email')->where('position','=','coordinator')->where('department','=',$userdepartment->department)->first(); //get user's coordinator email
 
-<<<<<<< Updated upstream
-        //dd($userid, $userdepartment->department, $coordinatoremail->email);
-
-         Mail::to($coordinatoremail->email)->send(new EmailIdea());
-=======
 
         Mail::to($coordinatoremail->email)->send(new EmailIdea());
->>>>>>> Stashed changes
 
         $setting = Setting::firstOrCreate([
             'setting' => 'idea_closure_date',
@@ -252,6 +246,7 @@ class HomeController extends Controller
                 $files_name[] = $file_name ;
             }
         }
+        
         //echo session('LoggedUser');
         $files_name = implode(",",$files_name);
         Idea::create([
@@ -264,7 +259,7 @@ class HomeController extends Controller
             'anonymous' => $request->anonymous ? 1 : 0
         ]);
 
-        return redirect()->route('home');
+        return redirect()->route('home')-> with('success', 'Thank you for contributing your idea.');
 
     }
 

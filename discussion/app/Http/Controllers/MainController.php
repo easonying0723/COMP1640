@@ -29,18 +29,15 @@ class MainController extends Controller
         $users =  User::where('id','=', $user_id)->get();
         return view('profile',['users' => $users],$udata);
     }
-
-    function change_profilepic(Request $request){
-        $user_id = (int)$request->session()->get('LoggedUser');
-
+    function updateprofilepic(Request $request){
         $image = '';
         if ($request->hasFile('img')) {
-            $file = $request->file('img');
-            $image = date('YmdHis') . '.' . $file->getClientOriginalExtension();
-            $file->move('images/', $image);
+            $file = $request->image;
+            $image = date('YmdHis') . '.' . $file[0]->getClientOriginalExtension();
+            $file[0]->move('images/', $image);
         }
 
-        //echo session('LoggedUser');
+        dd(strval($image));
         $update = User::where('id','=',$user_id)->update(['profilepic'=>strval($image)]);
         if($update){
             return back()->with('success','Profile picture changed successfully.');
@@ -49,6 +46,7 @@ class MainController extends Controller
             return back()->with('fail','Profile picture change failed.');
         }
     }
+
 
     function delete($id){
         $data = User::find($id);
@@ -103,8 +101,7 @@ class MainController extends Controller
             if(Hash::check($request->password, $userInfo->password)){
                 $request->session()->put('LoggedUser', $userInfo->id);
                 //echo session('LoggedUser');
-                return redirect('homepage');
-                
+                return redirect('homepage');   
             }else{
                 return back()->with('fail','Incorrect password');
             }

@@ -42,32 +42,24 @@
     <p class="userid">UserID: {{$data->id}}</p>
   </div>
 
-  <form action="{{url('profile/change_profilepic')}}" method="POST" enctype="multipart/form-data">
+  <form action="{{route('profile.updateprofilepic')}}" method="POST" enctype="multipart/form-data">
+
   <div class="profile-pic">
     <label class="-label" for="file">
       <span class="glyphicon glyphicon-camera"></span>
       <span>Change Image</span>
     </label>
-    <input id="file" type="file" name="img" class="file" accept="image/*" id="uploadphoto" onchange="loadFile(event)"/> 
+    <input id="file" type="file" name="image" class="file" onchange="loadFile(event)"/> 
     <img src="images/{{$data->profilepic}}" id="profilePic" width="200" />
   </div> 
 
-  <div class="row ">
+  <div class="row">
     <p id="profileName" class="name">{{$data->name}}</p>
   </div>
 
 
   <div class="small-middle-container">
-  <!-- <div class="row">
-    <div class="col">
-    <label for="uname" class="leftsection"><b>First Name:</b></label><br>
-    <input readonly type="text" name="fname" >
-    </div>
-    <div class="col">
-      <label for="lname" class="rightsection"><b>Last Name:</b></label><br>
-      <input readonly type="text" name="lname"></td>
-    </div>
-  </div> -->
+ 
   <div class="row">
       <label for="email" class="leftsection"><b>Email:</b></label><br>
       <input type="text" name="email" value="{{$data->email}}"style="background-color: #E6E6E5" disabled>
