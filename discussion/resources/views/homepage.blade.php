@@ -9,11 +9,6 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<!-- Datepickers -->
-<script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
-<link rel="stylesheet" href="https://fengyuanchen.github.io/datepicker/css/datepicker.css">
-<script src="https://fengyuanchen.github.io/datepicker/js/datepicker.js"></script>
-
 <!-- Multiselect -->
 <link href="{{ URL::asset('css/bootstrap-multiselect.css') }}" rel="text/css">
 <script src="{{ URL::asset('js/bootstrap-multiselect.js') }}" type="text/javascript"></script>
@@ -56,16 +51,21 @@
                   @endforeach
                   @if($LoggedUserInfo->position == 'manager')
                      <hr><button type="button" class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#titleModal">+ ADD TITLE</button>
-                     <button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                     <a href="/delete/{{$categoryData->id}}"><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button></a>
                   @endif
                   </div>
                </div>
-               
             </div>
                @endforeach
          </div>
       </div>
-      <!--------------BEFORE 這裏---------------------->
+      @if($LoggedUserInfo->position == 'manager')
+         <div class="container ms-auto mt-4">
+            <div class="ms-auto">
+               <a class="btn btn-primary float-end" id="buttonClosureDate">Set Closure Date</a>
+            </div>
+         </div>
+      @endif
    </div>
 
    
@@ -116,14 +116,6 @@
                <div class="ms-auto">
                   <a id="buttonExport" class="btn btn-primary float-end">Export All Data  <i class="fa fa-download" aria-hidden="true"></i></a>
                </div>
-            @endif
-
-            @if($LoggedUserInfo->position == 'manager')
-            <div class="container ms-auto mt-4">
-               <div class="ms-auto">
-                  <a class="btn btn-primary float-end" id="buttonClosureDate">Set Closure Date</a>
-               </div>
-            </div>
             @endif
          </div>
       </div>
@@ -318,22 +310,7 @@
                      </div>
                   </div>
                   <br>
-                  <div class="row">
-                     <div class="col-md-12">
-                        <label for="promoduration">Duration:</label>
-                        <div class="input-group" >
-                           <div class="input-group-prepend">
-                              <span class="input-group-text">Start-End</span>
-                           </div>
-                           <input type="date" placeholder="Start date" aria-label="First name"
-                  
-                              class="form-control start-date" name="title_duration_start"/>
-                           <input type="date" placeholder="End date" aria-label="Last name"
-                              class="form-control end-date" name="title_duration_end"/>
-                        </div>
-                     </div>
-                  </div>
-               </div><br>
+               </div>
             </div>
             <div class="modal-footer">
                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -477,7 +454,6 @@
             Terms and condition
          </div>
       </div>
-   </div>
    </div>
 
 
