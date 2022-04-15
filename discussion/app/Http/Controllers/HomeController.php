@@ -85,7 +85,6 @@ class HomeController extends Controller
             ->select(DB::raw('idea.*,users.name as user_name,users.profilepic, count(likes.id) as number_of_like,users.department, category_details.cate_name'))
             ->groupBy('idea.id')
             ->orderBy('number_of_like','desc')->paginate(5)->appends(request()->query());
-
         }else{
             $ideas = Idea::leftJoin('users', 'users.id', '=', 'idea.user_id')
             ->leftJoin('category_details','category_details.id','=','idea.cat_id')
@@ -211,8 +210,6 @@ class HomeController extends Controller
         
     }
 
-  
-
 
     public function store_idea(Request $request){
 
@@ -222,8 +219,7 @@ class HomeController extends Controller
 
         $coordinatoremail = User::select('email')->where('position','=','coordinator')->where('department','=',$userdepartment->department)->first(); //get user's coordinator email
 
-
-        Mail::to($coordinatoremail->email)->send(new EmailIdea());
+         Mail::to($coordinatoremail->email)->send(new EmailIdea());
 
         $setting = Setting::firstOrCreate([
             'setting' => 'idea_closure_date',

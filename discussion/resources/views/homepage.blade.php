@@ -7,32 +7,20 @@
 
 @section('category')
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/css/suneditor.min.css">
-<script src="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/suneditor.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <!-- Datepickers -->
 <script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
 <link rel="stylesheet" href="https://fengyuanchen.github.io/datepicker/css/datepicker.css">
 <script src="https://fengyuanchen.github.io/datepicker/js/datepicker.js"></script>
 
-
 <!-- Multiselect -->
 <link href="{{ URL::asset('css/bootstrap-multiselect.css') }}" rel="text/css">
 <script src="{{ URL::asset('js/bootstrap-multiselect.js') }}" type="text/javascript"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-   crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
 <div class="row homepagecontent">
    <div class="col-md-3 categorynav">
-      <br>
-      <form type="" action="">
-        @csrf
-      <input type="search" class="form-control" placeholder="Search" name="search" value="" />
-      <button class="btn btn-outline-light" type="submit" style="margin-left: 50%;margin-top: 10px;">Search</button>
-      <a href="/homepage">
-      <button class="btn btn-outline-light" type="button" style=" margin-top: 10px;">RESET</button>
-      </a>
-      </form>
       <br>
       <div class="categoryContainer">
          <div class="container">
@@ -48,7 +36,7 @@
             
          </div>  
          <div class="accordion accordion-flush" id="accordionFlushExample">
-               @foreach($data as $categoryData)     
+            @foreach($data as $categoryData)     
             <div class="accordion-item">
                <h2 class="accordion-header" id="flush-heading{{$categoryData->id}}">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$categoryData->id}}" aria-expanded="false" aria-controls="flush-collapse{{$categoryData->id}}">
@@ -59,12 +47,16 @@
                   
                <div class="accordion-body" id="{{$categoryData->id}}">
                   @foreach($titleC as $title)
-                     #{{$title->title_name}}
+                     @if($LoggedUserInfo->position == 'manager')
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                     @endif
+                     <a href="" target="_blank">
+                        #{{$title->title_name}}<br>
+                     </a>
                   @endforeach
                   @if($LoggedUserInfo->position == 'manager')
-                     <button type="button" data-bs-toggle="modal" data-bs-target="#titleModal" id="{{$categoryData->id}}">+ADD TITLE
-                     </button>
-                     <button type="button"><a href="/delete/{id}">DELETE</a></button>
+                     <hr><button type="button" class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#titleModal">+ ADD TITLE</button>
+                     <button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
                   @endif
                   </div>
                </div>
@@ -117,44 +109,55 @@
                @else
                Most Viewed </a>
                @endif
+               
             </div>
 
             @if($LoggedUserInfo->position == 'manager')
-            <div class="ms-auto">
-               <a class="btn btn-primary" id="buttonClosureDate">Set Closure Date</a>
-            </div>
+               <div class="ms-auto">
+                  <a id="buttonExport" class="btn btn-primary float-end">Export All Data  <i class="fa fa-download" aria-hidden="true"></i></a>
+               </div>
             @endif
 
             @if($LoggedUserInfo->position == 'manager')
-            <div class="ms-auto">
-               <a id="buttonExport" class="btn btn-primary">Export All Data</a>
+            <div class="container ms-auto mt-4">
+               <div class="ms-auto">
+                  <a class="btn btn-primary float-end" id="buttonClosureDate">Set Closure Date</a>
+               </div>
             </div>
             @endif
          </div>
       </div>
+
       <div class="container">
-         <div class="row row-cols-3">
-            <div class="col-sm-4">
-               <div class="card" style="width: 18rem;">
-                  <img src="images/add.png" class="card-img-top" style="">
-                  <div class="card-body">
-                     @if($LoggedUserInfo->position == 'staff' )
-                     @if(date('Y-m-d',strtotime($idea_closure_date->detail)) >= date('Y-m-d'))
-                     <button type="button" class="btn btn-primary" data-toggle="modal" id="addidea">
-                        + New Idea
-                     </button>
-                     @else
-                     <p>Adding idea is no longer allowed after closure date.</p>
-                     @endif
-                     
-                     @else
-                     <p>Log in as a staff to contribute.</p>
-                     @endif
+         <div class="row">
+            <div class="col-12">
+               <div class="card">
+                  <div class="row">
+                     <div class="col-4">
+                        <img src="images/add.png" class="card-img-top">
+                     </div>
+                     <div class="col-8">
+                        <div class="card-body">
+                         @if($LoggedUserInfo->position == 'staff' )
+                           @if(date('Y-m-d',strtotime($idea_closure_date->detail)) >= date('Y-m-d'))
+                           <button type="button" class="btn btn-primary float-end" data-toggle="modal" id="addidea">
+                              + New Idea
+                           </button>
+                           @else
+                           <p class="float-end">Adding idea is no longer allowed after closure date.</p>
+                           @endif
+                           
+                           @else
+                           <p class="float-end">Log in as a staff to contribute.</p>
+                           @endif
+                        </div>
+                     </div>
                   </div>
                </div>
             </div>
+            
             @foreach($ideas as $index => $idea)
-            <div class="col-sm-4">
+            <div class="col-12">
                <div class="card">
                   <div class="card-header">
                      <strong class="me-auto">{{$idea->subject}}</strong><span class=" ml-3 badge bg-secondary">{{$idea->cate_name}}</span>
@@ -235,9 +238,10 @@
                         <small style="float: right; margin: 10px">{{$idea->number_of_comment}} {{$idea->number_of_comment > 1 ? 'comments' : 'comment'}}</small>
                      </div>
                   </div>
-               </div>
+               </div>  
             </div>
             @endforeach
+            
          </div>
       </div>
       <br>
@@ -413,8 +417,7 @@
                      <div class="row">
                         <div class="col-md-12">
                            <div class="form-check">
-                              <input class="form-check-input" type="checkbox" value="true" id="checkboxTNC"
-                                 name="checkboxTNC" required>
+                              <input class="form-check-input" type="checkbox" value="true" id="checkboxTNC" name="checkboxTNC" required>
                               <label class="form-check-label" for="checkboxTNC">
                                  I agree to the<span> <a id='buttontnc' href="{{URL::to('/terms')}}" target="_blank">Terms & Conditions</a></span> 
                               </label>
@@ -448,13 +451,14 @@
                      <div class="row">
                         <div class="col-md-12">
                            <label for="">Idea Closure Date:</label>
-                           <input type="date" id="idea_closure_date" name="idea_closure_date" value="{{$idea_closure_date->detail}}" required>
+                           <input type="date" class="form-control" id="idea_closure_date" name="idea_closure_date" value="{{$idea_closure_date->detail}}" required>
                         </div>
                      </div>
+                     <br>
                      <div class="row">
                         <div class="col-md-12">
                            <label for="">Comment Closure Date:</label>
-                           <input type="date" id="comment_closure_date" name="comment_closure_date" value="{{$comment_closure_date->detail}}" required>
+                           <input type="date" class="form-control" id="comment_closure_date" name="comment_closure_date" value="{{$comment_closure_date->detail}}" required>
                         </div>
                      </div>
                </div>
@@ -593,7 +597,6 @@
                </div>
             </div>
             <hr/>
-
             
             <div class="container">
                <div class="modal-body" id="footersec">
@@ -708,7 +711,7 @@
                       profilepic = "profile3.png";
                       name = "Anonymous";
                    }
-                  commentcontainer.innerHTML += '<div class="container"><div class="row" id="viewcommentsec"><div class="col-md-1"><img src="images/' + profilepic + '" style="object-fit:contain;width:100%;height:100%" class="commentimg"></div><div class="col-md-11"><h6 class="mb-2 text-muted fw-bold" class="comment-username">' + name + '</h6><h6 class="comment-content">' + data[i].comment + '</h6><small><span class="comment-dt">' + data[i].created_at + '</span></small></div></div></div><br>';
+                  commentcontainer.innerHTML += '<div class="container"><div class="row" id="viewcommentsec"><div class="col-md-1"><img src="images/' + profilepic + '" style="object-fit:contain;width:50px;height:50px" class="commentimg"></div><div class="col-md-11"><h6 class="mb-2 text-muted fw-bold" class="comment-username">' + name + '</h6><h6 class="comment-content">' + data[i].comment + '</h6><small><span class="comment-dt">' + data[i].created_at + '</span></small></div></div></div><br>';
                }
             }
          })
@@ -753,54 +756,7 @@
             }
          })
       }
-
-
-
-
-
-      // function setLikeText(id, newvalue) {
-      //    var s = document.getElementById(id);
-      //    s.innerHTML = newvalue;
-      // }
-
-      // function setDislikeText(id, newvalue) {
-      //    var s = document.getElementById(id);
-      //    s.innerHTML = newvalue;
-      // }
-
-      // window.onload = function () {
-      //    setLikeText("likeValue", 0);
-      //    setDislikeText("dislikeValue", 0);
-      // }
-
-      // var currentLike = document.getElementById("likeValue").textContent;
-      // var currentDislike = document.getElementById("dislikeValue").textContent;
-
-      // $('#like').click(function () {
-      //    console.log(currentLike);
-      //    console.log(currentDislike);
-
-      //    if (currentLike > 0) {
-      //       setLike("likeValue", 0);
-      //    }
-
-      //    else {
-      //       setLikeText("likeValue", 1);
-      //       setDislikeText("dislikeValue", 0);
-      //    }
-
-      // });
-
-
-      // $('#dislike').click(function () {
-      //    if (currentDislike > 0) {
-      //       setDislikeText("dislikeValue", 1);
-      //    }
-      //    else {
-      //       setDislikeText("dislikeValue", 1);
-      //       setLikeText("likeValue", 0);
-      //    }
-      // });
+      
    </script>
 
    @endsection
