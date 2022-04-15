@@ -264,22 +264,11 @@
          <div class="modal-body">
             <div class="container-fluid">
                <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-12">
                      <label for="">Category Name:</label>
                      <div id="newtask">
                         <input type="text" class="form-control" id="" placeholder="Please enter category name" name="cate_name" required>
                      </div>
-                  </div>
-                  <div class="col-md-6">
-                     <label for="">Department:</label>
-                     <label>Department</label>
-                     <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="cate_option">
-                        <option selected>Please Select</option>
-                        <option value="IT DEPARTMENT">IT DEPARTMENT</option>
-                        <option value="ACCOUNTING DEPARTMENT">ACCOUNTING DEPARTMENT</option>
-                        <option value="HUMAN RESOURCE DEPARTMENT">HUMAN RESOURCE DEPARTMENT</option>
-                  </select>
-                  <br>
                   </div>
                </div>
                <br>
@@ -315,7 +304,6 @@
                      </div>
                   </div>
                   <br>
-            
                </div><br>
             </div>
             <div class="modal-footer">

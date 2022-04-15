@@ -10,7 +10,6 @@ class Title extends Model
     use HasFactory;
 
     protected $table = 'title_details';
-    public $timestamps = false;
     protected $fillable = [
         'title_name',
         'id',
