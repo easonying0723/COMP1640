@@ -9,11 +9,6 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<!-- Datepickers -->
-<script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
-<link rel="stylesheet" href="https://fengyuanchen.github.io/datepicker/css/datepicker.css">
-<script src="https://fengyuanchen.github.io/datepicker/js/datepicker.js"></script>
-
 <!-- Multiselect -->
 <link href="{{ URL::asset('css/bootstrap-multiselect.css') }}" rel="text/css">
 <script src="{{ URL::asset('js/bootstrap-multiselect.js') }}" type="text/javascript"></script>
@@ -65,7 +60,13 @@
                @endforeach
          </div>
       </div>
-      <!--------------BEFORE 這裏---------------------->
+      @if($LoggedUserInfo->position == 'manager')
+         <div class="container ms-auto mt-4">
+            <div class="ms-auto">
+               <a class="btn btn-primary float-end" id="buttonClosureDate">Set Closure Date</a>
+            </div>
+         </div>
+      @endif
    </div>
 
    
@@ -116,14 +117,6 @@
                <div class="ms-auto">
                   <a id="buttonExport" class="btn btn-primary float-end">Export All Data  <i class="fa fa-download" aria-hidden="true"></i></a>
                </div>
-            @endif
-
-            @if($LoggedUserInfo->position == 'manager')
-            <div class="container ms-auto mt-4">
-               <div class="ms-auto">
-                  <a class="btn btn-primary float-end" id="buttonClosureDate">Set Closure Date</a>
-               </div>
-            </div>
             @endif
          </div>
       </div>
@@ -463,7 +456,6 @@
             Terms and condition
          </div>
       </div>
-   </div>
    </div>
 
 
