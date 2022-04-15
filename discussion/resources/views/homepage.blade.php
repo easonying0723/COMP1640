@@ -9,6 +9,8 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+
+
 <!-- Multiselect -->
 <link href="{{ URL::asset('css/bootstrap-multiselect.css') }}" rel="text/css">
 <script src="{{ URL::asset('js/bootstrap-multiselect.js') }}" type="text/javascript"></script>
@@ -43,7 +45,7 @@
                <div class="accordion-body" id="{{$categoryData->id}}">
                   @foreach($titleC as $title)
                      @if($LoggedUserInfo->position == 'manager')
-                     <a href="/delete/{{$titleC->title_id}}"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
+                     <a href="/delete/{{$title->title_id}}"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
                      @endif
                      <a href="" target="_blank">
                         #{{$title->title_name}}<br>
@@ -60,13 +62,7 @@
                @endforeach
          </div>
       </div>
-      @if($LoggedUserInfo->position == 'manager')
-         <div class="container ms-auto mt-4">
-            <div class="ms-auto">
-               <a class="btn btn-primary float-end" id="buttonClosureDate">Set Closure Date</a>
-            </div>
-         </div>
-      @endif
+      <!--------------BEFORE 這裏---------------------->
    </div>
 
    
@@ -117,6 +113,14 @@
                <div class="ms-auto">
                   <a id="buttonExport" class="btn btn-primary float-end">Export All Data  <i class="fa fa-download" aria-hidden="true"></i></a>
                </div>
+            @endif
+
+            @if($LoggedUserInfo->position == 'manager')
+            <div class="container ms-auto mt-4">
+               <div class="ms-auto">
+                  <a class="btn btn-primary float-end" id="buttonClosureDate">Set Closure Date</a>
+               </div>
+            </div>
             @endif
          </div>
       </div>
@@ -260,22 +264,11 @@
          <div class="modal-body">
             <div class="container-fluid">
                <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-12">
                      <label for="">Category Name:</label>
                      <div id="newtask">
                         <input type="text" class="form-control" id="" placeholder="Please enter category name" name="cate_name" required>
                      </div>
-                  </div>
-                  <div class="col-md-6">
-                     <label for="">Department:</label>
-                     <label>Department</label>
-                     <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="cate_option">
-                        <option selected>Please Select</option>
-                        <option value="IT DEPARTMENT">IT DEPARTMENT</option>
-                        <option value="ACCOUNTING DEPARTMENT">ACCOUNTING DEPARTMENT</option>
-                        <option value="HUMAN RESOURCE DEPARTMENT">HUMAN RESOURCE DEPARTMENT</option>
-                  </select>
-                  <br>
                   </div>
                </div>
                <br>
@@ -311,7 +304,6 @@
                      </div>
                   </div>
                   <br>
-            
                </div><br>
             </div>
             <div class="modal-footer">
@@ -456,6 +448,7 @@
             Terms and condition
          </div>
       </div>
+   </div>
    </div>
 
 

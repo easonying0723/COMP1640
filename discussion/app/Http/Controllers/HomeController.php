@@ -343,11 +343,6 @@ class HomeController extends Controller
     {
              DB::delete('delete from category_details where id = ? ', [$id]);
             return redirect('/homepage')->with('success','Category deleted successfully');
-            
-            //$delCategory = ['checkIdeaInfo'=>Idea::where('id','=')];
-         //if($delCategory['checkIdeaInfo']->idea != 'null'){
-            //return redirect('/homepage')->with('fail','There is a record under this category');
-       // }
 
     }
     public function title_delete($title_id)
@@ -365,6 +360,8 @@ class HomeController extends Controller
     {
         $titleC = new Title;
         //$titleC => Cactegory::where('id' = )
+        //$titleC = Cactegory::select('select from category_details where id = ?', [$id]);
+       // $titleC = Title::with('Cactegory')->get();
         $titleC->title_name = $request->input('title_name');
 
         $titleC->save();
