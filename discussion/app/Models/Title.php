@@ -13,8 +13,6 @@ class Title extends Model
    // public $timestamps = false;
     protected $fillable = [
         'title_name',
-        'title_duration_start',
-        'title_duration_end',
         'id',
         
     ];

@@ -48,19 +48,19 @@
                <div class="accordion-body" id="{{$categoryData->id}}">
                   @foreach($titleC as $title)
                      @if($LoggedUserInfo->position == 'manager')
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                     <a href="/delete/{{$titleC->title_id}}"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
                      @endif
                      <a href="" target="_blank">
                         #{{$title->title_name}}<br>
                      </a>
                   @endforeach
                   @if($LoggedUserInfo->position == 'manager')
-                     <hr><button type="button" class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#titleModal">+ ADD TITLE</button>
-                     <button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                     <hr><button type="button" class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#titleModal" value="{{$categoryData->id}}">+ ADD TITLE</button>
+                     <a href="/delete/{{$categoryData->id}}"><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button></a>
                   @endif
                   </div>
                </div>
-               
+         
             </div>
                @endforeach
          </div>
@@ -318,21 +318,7 @@
                      </div>
                   </div>
                   <br>
-                  <div class="row">
-                     <div class="col-md-12">
-                        <label for="promoduration">Duration:</label>
-                        <div class="input-group" >
-                           <div class="input-group-prepend">
-                              <span class="input-group-text">Start-End</span>
-                           </div>
-                           <input type="date" placeholder="Start date" aria-label="First name"
-                  
-                              class="form-control start-date" name="title_duration_start"/>
-                           <input type="date" placeholder="End date" aria-label="Last name"
-                              class="form-control end-date" name="title_duration_end"/>
-                        </div>
-                     </div>
-                  </div>
+            
                </div><br>
             </div>
             <div class="modal-footer">
