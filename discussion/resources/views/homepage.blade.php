@@ -40,21 +40,22 @@
                </h2>
                <div id="flush-collapse{{$categoryData->id}}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                   
-               <div class="accordion-body">
+               <div class="accordion-body" id="{{$categoryData->id}}">
                   @foreach($titleC as $title)
                      @if($LoggedUserInfo->position == 'manager')
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                     <a href="/delete/{{$titleC->title_id}}"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
                      @endif
                      <a href="" target="_blank">
                         #{{$title->title_name}}<br>
                      </a>
                   @endforeach
                   @if($LoggedUserInfo->position == 'manager')
-                     <hr><button type="button" class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#titleModal">+ ADD TITLE</button>
+                     <hr><button type="button" class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#titleModal" value="{{$categoryData->id}}">+ ADD TITLE</button>
                      <a href="/delete/{{$categoryData->id}}"><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button></a>
                   @endif
                   </div>
                </div>
+         
             </div>
                @endforeach
          </div>
@@ -310,7 +311,8 @@
                      </div>
                   </div>
                   <br>
-               </div>
+            
+               </div><br>
             </div>
             <div class="modal-footer">
                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

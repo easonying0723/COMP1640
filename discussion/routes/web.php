@@ -78,8 +78,11 @@ Route::get('/b','HomeController@store_idea');//email retrieve data
 Route::get('/c','HomeController@store_comment');//email retrieve data
 
 Route::post('/homepage/category/stored',[HomeController::class,'category_store']);
+
+//Route::get('/delete/{id}',[HomeController::class,'category_delete']);
 Route::post('/homepage/title/stored',[HomeController::class,'title_store']);
 Route::get('/homepage/view',[HomeController::class,'titleIndex']);
 Route::get('/delete/{id}',[HomeController::class,'category_delete']);
+Route::get('delete/{title_id}',[HomeController::class,'title_delete']);
 
  });

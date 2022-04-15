@@ -341,8 +341,8 @@ class HomeController extends Controller
     }
     public function category_delete($id)
     {
-             //DB::delete('delete from category_details where id = ? ', [$id]);
-            //return redirect('/homepage')->with('success','Category deleted successfully');
+             DB::delete('delete from category_details where id = ? ', [$id]);
+            return redirect('/homepage')->with('success','Category deleted successfully');
             
             //$delCategory = ['checkIdeaInfo'=>Idea::where('id','=')];
          //if($delCategory['checkIdeaInfo']->idea != 'null'){
@@ -350,18 +350,23 @@ class HomeController extends Controller
        // }
 
     }
+    public function title_delete($title_id)
+    {
+        DB::delete('delete from title_details where title_id = ?', [$title_id]);
+        return redirect ('/homepage')->with('success','Title deleted successfully');
+    }
     public function titleIndex()
     {
-        $titleC = Title::all();
+        $titleC = Title::with('title_name')->whereNull('id')->get;
         return view('/homepage',['titleC',$titleC]);
 
     }
     public function title_store(Request $request)
     {
         $titleC = new Title;
+        //$titleC => Cactegory::where('id' = )
         $titleC->title_name = $request->input('title_name');
-        $titleC->title_duration_start = $request->input('title_duration_start');
-        $titleC->title_duration_end = $request->input('title_duration_end');
+
         $titleC->save();
         return redirect('/homepage')->with('success','Title added successfully');
     }
