@@ -14,6 +14,7 @@ use App\Mail\CommentIdea;
 use Illuminate\Support\Facades\Mail;
 
 use App\Models\Cactegory;
+use App\Models\Title;
 use App\Models\IdeaView;
 use App\Models\Setting;
 use Illuminate\Support\Facades\DB;
@@ -342,8 +343,20 @@ class HomeController extends Controller
     }
     public function category_delete($id)
     {
-            // DB::delete('delete from category_details where id = ? ', [$id]);
-            // return redirect('/homepage')->with('success','Category deleted successfully');
+             //DB::delete('delete from category_details where id = ? ', [$id]);
+            //return redirect('/homepage')->with('success','Category deleted successfully');
+            
+            //$delCategory = ['checkIdeaInfo'=>Idea::where('id','=')];
+         //if($delCategory['checkIdeaInfo']->idea != 'null'){
+            //return redirect('/homepage')->with('fail','There is a record under this category');
+       // }
+
+    }
+    public function titleIndex()
+    {
+        $titleC = Title::all();
+        return view('/homepage',['titleC',$titleC]);
+
     }
     public function title_store(Request $request)
     {
@@ -439,9 +452,5 @@ class HomeController extends Controller
         $zip->close();
         return response()->download($zip_file);
     }
-    // public function category_delete($id)
-    // {
-    //         DB::delete('delete from category_details where id = ? ', [$id]);
-    //         return redirect('/homepage')->with('success','Category deleted successfully');
-    // }
+   
 }
