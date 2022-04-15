@@ -365,6 +365,8 @@ class HomeController extends Controller
     {
         $titleC = new Title;
         //$titleC => Cactegory::where('id' = )
+        //$titleC = Cactegory::select('select from category_details where id = ?', [$id]);
+       // $titleC = Title::with('Cactegory')->get();
         $titleC->title_name = $request->input('title_name');
 
         $titleC->save();

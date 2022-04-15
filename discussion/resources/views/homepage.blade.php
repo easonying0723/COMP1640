@@ -9,6 +9,8 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+
+
 <!-- Multiselect -->
 <link href="{{ URL::asset('css/bootstrap-multiselect.css') }}" rel="text/css">
 <script src="{{ URL::asset('js/bootstrap-multiselect.js') }}" type="text/javascript"></script>
@@ -43,7 +45,7 @@
                <div class="accordion-body" id="{{$categoryData->id}}">
                   @foreach($titleC as $title)
                      @if($LoggedUserInfo->position == 'manager')
-                     <a href="/delete/{{$titleC->title_id}}"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
+                     <a href="/delete/{{$title->title_id}}"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
                      @endif
                      <a href="" target="_blank">
                         #{{$title->title_name}}<br>
@@ -60,13 +62,7 @@
                @endforeach
          </div>
       </div>
-      @if($LoggedUserInfo->position == 'manager')
-         <div class="container ms-auto mt-4">
-            <div class="ms-auto">
-               <a class="btn btn-primary float-end" id="buttonClosureDate">Set Closure Date</a>
-            </div>
-         </div>
-      @endif
+      <!--------------BEFORE 這裏---------------------->
    </div>
 
    
@@ -117,6 +113,14 @@
                <div class="ms-auto">
                   <a id="buttonExport" class="btn btn-primary float-end">Export All Data  <i class="fa fa-download" aria-hidden="true"></i></a>
                </div>
+            @endif
+
+            @if($LoggedUserInfo->position == 'manager')
+            <div class="container ms-auto mt-4">
+               <div class="ms-auto">
+                  <a class="btn btn-primary float-end" id="buttonClosureDate">Set Closure Date</a>
+               </div>
+            </div>
             @endif
          </div>
       </div>
@@ -456,6 +460,7 @@
             Terms and condition
          </div>
       </div>
+   </div>
    </div>
 
 
