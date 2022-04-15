@@ -55,6 +55,8 @@ class HomeController extends Controller
 
         $filter = $request->get('filter');
 
+        $titleC = Title::all();
+        //return view('/homepage',);
 
         if($request->get('filter') == 'recent-view'){
             $ideas = DB::table('idea_view')
@@ -127,7 +129,7 @@ class HomeController extends Controller
             $ideas->setCollection($sortedIdeas);
         }
 
-        return view('homepage',compact('ideas','comments','data','idea_closure_date','comment_closure_date'), $udata);
+        return view('homepage',compact('ideas','comments','data','idea_closure_date','comment_closure_date','titleC'), $udata,);
 
     }
 
