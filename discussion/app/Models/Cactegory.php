@@ -13,7 +13,6 @@ class Cactegory extends Model
     public $timestamps = false;
     protected $fillable = [
         'cate_name',
-        'cate_option',
         
     ];
 }

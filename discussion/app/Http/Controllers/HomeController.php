@@ -20,6 +20,7 @@ use App\Models\Setting;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use PDO;
+use Symfony\Component\Console\Input\Input;
 
 class HomeController extends Controller
 {
@@ -219,7 +220,7 @@ class HomeController extends Controller
 
         $coordinatoremail = User::select('email')->where('position','=','coordinator')->where('department','=',$userdepartment->department)->first(); //get user's coordinator email
 
-         Mail::to($coordinatoremail->email)->send(new EmailIdea());
+        Mail::to($coordinatoremail->email)->send(new EmailIdea());
 
         $setting = Setting::firstOrCreate([
             'setting' => 'idea_closure_date',
@@ -316,6 +317,11 @@ class HomeController extends Controller
             return back()->with('fail','Something went wrong, try again later');
          }
     }
+
+
+
+    /////////////////////CATEGORY//////////////////////
+
     public function Categoryindex(Request $request)
     {
        $search = $request['search'] ?? "";
@@ -334,22 +340,20 @@ class HomeController extends Controller
     {
         $data = new Cactegory;
         $data->cate_name = $request->input('cate_name');
-        $data->cate_option = $request->input('cate_option');
 
         $data->save();
         return redirect('/homepage')->with('success','Category added successfully');
     }
+
     public function category_delete($id)
     {
-             DB::delete('delete from category_details where id = ? ', [$id]);
-            return redirect('/homepage')->with('success','Category deleted successfully');
+        DB::delete('delete from category_details where id = ? ', [$id]);
+        return back()->with('success','Category deleted successfully');
 
     }
-    public function title_delete($title_id)
-    {
-        DB::delete('delete from title_details where title_id = ?', [$title_id]);
-        return redirect ('/homepage')->with('success','Title deleted successfully');
-    }
+
+    /////////////////////TITLE//////////////////////
+
     public function titleIndex()
     {
         $titleC = Title::with('title_name')->whereNull('id')->get;
@@ -359,13 +363,16 @@ class HomeController extends Controller
     public function title_store(Request $request)
     {
         $titleC = new Title;
-        //$titleC => Cactegory::where('id' = )
-        //$titleC = Cactegory::select('select from category_details where id = ?', [$id]);
-       // $titleC = Title::with('Cactegory')->get();
         $titleC->title_name = $request->input('title_name');
+        $titleC->id = $request->input('cat_id');
 
         $titleC->save();
-        return redirect('/homepage')->with('success','Title added successfully');
+        return back()->with('success','Title added successfully');
+    }
+    public function title_delete($title_id)
+    {
+        DB::delete('delete from title_details where title_id = ?', [$title_id]);
+        return back()->with('success','Title deleted successfully');
     }
 
 

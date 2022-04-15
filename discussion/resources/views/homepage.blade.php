@@ -9,8 +9,6 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-
-
 <!-- Multiselect -->
 <link href="{{ URL::asset('css/bootstrap-multiselect.css') }}" rel="text/css">
 <script src="{{ URL::asset('js/bootstrap-multiselect.js') }}" type="text/javascript"></script>
@@ -43,26 +41,69 @@
                <div id="flush-collapse{{$categoryData->id}}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                   
                <div class="accordion-body" id="{{$categoryData->id}}">
+
                   @foreach($titleC as $title)
-                     @if($LoggedUserInfo->position == 'manager')
-                     <a href="/delete/{{$title->title_id}}"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
+                     
+                     @if($categoryData->id == $title->id)
+                        @if($LoggedUserInfo->position == 'manager')
+                           <a href="/deletetitle/{{$title->title_id}}"><button type="button" class="btn-close" aria-label="Close"></button></a>
+                        @endif
+                        <a href="" target="_blank">#{{$title->title_name}}<br></a>
                      @endif
-                     <a href="" target="_blank">
-                        #{{$title->title_name}}<br>
-                     </a>
+
                   @endforeach
+
                   @if($LoggedUserInfo->position == 'manager')
-                     <hr><button type="button" class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#titleModal" value="{{$categoryData->id}}">+ ADD TITLE</button>
-                     <a href="/delete/{{$categoryData->id}}"><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button></a>
+                     <hr><button type="button" class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#titleModal{{$categoryData->id}}">+ ADD TITLE</button>
+                     <a href="/deletecategory/{{$categoryData->id}}"><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button></a>
                   @endif
+
+                  {{---------------------------- Add Title Modal ----------------------------}}
+                  <div class="modal fade" id="titleModal{{$categoryData->id}}" tabindex="-1" aria-labelledby="titleModallLabel" aria-hidden="true">
+                     <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                           <div class="modal-header">
+                              <h5 class="modal-title" id="titleModalLabel">Add New Title</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                           </div>
+                           <form action="{{url ('/homepage/title/stored')}}" method="POST">
+                           @csrf
+                           <div class="modal-body">
+                              <div class="container-fluid">
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <label for="">Title Name:</label>
+                                       <input type="text" class="form-control" id="" name="title_name" placeholder="Please enter category name" required>
+                                       <input type="text" class="form-control" id="" name="cat_id" value="{{$categoryData->id}}" required>
+                                    </div>
+                                 </div>
+                                 <br>
+                              </div><br>
+                           </div>
+                           <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="submit" class="btn btn-primary" id="createtitle">Create</button>
+                           </div>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+                  
                   </div>
                </div>
          
             </div>
-               @endforeach
+
+            @endforeach
          </div>
       </div>
-      <!--------------BEFORE 這裏---------------------->
+      @if($LoggedUserInfo->position == 'manager')
+         <div class="container ms-auto mt-4">
+            <div class="ms-auto">
+               <a class="btn btn-primary float-end" id="buttonClosureDate">Set Closure Date</a>
+            </div>
+         </div>
+      @endif
    </div>
 
    
@@ -113,14 +154,6 @@
                <div class="ms-auto">
                   <a id="buttonExport" class="btn btn-primary float-end">Export All Data  <i class="fa fa-download" aria-hidden="true"></i></a>
                </div>
-            @endif
-
-            @if($LoggedUserInfo->position == 'manager')
-            <div class="container ms-auto mt-4">
-               <div class="ms-auto">
-                  <a class="btn btn-primary float-end" id="buttonClosureDate">Set Closure Date</a>
-               </div>
-            </div>
             @endif
          </div>
       </div>
@@ -286,7 +319,7 @@
 
 
    {{---------------------------- Add Title Modal ----------------------------}}
-   <div class="modal fade" id="titleModal" tabindex="-1" aria-labelledby="titleModallLabel" aria-hidden="true">
+   {{-- <div class="modal fade" id="titleModal" tabindex="-1" aria-labelledby="titleModallLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg">
          <div class="modal-content">
             <div class="modal-header">
@@ -301,6 +334,7 @@
                      <div class="col-md-12">
                         <label for="">Title Name:</label>
                         <input type="text" class="form-control" id="" name="title_name" placeholder="Please enter category name" required>
+                        <input type="text" class="form-control" id="" name="cat_id" value="{{$categoryData->id}}" required>
                      </div>
                   </div>
                   <br>
@@ -313,7 +347,7 @@
             </form>
          </div>
       </div>
-   </div>
+   </div> --}}
 
 
 
@@ -448,7 +482,6 @@
             Terms and condition
          </div>
       </div>
-   </div>
    </div>
 
 
