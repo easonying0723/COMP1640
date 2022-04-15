@@ -219,8 +219,6 @@ class HomeController extends Controller
 
         $coordinatoremail = User::select('email')->where('position','=','coordinator')->where('department','=',$userdepartment->department)->first(); //get user's coordinator email
 
-        //dd($userid, $userdepartment->department, $coordinatoremail->email);
-
          Mail::to($coordinatoremail->email)->send(new EmailIdea());
 
         $setting = Setting::firstOrCreate([

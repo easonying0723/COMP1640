@@ -20,12 +20,20 @@
 
   <!--Bootstrap-->
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
-        <script charset="utf8" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+  <script charset="utf8" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
 
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+
 </head>
 <body>
-<div class="container">
+
+<div class="container p-5">
+  @if(Session::get('fail'))
+    <div class="alert alert-danger">
+      {{ Session::get('fail') }}
+    </div>
+  @endif
+  
   <div class="row">
     <div class="column1 col-6 p-5" style="background-color:#424473;">
       <img src="/images/login.png" class="lgnImage">
@@ -36,24 +44,18 @@
       <p class="welcome">Welcome back you've been missed!</p>
     
       <form action="{{ route('auth.check') }}" method="post">
-      @if(Session::get('fail'))
-        <div class="alert alert-danger">
-           {{ Session::get('fail') }}
-        </div>
-      @endif
-  
       @csrf
-    <div class="textField">
-      <div class="form-group">
-      <input type="text" placeholder="Enter email" name="email" required><br>
-      <span class="text-danger">@error('email'){{ $message }} @enderror</span>
-      </div>
+      <div class="textField">
+        <div class="form-group">
+          <input type="text" placeholder="Enter email" name="email" required><br>
+          <span class="text-danger">@error('email'){{ $message }} @enderror</span>
+        </div>
 
-      <div class="form-group">
-      <input type="password" placeholder="Enter Password" name="password" required><br> 
-      <span class="text-danger">@error('password'){{ $message }} @enderror</span>
+        <div class="form-group">
+          <input type="password" placeholder="Enter Password" name="password" required><br> 
+          <span class="text-danger">@error('password'){{ $message }} @enderror</span>
+        </div>
       </div>
-    </div>
    
     <!--<div class ="reminder">
       <label>
@@ -70,5 +72,6 @@
     </div>
   </div>
 </div>
+
 </body>
 </html>
