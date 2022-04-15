@@ -15,7 +15,6 @@
 <link rel="stylesheet" href="https://fengyuanchen.github.io/datepicker/css/datepicker.css">
 <script src="https://fengyuanchen.github.io/datepicker/js/datepicker.js"></script>
 
-
 <!-- Multiselect -->
 <link href="{{ URL::asset('css/bootstrap-multiselect.css') }}" rel="text/css">
 <script src="{{ URL::asset('js/bootstrap-multiselect.js') }}" type="text/javascript"></script>
@@ -132,29 +131,37 @@
             @endif
          </div>
       </div>
+
       <div class="container">
-         <div class="row row-cols-3">
-            <div class="col-sm-4">
-               <div class="card" style="width: 18rem;">
-                  <img src="images/add.png" class="card-img-top" style="">
-                  <div class="card-body">
-                     @if($LoggedUserInfo->position == 'staff' )
-                     @if(date('Y-m-d',strtotime($idea_closure_date->detail)) >= date('Y-m-d'))
-                     <button type="button" class="btn btn-primary" data-toggle="modal" id="addidea">
-                        + New Idea
-                     </button>
-                     @else
-                     <p>Adding idea is no longer allowed after closure date.</p>
-                     @endif
-                     
-                     @else
-                     <p>Log in as a staff to contribute.</p>
-                     @endif
+         <div class="row">
+            <div class="col-12">
+               <div class="card">
+                  <div class="row">
+                     <div class="col-4">
+                        <img src="images/add.png" class="card-img-top">
+                     </div>
+                     <div class="col-8">
+                        <div class="card-body">
+                         @if($LoggedUserInfo->position == 'staff' )
+                           @if(date('Y-m-d',strtotime($idea_closure_date->detail)) >= date('Y-m-d'))
+                           <button type="button" class="btn btn-primary float-end" data-toggle="modal" id="addidea">
+                              + New Idea
+                           </button>
+                           @else
+                           <p>Adding idea is no longer allowed after closure date.</p>
+                           @endif
+                           
+                           @else
+                           <p>Log in as a staff to contribute.</p>
+                           @endif
+                        </div>
+                     </div>
                   </div>
                </div>
             </div>
+            
             @foreach($ideas as $index => $idea)
-            <div class="col-sm-4">
+            <div class="col-12">
                <div class="card">
                   <div class="card-header">
                      <strong class="me-auto">{{$idea->subject}}</strong><span class=" ml-3 badge bg-secondary">{{$idea->cate_name}}</span>
@@ -235,9 +242,10 @@
                         <small style="float: right; margin: 10px">{{$idea->number_of_comment}} {{$idea->number_of_comment > 1 ? 'comments' : 'comment'}}</small>
                      </div>
                   </div>
-               </div>
+               </div>  
             </div>
             @endforeach
+            
          </div>
       </div>
       <br>
