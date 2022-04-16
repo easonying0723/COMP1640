@@ -391,6 +391,9 @@ class HomeController extends Controller
 
     public function export_data(){
         $udata = ['LoggedUserInfo'=>User::where('id','=', session('LoggedUser'))->first()];
+        if(!$udata['LoggedUserInfo']){
+            return redirect('/homepage');
+        }
         if($udata['LoggedUserInfo']->position != 'manager'){
             return redirect('/homepage')->with('fail','Only manager is allowed to export data.');
         }
