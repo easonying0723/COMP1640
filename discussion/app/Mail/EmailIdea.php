@@ -17,9 +17,11 @@ class EmailIdea extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($data)
     {
-
+        $this->name = $data['name'];
+        $this->title = $data['title'];
+        $this->category = $data['category'];
     }
 
     /**
@@ -29,6 +31,6 @@ class EmailIdea extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.idea')->subject('Someone has post idea.');
+        return $this->markdown('emails.idea')->subject('Someone has post idea.')->with('name', $this->name)->with('title', $this->title)->with('category', $this->category);
     }
 }

@@ -9,6 +9,8 @@ class Title extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'title_id';
+
     protected $table = 'title_details';
     public $timestamps = false;
     protected $fillable = [
