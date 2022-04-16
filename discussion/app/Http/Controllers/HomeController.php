@@ -336,7 +336,15 @@ class HomeController extends Controller
         
         return view('homepage')->with('data',$data);
     }
+    public function category_store(Request $request)
+    {
+        $data = new Cactegory;
+        $data->cate_name = $request->input('cate_name');
 
+        $data->save();
+        return redirect('/homepage')->with('success','Category added successfully');
+    }
+    
     public function category_delete($id)
     {
        // DB::delete('delete category_details , title_details from category_details INNERJOIN title_details
