@@ -344,11 +344,31 @@ class HomeController extends Controller
         $data->save();
         return redirect('/homepage')->with('success','Category added successfully');
     }
+    
 
     public function category_delete($id)
     {
-        DB::delete('delete from category_details where id = ? ', [$id]);
+       // DB::delete('delete category_details , title_details from category_details INNERJOIN title_details
+       // WHERE category_details.id = title_details.id and category_details.id = ?' ,[$id]);
+        
+     
+       $data = DB::table('category_details')
+       ->leftJoin('title_details','category_details.id','=','title_details.id')
+       ->leftJoin('idea','category_details.id','=','idea.cat_id')
+       ->where('category_details.id',$id);
+
+     
+        DB::table('title_details')->where('id', $id)->delete();                           
+        $data->delete();
+        
+       // DB::delete('delete from category_details where id = ? '),
+       // delete from title_details where id = ?,
+        //delete from idea where cat_id = ?', [$id]);
         return back()->with('success','Category deleted successfully');
+       
+       
+
+      
 
     }
 

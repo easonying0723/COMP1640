@@ -47,6 +47,7 @@
                      @if($categoryData->id == $title->id)
                         @if($LoggedUserInfo->position == 'manager')
                            <a href="/deletetitle/{{$title->title_id}}"><button type="button" class="btn-close" aria-label="Close"></button></a>
+                          
                         @endif
                         <a href="" target="_blank">#{{$title->title_name}}<br></a>
                      @endif
@@ -56,6 +57,7 @@
                   @if($LoggedUserInfo->position == 'manager')
                      <hr><button type="button" class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#titleModal{{$categoryData->id}}">+ ADD TITLE</button>
                      <a href="/deletecategory/{{$categoryData->id}}"><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button></a>
+                     
                   @endif
 
                   {{---------------------------- Add Title Modal ----------------------------}}
@@ -319,7 +321,7 @@
 
 
    {{---------------------------- Add Title Modal ----------------------------}}
-   {{-- <div class="modal fade" id="titleModal" tabindex="-1" aria-labelledby="titleModallLabel" aria-hidden="true">
+   {{--<div class="modal fade" id="titleModal" tabindex="-1" aria-labelledby="titleModallLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg">
          <div class="modal-content">
             <div class="modal-header">
