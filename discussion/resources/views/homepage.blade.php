@@ -389,6 +389,18 @@
                      <br>
                      <div class="row">
                         <div class="col-md-12">
+                           <label for="title">Title:</label>
+                           <select name="title" id="title" class="form-control">
+                           <option selected>Please Choose...</option>
+                           @foreach($titleC as $title)
+                             <option value="{{$title ->title_id}}">{{$title -> title_name}}</option>
+                           @endforeach
+                           </select>
+                        </div>
+                     </div>
+                     <br>
+                     <div class="row">
+                        <div class="col-md-12">
                            <div class="mb-3">
                               <label for="uploadfile" class="form-label">Upload File</label>
                               <input class="form-control" type="file" id="uploadfile" name="file[]" multiple>
@@ -463,6 +475,7 @@
                            <input type="date" class="form-control" id="comment_closure_date" name="comment_closure_date" value="{{$comment_closure_date->detail}}" required>
                         </div>
                      </div>
+               </div>
                </div>
                <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -571,8 +584,8 @@
                      @else
                      <span class="bx bx-dislike" aria-hidden="true"></span>
                      <span class="dislikes">Dislike {{$idea->number_of_dislike}}</span>
-                  </button>
                      @endif
+                  </button>
                   @else <!-- if user is not staff, cannot click like/dislike -->
                   <button class="btn like btn-warning" style="margin:1px;" disabled>
                      @if($idea->user_like == 1)
@@ -627,6 +640,8 @@
                         </div>
                      </div>
                   </form>
+                  @else
+                  <p>Adding comment is no longer allowed after final closure date.</p>
                   @endif
                   @else
                   <p>Log in as a staff to comment</p>

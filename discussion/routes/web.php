@@ -37,6 +37,9 @@ Route::get('/', function () {
 //     return view('usercontrol');
 // });
 
+Route::get('/homepage/export_data',[HomeController::class, 'export_data'])->name('export_data'); //dont move this
+Route::get('/homepage/export_file',[HomeController::class, 'export_file'])->name('export_file'); //dont move this
+
 Route::post('/auth/check',[MainController::class, 'check'])->name('auth.check');
 
 Route::get('/auth/login',[MainController::class, 'login'])->name('auth.login');
@@ -58,8 +61,6 @@ Route::get('terms', function () {
     return view('terms');
 });
 
-Route::get('/homepage/export_data',[HomeController::class, 'export_data'])->name('export_data');
-Route::get('/homepage/export_file',[HomeController::class, 'export_file'])->name('export_file');
 
 Route::get('/usercontrol/delete/{id}',[MainController::class, 'delete'])->name('usercontrol.delete');
 Route::get('/userChangeStatus/{id}',[MainController::class, 'userChangeStatus'])->name('userChangeStatus');

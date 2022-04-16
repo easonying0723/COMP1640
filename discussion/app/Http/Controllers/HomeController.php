@@ -20,6 +20,7 @@ use App\Models\Setting;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use PDO;
+use stdClass;
 use Symfony\Component\Console\Input\Input;
 
 class HomeController extends Controller
@@ -56,11 +57,11 @@ class HomeController extends Controller
 
         $filter = $request->get('filter');
 
-        // $titleC = Title::all();
+        $titleC = Title::all();
 
         if($request->get('filter') == 'recent-view'){
             $ideas = DB::table('idea_view')
-            ->leftJoin('idea', 'idea.id', '=', 'idea_view.idea_id')
+            ->join('idea', 'idea.id', '=', 'idea_view.idea_id')
             ->leftJoin('users', 'users.id', '=', 'idea.user_id')
             ->leftJoin('category_details','category_details.id','=','idea.cat_id')
             ->select(DB::raw('idea.*,users.name as user_name,users.profilepic,  max(idea_view.created_at) as latest,users.department, category_details.cate_name'))
@@ -70,7 +71,7 @@ class HomeController extends Controller
             ->paginate(5)->appends(request()->query());;
         }else if($request->get('filter') == 'most-viewed'){
             $ideas = DB::table('idea_view')
-            ->leftJoin('idea', 'idea.id', '=', 'idea_view.idea_id')
+            ->join('idea', 'idea.id', '=', 'idea_view.idea_id')
             ->leftJoin('users', 'users.id', '=', 'idea.user_id')
             ->leftJoin('category_details','category_details.id','=','idea.cat_id')
             ->select(DB::raw('idea.*,users.name as user_name, users.profilepic, count(idea_view.id) as number_of_view,users.department,category_details.cate_name'))
@@ -92,7 +93,7 @@ class HomeController extends Controller
             ->paginate(5)->appends(request()->query());
         }
         
-     
+
         $comments = Comment::paginate(7);
         $data = Cactegory::all();
         foreach ($ideas as $key => $idea) {
@@ -218,8 +219,8 @@ class HomeController extends Controller
         $userdepartment = User::select('department')->where('id','=', $userid)->get();//get user's department
 
         $coordinatoremail = User::select('email')->where('position','=','coordinator')->where('department','=',$userdepartment[0]->department)->first(); //get user's coordinator email
-
-        Mail::to($coordinatoremail->email)->send(new EmailIdea());
+        $data=array("name"=>User::find($userid)->name,"title"=>Title::find($request->title)->title_name,"category"=>Cactegory::find($request->category)->cate_name);
+        Mail::to($coordinatoremail->email)->send(new EmailIdea($data));
 
         $setting = Setting::firstOrCreate([
             'setting' => 'idea_closure_date',
@@ -251,6 +252,7 @@ class HomeController extends Controller
         Idea::create([
             'user_id' => (int)$request->session()->get('LoggedUser'),
             'cat_id' => (int)$request->category, 
+            'title_id' => (int)$request->title, 
             'subject' => $request->subject,
             'photo' => strval($image),
             'file' => strval($files_name),
@@ -294,8 +296,8 @@ class HomeController extends Controller
     public function store_closure_date(Request $request)
     {
         $udata = ['LoggedUserInfo'=>User::where('id','=', session('LoggedUser'))->first()];
-        if($udata['LoggedUserInfo']->position != 'admin'){
-            return redirect('/homepage')->with('fail','Only admin is allowed to set closure date.');
+        if($udata['LoggedUserInfo']->position != 'manager'){
+            return redirect('/homepage')->with('fail','Only manager is allowed to set closure date.');
         }
         $setting = Setting::firstOrCreate([
             'setting' => 'idea_closure_date',
@@ -389,6 +391,9 @@ class HomeController extends Controller
 
     public function export_data(){
         $udata = ['LoggedUserInfo'=>User::where('id','=', session('LoggedUser'))->first()];
+        if(!$udata['LoggedUserInfo']){
+            return redirect('/homepage');
+        }
         if($udata['LoggedUserInfo']->position != 'manager'){
             return redirect('/homepage')->with('fail','Only manager is allowed to export data.');
         }
