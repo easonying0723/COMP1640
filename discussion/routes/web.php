@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DataTableController;
 use Illuminate\Support\Facades\View;
 
 /*
@@ -16,6 +17,8 @@ use Illuminate\Support\Facades\View;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('datatable', 'DataTableController@index'); 
+Route::get('get', 'DataTableController@get');
 
 Route::get('/', function () {
     return view('auth/login');
