@@ -26,7 +26,13 @@ class DashboardController extends Controller
      */
     public function index()
     {
-
+        $udata = User::where('id','=', session('LoggedUser'))->first();
+        if(!$udata){
+            redirect('homepage');
+        }
+        if($udata->position != 'manager'){
+            return back()->with('fail','Only manager is allowed to access the dashboard.');
+        }
         $departmentsArray = DB::table('users')->select('department')->distinct()->get()->toArray();
         $departments = array();
         foreach ($departmentsArray as $key => $value) {
