@@ -25,24 +25,15 @@
   <div class="termsTitle">
     <h1>Terms & Condition.</h1><br>
     <p>Please check terms and condition to proceed to submit your ideas.</p>
-      <div class="termsContent">DISCUSS.ION provides functionality to make available content and ideas in connection with the DISCUSS.ION sites. Any text in content should be written in English. You acknowledge and agree that you are responsible for all content and ideas you make available in connection with our website. You respresent and warrant that (1) you have the authority to grant the rights in such content and ideas as set forth in these Terms of Use, and the use of such ideas, will not violate any terms of these Terms of Use. This means you will be responsible for the legality, the accuracy , the approriateness, the originality , and your rights in any such Ideas. 
+      <div class="termsContent">
+        <strong>DISCUSS.ION</strong> <br><br>
+        DISCUSS.ION provides functionality to make available content and ideas in connection with people<br><br>
+        <strong class="text-muted">Any text in content should be written in English.</strong><br><br>
+        Your acknowledgement and agree that you are responsible for all content and ideas you make available in connection with our website. You respresent and warrant that (1) you have the authority to grant the rights in such content and ideas as set forth in these Terms of Use, and the use of such ideas, will not violate any terms of these Terms of Use. This means you will be responsible for the legality, the accuracy , the approriateness, the originality , and your rights in any such Ideas. 
+        Your acknowledgement and agree that you are responsible for all content and ideas you make available in connection with our website. You respresent and warrant that (1) you have the authority to grant the rights in such content and ideas as set forth in these Terms of Use, and the use of such ideas, will not violate any terms of these Terms of Use. This means you will be responsible for the legality, the accuracy , the approriateness, the originality , and your rights in any such Ideas. 
+        Your acknowledgement and agree that you are responsible for all content and ideas you make available in connection with our website. You respresent and warrant that (1) you have the authority to grant the rights in such content and ideas as set forth in these Terms of Use, and the use of such ideas, will not violate any terms of these Terms of Use. This means you will be responsible for the legality, the accuracy , the approriateness, the originality , and your rights in any such Ideas. 
         <br><br>When you agree to terms and conditions, you are basically agreeing to all sorts of things. In order to know exactly what you have agreed to, you have to read and make sure you understand everything in the terms and conditions. Most people are usually surprised when they find out what they have agreed to.
       </div>
-      
-      <!-- <form class="needs-validation" action ="/home" novalidate>
-      <div class="form-check termsCheck" novalidate>
-        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-        <label class="form-check-label" for="invalidCheck">
-        I agree to the terms and condition.
-        </label>
-          <div class="invalid-feedback">
-        You must agree before proceed.
-          </div>
-      </div>
-        <br>
-        <button class="lgnButton" type="submit" >Proceed</button>
-
-      </form> -->
   </div>
 </body>
 <script>
