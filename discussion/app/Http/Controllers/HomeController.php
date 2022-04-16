@@ -355,6 +355,8 @@ class HomeController extends Controller
        $data = DB::table('category_details')
        ->leftJoin('title_details','category_details.id','=','title_details.id')
        ->leftJoin('idea','category_details.id','=','idea.cat_id')
+       ->leftJoin('likes','idea.id','=','likes.idea_id' )
+       ->leftJoin('comments','idea.id','=','comments.idea_id')
        ->where('category_details.id',$id);
 
      
