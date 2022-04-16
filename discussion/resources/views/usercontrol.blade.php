@@ -4,12 +4,7 @@
 
 <!-- Own -->
 {{-- <script src="{{ URL::asset('js/usercontrol.js') }}" type="text/javascript"></script> --}}
-        <!-- Datatable -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <link  href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-   
 @section('usercontrolcontent')
 <!-- ----------------------------------------Content---------------------------------------- -->
    <br>
@@ -35,7 +30,7 @@
          <div class="container">
             <div class="form-row">
                <div class="form-group col-md-12">
-                  <table class="display table table-striped table-bordered table-hover horizontal-scrollable" id="usercontrolTable">
+                  <table class="table table-striped table-bordered table-hover horizontal-scrollable" id="usercontrolTable">
                      <thead>
                            <tr>
                               <th>User ID</th>
@@ -47,7 +42,7 @@
                               <!-- <th></th> -->
                            </tr>
                      </thead>
-                     <tbody> 
+                     <tbody id="stockadjBody"> 
                         @foreach($users as $data)
                         <tr>
                            <td>{{$data->id}}</td>
@@ -104,7 +99,6 @@
                               <option value="IT">IT</option>
                               <option value="Marketing">Marketing</option>
                               <option value="Accounting Finance">Accounting Finance</option>
-                              <option value="Human Resource">Human Resource</option>
                            </select>
                         </div>
                      </div><br>
@@ -142,18 +136,28 @@
 
     @endsection
 
+
 <script type="module">
-
-$(document).ready( function () {
-
    $('#usercontrolTable').DataTable({//call table id
+
    scroll: true,
    responsive: true,
    searching: true,
    paging: true,
-   });
-} );
 
+   columnDefs: [ {
+      targets: 6,
+      data: null,
+      defaultContent:'<input type="checkbox" id="userstatus" data-toggle="toggle" data-on="On" data-off="Off" data-size="sm" checked required>'
+      },
+
+   {
+      targets: -1,
+      data: null,
+      defaultContent: '<button class="btn btn-light" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="bx bx-trash"></i></button>'
+   }],
+
+   });
 
    $('#createusercontrol').on( 'click',function () {
    $("#successModal").modal("show");
