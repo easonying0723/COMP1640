@@ -321,6 +321,7 @@ table.ideas th {
     <th>User Name</th>
   </tr>
   @foreach($anonymousComment as $idea)
+  @if($idea->idea)
   <tr>
     <td>{{$idea->id}}</td>
     <td>{{$idea->comment}}</td>
@@ -328,6 +329,7 @@ table.ideas th {
     <td>{{$idea->user->id}}</td>
     <td>{{$idea->user->name}}</td>
   </tr>
+  @endif
   @endforeach
 
 </table>
