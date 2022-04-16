@@ -56,8 +56,7 @@ class HomeController extends Controller
 
         $filter = $request->get('filter');
 
-        $titleC = Title::all();
-        //return view('/homepage',);
+        // $titleC = Title::all();
 
         if($request->get('filter') == 'recent-view'){
             $ideas = DB::table('idea_view')
@@ -216,9 +215,9 @@ class HomeController extends Controller
 
         $userid = (int)$request->session()->get('LoggedUser');
 
-        $userdepartment = User::select('department')->where('id','=', $userid)->first();//get user's department
+        $userdepartment = User::select('department')->where('id','=', $userid)->get();//get user's department
 
-        $coordinatoremail = User::select('email')->where('position','=','coordinator')->where('department','=',$userdepartment->department)->first(); //get user's coordinator email
+        $coordinatoremail = User::select('email')->where('position','=','coordinator')->where('department','=',$userdepartment[0]->department)->first(); //get user's coordinator email
 
         Mail::to($coordinatoremail->email)->send(new EmailIdea());
 
@@ -335,16 +334,6 @@ class HomeController extends Controller
         
         return view('homepage')->with('data',$data);
     }
-
-    public function category_store(Request $request)
-    {
-        $data = new Cactegory;
-        $data->cate_name = $request->input('cate_name');
-
-        $data->save();
-        return redirect('/homepage')->with('success','Category added successfully');
-    }
-    
 
     public function category_delete($id)
     {

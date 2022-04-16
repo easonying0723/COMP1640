@@ -9,11 +9,6 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<!-- Multiselect -->
-<link href="{{ URL::asset('css/bootstrap-multiselect.css') }}" rel="text/css">
-<script src="{{ URL::asset('js/bootstrap-multiselect.js') }}" type="text/javascript"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-
 <div class="row homepagecontent">
    <div class="col-md-3 categorynav">
       <br>
@@ -65,7 +60,7 @@
                      <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                            <div class="modal-header">
-                              <h5 class="modal-title" id="titleModalLabel">Add New Title</h5>
+                              <h5 class="modal-title" id="titleModalLabel" style="color: black;">Add New Title</h5>
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                            </div>
                            <form action="{{url ('/homepage/title/stored')}}" method="POST">
@@ -74,9 +69,9 @@
                               <div class="container-fluid">
                                  <div class="row">
                                     <div class="col-md-12">
-                                       <label for="">Title Name:</label>
+                                       <label for="" style="color: black;">Title Name:</label>
                                        <input type="text" class="form-control" id="" name="title_name" placeholder="Please enter category name" required>
-                                       <input type="text" class="form-control" id="" name="cat_id" value="{{$categoryData->id}}" required>
+                                       <input type="text" class="form-control" id="" name="cat_id" value="{{$categoryData->id}}" required hidden>
                                     </div>
                                  </div>
                                  <br>
