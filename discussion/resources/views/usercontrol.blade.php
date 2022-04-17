@@ -4,7 +4,9 @@
 
 <!-- Own -->
 {{-- <script src="{{ URL::asset('js/usercontrol.js') }}" type="text/javascript"></script> --}}
-
+<!-- Datatable -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+<script charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 @section('usercontrolcontent')
 <!-- ----------------------------------------Content---------------------------------------- -->
    <br>
@@ -132,24 +134,17 @@
 
 <script type="module">
    $('#usercontrolTable').DataTable({//call table id
-
-   scroll: true,
+      retrieve: true,
+   scrollCollapse: true,
    responsive: true,
+   ordering: true,
    searching: true,
-   paging: true,
-
-   columnDefs: [ {
-      targets: 6,
-      data: null,
-      defaultContent:'<input type="checkbox" id="userstatus" data-toggle="toggle" data-on="On" data-off="Off" data-size="sm" checked required>'
-      },
-
-   {
-      targets: -1,
-      data: null,
-      defaultContent: '<button class="btn btn-light" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="bx bx-trash"></i></button>'
-   }],
-
+   order: [ 1, 'asc' ],
+   pagingType: "full_numbers",
+   lengthMenu:[
+      [10,-1],
+      [10,"All"]
+   ],
    });
 
    $('#createusercontrol').on( 'click',function () {
