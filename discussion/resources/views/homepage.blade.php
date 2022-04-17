@@ -12,6 +12,14 @@
 <div class="row homepagecontent">
    <div class="col-md-3 categorynav">
       <br>
+      <form method="" action="">
+        @csrf
+      <input type="search" class="form-control" placeholder="Search" name="search" value="" />
+      <button class="btn btn-outline-light" type="submit" style="margin-left: 45%;margin-top: 10px;">Search</button>
+      <a href="/homepage">
+      <button class="btn btn-outline-light" type="button" style=" margin-top: 10px;">RESET</button>
+      </a>
+      </form>
       <div class="categoryContainer">
          <div class="container">
             <p class="justify-content-between" style="color: #D0D4E3; font-weight: bold;">Category
@@ -44,14 +52,19 @@
                            <a href="/deletetitle/{{$title->title_id}}"><button type="button" class="btn-close" aria-label="Close"></button></a>
                           
                         @endif
-                        <a href="" target="_blank">#{{$title->title_name}}<br></a>
+                        <a href="{{route('home', array('filter' => 'cate_id'))}}" target="_blank">#{{$title->title_name}}<br></a>
+                        @if(Request::get('filter') == 'cate_id')
+                        
+                        @endif
+
+                  
                      @endif
 
                   @endforeach
 
                   @if($LoggedUserInfo->position == 'manager')
                      <hr><button type="button" class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#titleModal{{$categoryData->id}}">+ ADD TITLE</button>
-                     <a href="/deletecategory/{{$categoryData->id}}"><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button></a>
+                     <a href="/delete/{{$categoryData->id}}"><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button></a>
                      
                   @endif
 
@@ -497,7 +510,7 @@
 
 
    {{---------------------------- View Idea Modal ----------------------------}}
-
+   
    @foreach($ideas as $index => $idea)
    <div class="modal fade" id="{{'idea-'.$idea->id}}" data tabindex="-1" aria-labelledby="viewModallLabel" aria-hidden="true">
       <div class="modal-dialog modal-xl">
@@ -659,6 +672,7 @@
       </div>
    </div>
    @endforeach
+   
 
    <script>
       $('#buttonExport').on('click',function () {
