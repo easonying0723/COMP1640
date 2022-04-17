@@ -58,17 +58,19 @@ class HomeController extends Controller
         $filter = $request->get('filter');
 
         $titleC = Title::all();
-        if($request->get('filter') == 'cate_id'){
+
+        if($request->get('filter') == 'title_id'){
             $ideas = DB::table('idea_view')
-           // ->join('title_details','title_details.title_id','=','idea_view.title_id')
-           ->join('idea', 'idea.id', '=', 'idea_view.idea_id')
+            ->join('idea', 'idea.id', '=', 'idea_view.idea_id')
+            ->leftjoin('title_details','title_details.title_id','=','idea.title_id')
             ->leftJoin('users', 'users.id', '=', 'idea.user_id')
             ->leftJoin('category_details','category_details.id','=','idea.cat_id')
+            ->leftJoin('title_details','title_details.title_id','=','idea.title_id')
             //->leftJoin('title_details','title_details.title_id','=','idea.title_id')
             ->select(DB::raw('idea.*,users.name as user_name,users.profilepic,  max(idea_view.created_at) as latest,users.department, category_details.cate_name'))
             ->where('idea_view.idea_id',$user_id)
-            ->groupBy('idea_view.idea_id')
-            ->orderBy('latest','desc')
+            //->groupBy('idea_view.idea_id')                                  
+           // ->orderBy('latest','desc')
             ->paginate(5)->appends(request()->query());;
         }
 

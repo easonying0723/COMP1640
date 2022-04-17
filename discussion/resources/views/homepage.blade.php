@@ -52,9 +52,9 @@
                            <a href="/deletetitle/{{$title->title_id}}"><button type="button" class="btn-close" aria-label="Close"></button></a>
                           
                         @endif
-                        <a href="{{route('home', array('filter' => 'cate_id'))}}" target="_blank">#{{$title->title_name}}<br></a>
-                        @if(Request::get('filter') == 'cate_id')
-                        
+                        <a href="{{route('home', array('filter' => 'title_id'))}}" target="_blank">#{{$title->title_name}}<br></a>
+                        @if(Request::get('filter') == 'title_id')
+                        {{$title->title_name}}
                         @endif
 
                   
