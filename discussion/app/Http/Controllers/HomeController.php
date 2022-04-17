@@ -144,12 +144,7 @@ class HomeController extends Controller
             }
         }
         
-        $search = request()->query('search');
-        if($search){
-            $data = Cactegory::where('cate_name','LIKE',"%{$search}%")->get();
-        }else{
-            return view('homepage');
-        }
+        
 
 
         return view('homepage',compact('ideas','comments','data','idea_closure_date','comment_closure_date','titleC'), $udata,);
