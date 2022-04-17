@@ -12,7 +12,7 @@
 <div class="row homepagecontent">
    <div class="col-md-3 categorynav">
       <br>
-      <form method="" action="">
+      <form method="GET" action="">
         @csrf
       <input type="search" class="form-control" placeholder="Search" name="search" value="" />
       <button class="btn btn-outline-light" type="submit" style="margin-left: 45%;margin-top: 10px;">Search</button>

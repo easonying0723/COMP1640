@@ -42,6 +42,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+       
         $idea_closure_date = Setting::firstOrCreate([
             'setting' => 'idea_closure_date',
             'extra' => date('Y')
@@ -57,6 +58,7 @@ class HomeController extends Controller
 
         $filter = $request->get('filter');
 
+        $data = Cactegory::all();
         $titleC = Title::all();
 
         if($request->get('filter') == 'title_id'){
@@ -65,9 +67,7 @@ class HomeController extends Controller
             ->leftjoin('title_details','title_details.title_id','=','idea.title_id')
             ->leftJoin('users', 'users.id', '=', 'idea.user_id')
             ->leftJoin('category_details','category_details.id','=','idea.cat_id')
-            ->leftJoin('title_details','title_details.title_id','=','idea.title_id')
-            //->leftJoin('title_details','title_details.title_id','=','idea.title_id')
-            ->select(DB::raw('idea.*,users.name as user_name,users.profilepic,  max(idea_view.created_at) as latest,users.department, category_details.cate_name'))
+            ->select(DB::raw('idea.*,users.name as user_name,users.profilepic,  max(idea_view.created_at) as latest,users.department, category_details.cate_name','title_details.title_id'))
             ->where('idea_view.idea_id',$user_id)
             //->groupBy('idea_view.idea_id')                                  
            // ->orderBy('latest','desc')
@@ -147,6 +147,7 @@ class HomeController extends Controller
 
         return view('homepage',compact('ideas','comments','data','idea_closure_date','comment_closure_date','titleC'), $udata,);
 
+    
     }
 
     public function idea_details($id){
@@ -342,17 +343,18 @@ class HomeController extends Controller
     public function Categoryindex(Request $request)
     {
        $search = $request['search'] ?? "";
-       if($search !="")
-        {
-            //where clause
-            $data = Cactegory::where('cate_name','LIKE', "%$search%")->get();
-       }else{
-            $data = Cactegory::all();
-        }
+        if($search !="")
+         {
+             //where clause
+             $data = Cactegory::where('cate_name','LIKE', "%$search%")->get();
+        }else{
+             $data = Cactegory::all();
+         }
+         
         
-        return view('homepage')->with('data',$data);
+       return view('homepage')->with('data',$data);
     }
-
+  
     public function category_store(Request $request)
     {
         $data = new Cactegory;
