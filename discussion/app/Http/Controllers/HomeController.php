@@ -59,6 +59,21 @@ class HomeController extends Controller
 
         $titleC = Title::all();
 
+        if($request->get('filter') == 'title_id'){
+            $ideas = DB::table('idea_view')
+            ->join('idea', 'idea.id', '=', 'idea_view.idea_id')
+            ->leftjoin('title_details','title_details.title_id','=','idea.title_id')
+            ->leftJoin('users', 'users.id', '=', 'idea.user_id')
+            ->leftJoin('category_details','category_details.id','=','idea.cat_id')
+            ->leftJoin('title_details','title_details.title_id','=','idea.title_id')
+            //->leftJoin('title_details','title_details.title_id','=','idea.title_id')
+            ->select(DB::raw('idea.*,users.name as user_name,users.profilepic,  max(idea_view.created_at) as latest,users.department, category_details.cate_name'))
+            ->where('idea_view.idea_id',$user_id)
+            //->groupBy('idea_view.idea_id')                                  
+           // ->orderBy('latest','desc')
+            ->paginate(5)->appends(request()->query());;
+        }
+
         if($request->get('filter') == 'recent-view'){
             $ideas = DB::table('idea_view')
             ->join('idea', 'idea.id', '=', 'idea_view.idea_id')
@@ -90,6 +105,7 @@ class HomeController extends Controller
             $ideas = Idea::leftJoin('users', 'users.id', '=', 'idea.user_id')
             ->leftJoin('category_details','category_details.id','=','idea.cat_id')
             ->select(DB::raw('*,idea.created_at as created_at,users.profilepic, idea.id as id, category_details.cate_name'))
+            ->orderBy('idea.created_at','desc')
             ->paginate(5)->appends(request()->query());
         }
         
@@ -220,7 +236,7 @@ class HomeController extends Controller
 
         $coordinatoremail = User::select('email')->where('position','=','coordinator')->where('department','=',$userdepartment[0]->department)->first(); //get user's coordinator email
         $data=array("name"=>User::find($userid)->name,"title"=>Title::find($request->title)->title_name,"category"=>Cactegory::find($request->category)->cate_name);
-        Mail::to($coordinatoremail->email)->send(new EmailIdea($data));
+       // Mail::to($coordinatoremail->email)->send(new EmailIdea($data));
 
         $setting = Setting::firstOrCreate([
             'setting' => 'idea_closure_date',
@@ -356,6 +372,7 @@ class HomeController extends Controller
        ->leftJoin('likes','idea.id','=','likes.idea_id' )
        ->leftJoin('comments','idea.id','=','comments.idea_id')
        ->where('category_details.id',$id);
+       
 
      
         DB::table('title_details')->where('id', $id)->delete();                           
@@ -374,9 +391,10 @@ class HomeController extends Controller
 
     /////////////////////TITLE//////////////////////
 
-    public function titleIndex()
+    public function titleIndex(Request $request)
     {
         $titleC = Title::with('title_name')->whereNull('id')->get;
+        
         return view('/homepage',['titleC',$titleC]);
 
     }
