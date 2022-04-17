@@ -35,7 +35,7 @@
 <!--<h2 class="title">Profile Setting</h2>-->
 @foreach($users as $data)
 <div class="empty">
-<form class="profileForm">
+<div class="profileForm">
   <div class="profileContent">
     <!-- Trigger/Open The Modal -->
     <button type="button" id="changePassBtn" class="pswBtn" data-bs-toggle="modal" data-bs-target="#changePassword_modal">Change password <span class="iconify" data-icon="akar-icons:key"></span> </button>
@@ -43,13 +43,13 @@
   </div>
 
   <form action="{{route('profile.updateprofilepic')}}" method="POST" enctype="multipart/form-data">
-
+  @csrf
   <div class="profile-pic">
     <label class="-label" for="file">
       <span class="glyphicon glyphicon-camera"></span>
       <span>Change Image</span>
     </label>
-    <input id="file" type="file" name="image" class="file" onchange="loadFile(event)"/> 
+    <input id="file" type="file" name="image" accept="image/*" class="file" onchange="loadFile(event)"/> 
     <img src="images/{{$data->profilepic}}" id="profilePic" width="200" />
   </div> 
 
@@ -73,7 +73,6 @@
     <input type="text" name="position" class ="rightsection" style="background-color: #E6E6E5" value="{{$data->position}}" disabled>
     </div>
 </div>
-@endforeach
 <br>
 <div class="text-center">
   <button type="submit" class="btn btn-secondary">Change Photo</button>
@@ -81,6 +80,8 @@
 
 </form>
 </div>
+</div>
+@endforeach
 
 <!-- Modal -->
 <div class="modal fade" id="changePassword_modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
