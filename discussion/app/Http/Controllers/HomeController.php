@@ -341,6 +341,7 @@ class HomeController extends Controller
 
     /////////////////////CATEGORY//////////////////////
   
+    
     public function category_store(Request $request)
     {
         $data = new Cactegory;

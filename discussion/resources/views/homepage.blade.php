@@ -12,7 +12,6 @@
 <div class="row homepagecontent">
    <div class="col-md-3 categorynav">
       <br>
-     
       <div class="categoryContainer">
          <div class="container">
             <p class="justify-content-between" style="color: #D0D4E3; font-weight: bold;">Category

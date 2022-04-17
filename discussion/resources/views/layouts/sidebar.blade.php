@@ -76,7 +76,7 @@
             </div>
             <form>
             <a href="profile" class="nav_link">
-               <img src="images/ironman.png" class="userimg">
+               <img src="{{'images/' . $LoggedUserInfo['profilepic']}}" class="userimg">
                <div>
                   <br>
                   <span class="nav_name" style="font-size:12px">{{ $LoggedUserInfo['name'] }}</span>
