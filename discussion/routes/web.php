@@ -91,11 +91,6 @@ Route::get('/c','HomeController@store_comment');//email retrieve data
 
 Route::post('/homepage/category/stored',[HomeController::class,'category_store']);
 
-
-Route::get('/homepage/search',[HomeController::class,'category_search']);
-
-
-
 //Route::get('/delete/{id}',[HomeController::class,'category_delete']);
 Route::post('/homepage/title/stored',[HomeController::class,'title_store']);
 Route::get('/homepage/view',[HomeController::class,'titleIndex']);
