@@ -55,26 +55,26 @@ class HomeController extends Controller
         $udata = ['LoggedUserInfo'=>User::where('id','=', session('LoggedUser'))->first()];
         $user_id = (int)$udata['LoggedUserInfo']->id;
 
+        
 
-        $filter = $request->get('filter');
-
+        //$titlefilter_id =$request->get('tfilter'); 
+        //dd($titlefilter_id);
+        
         $data = Cactegory::all();
+
         $titleC = Title::all();
 
-        if($request->get('filter') == 'title_id'){
-            $ideas = DB::table('idea_view')
-            ->join('idea', 'idea.id', '=', 'idea_view.idea_id')
-            ->leftjoin('title_details','title_details.title_id','=','idea.title_id')
-            ->leftJoin('users', 'users.id', '=', 'idea.user_id')
-            ->leftJoin('category_details','category_details.id','=','idea.cat_id')
-            ->select(DB::raw('idea.*,users.name as user_name,users.profilepic,  max(idea_view.created_at) as latest,users.department, category_details.cate_name','title_details.title_id'))
-            ->where('idea_view.idea_id',$user_id)
-            //->groupBy('idea_view.idea_id')                                  
-           // ->orderBy('latest','desc')
-            ->paginate(5)->appends(request()->query());;
+        if($request->get('tfilter')){
+            $ideas = DB::table('idea')
+            ->join('title_details','title_details.title_id','=','idea.title_id')
+            ->Join('users', 'users.id', '=', 'idea.user_id')
+            ->join('category_details','category_details.id','=','idea.cat_id')
+            ->select(DB::raw('idea.*,users.name as user_name,users.profilepic,users.department, category_details.cate_name,title_details.title_id,title_details.title_name'))
+            ->where('idea.title_id', $request->get('tfilter'))
+            ->paginate(5)->appends(request()->query());
         }
-
-        if($request->get('filter') == 'recent-view'){
+        
+        else if($request->get('filter') == 'recent-view'){
             $ideas = DB::table('idea_view')
             ->join('idea', 'idea.id', '=', 'idea_view.idea_id')
             ->leftJoin('users', 'users.id', '=', 'idea.user_id')
@@ -84,6 +84,7 @@ class HomeController extends Controller
             ->groupBy('idea_view.idea_id')
             ->orderBy('latest','desc')
             ->paginate(5)->appends(request()->query());;
+            
         }else if($request->get('filter') == 'most-viewed'){
             $ideas = DB::table('idea_view')
             ->join('idea', 'idea.id', '=', 'idea_view.idea_id')
@@ -117,7 +118,8 @@ class HomeController extends Controller
             ->paginate(5)->appends(request()->query());
         }
         
-        
+        //dd($ideas);
+
         $comments = Comment::paginate(7);
         $data = Cactegory::all();
         foreach ($ideas as $key => $idea) {

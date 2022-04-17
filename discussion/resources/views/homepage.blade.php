@@ -41,14 +41,18 @@
                   @foreach($titleC as $title)
                      
                      @if($categoryData->id == $title->id)
+
                         @if($LoggedUserInfo->position == 'Manager')
                            <a href="/deletetitle/{{$title->title_id}}"><button type="button" class="btn-close" aria-label="Close"></button></a>
-                          
                         @endif
-                        <a href="{{route('home', array('filter' => 'title_id'))}}" target="_blank">#{{$title->title_name}}<br></a>
-                        @if(Request::get('filter') == 'title_id')
-                        {{$title->title_name}}
-                        @endif
+                        <a href="{{route('home', array('tfilter' => $title->title_id))}}" >
+                           @if(Request::get('filter') == '$title->id')
+                           <strong class ="text-warning">{{$title->title_name}}</strong>
+                           @else
+                           {{$title->title_name}}
+                           @endif
+                        </a><br>
+ 
 
                   
                      @endif
@@ -193,14 +197,14 @@
             <div class="col-12">
                <div class="card">
                   <div class="card-header">
-                     <strong class="me-auto">{{$idea->subject}}</strong><span class=" ml-3 badge bg-secondary">{{$idea->cate_name}}</span>
+                     <strong class="me-auto">{{$idea->subject}}</strong><span class=" ml-3 badge bg-secondary">{{$idea->cate_name}}</span> <span class=" ml-3 badge bg-primary">{{$idea->title_name}}</span> 
                      <br>
                      <small>{{$idea->created_at}}</small>
                   </div>
                   <div class="card-body">
                      <div>
                         <h6 class="card-subtitle mb-2 text-muted fw-bold">{{$idea->anonymous == 1 ? 'Anonymous' : (isset($idea->user) ? $idea->user->name : $idea->user_name)}}
-                           <img src="images/{{$idea->profilepic}}" id="userimg">
+                           <img src="images/{{$idea->anonymous == 1 ?'profile3.png': $idea->profilepic }}" id="userimg">
                         </h6>
                         <button type="button" class="btn btn-info btn-sm" disabled>{{ $idea->department}} Department</button>
                      </div>
@@ -488,7 +492,7 @@
                      <div class="col-md-12">
                         <div>
                            <h6 class="mb-2 text-muted fw-bold">{{$idea->anonymous == 1 ? 'Anonymous' : (isset($idea->user) ? $idea->user->name : $idea->user_name)}}
-                              <img src="images/{{$idea->profilepic}}" id="userimg">
+                              <img src="images/{{$idea->anonymous == 1 ?'profile3.png': $idea->profilepic }}" id="userimg">
                            </h6>
                            <button type="button" class="btn btn-info btn-sm" disabled>{{$idea->department}} Department</button>
                            <br><br>

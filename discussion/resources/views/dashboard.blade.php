@@ -84,6 +84,7 @@ table {
   font-family: 'montserrats';
   border-collapse: collapse;
   width: 100%;
+  overflow-y: scroll;
 }
 
 .table-dash table {

@@ -61,6 +61,7 @@ Route::get('terms', function () {
     return view('terms');
 });
 
+//Route::get('/homepage/{category_slug},{title_slug}/'[HomeController::class, 'index'])->name('homepage.');
 
 Route::get('/usercontrol/delete/{id}',[MainController::class, 'delete'])->name('usercontrol.delete');
 Route::get('/userChangeStatus/{id}',[MainController::class, 'userChangeStatus'])->name('userChangeStatus');
