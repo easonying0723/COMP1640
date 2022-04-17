@@ -19,7 +19,10 @@ class MainController extends Controller
     function usercontrol(){
         $udata = ['LoggedUserInfo'=>User::where('id','=', session('LoggedUser'))->first()];// pass to sidebar
         $users = User::all();
-
+        //$userblock = User::where('id','=', session('LoggedUser'))->first();
+        //if($userblock->position != 'manager'|| 'coordinator'){
+        //    return back()->with('fail','Only manager and coordinator is allowed to access the dashboard.');
+        //}
         return view('usercontrol',['users' => $users],$udata);
     }
 
