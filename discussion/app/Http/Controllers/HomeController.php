@@ -236,7 +236,7 @@ class HomeController extends Controller
 
         $coordinatoremail = User::select('email')->where('position','=','coordinator')->where('department','=',$userdepartment[0]->department)->first(); //get user's coordinator email
         $data=array("name"=>User::find($userid)->name,"title"=>Title::find($request->title)->title_name,"category"=>Cactegory::find($request->category)->cate_name);
-       // Mail::to($coordinatoremail->email)->send(new EmailIdea($data));
+        Mail::to($coordinatoremail->email)->send(new EmailIdea($data));
 
         $setting = Setting::firstOrCreate([
             'setting' => 'idea_closure_date',
