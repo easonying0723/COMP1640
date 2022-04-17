@@ -12,14 +12,6 @@
 <div class="row homepagecontent">
    <div class="col-md-3 categorynav">
       <br>
-      <form method="GET" action="">
-        @csrf
-      <input type="search" class="form-control" placeholder="Search" name="search" value="" />
-      <button class="btn btn-outline-light" type="submit" style="margin-left: 45%;margin-top: 10px;">Search</button>
-      <a href="/homepage">
-      <button class="btn btn-outline-light" type="button" style=" margin-top: 10px;">RESET</button>
-      </a>
-      </form>
       <div class="categoryContainer">
          <div class="container">
             <p class="justify-content-between" style="color: #D0D4E3; font-weight: bold;">Category
@@ -161,7 +153,7 @@
             </div>
 
             @if($LoggedUserInfo->position == 'Manager')
-               <div class="ms-auto">
+               <div class="ms-auto mt-4">
                   <a id="buttonExport" class="btn btn-primary float-end">Export All Data  <i class="fa fa-download" aria-hidden="true"></i></a>
                </div>
             @endif
