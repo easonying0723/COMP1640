@@ -101,6 +101,14 @@ class HomeController extends Controller
             ->select(DB::raw('idea.*,users.name as user_name,users.profilepic, count(likes.id) as number_of_like,users.department, category_details.cate_name'))
             ->groupBy('idea.id')
             ->orderBy('number_of_like','desc')->paginate(5)->appends(request()->query());
+        }else if($request->get('filter') == 'hottest-topic'){
+            $ideas = Idea::leftJoin('users', 'users.id', '=', 'idea.user_id')
+            ->leftJoin('category_details','category_details.id','=','idea.cat_id')
+            ->leftJoin('likes','likes.idea_id','=','idea.id')
+            ->select(DB::raw('*,idea.created_at as created_at,users.profilepic, idea.id as id, category_details.cate_name,((select count(id) from likes where idea_id = idea.id and `like` = 1) - (select count(id) from likes where idea_id = idea.id and `like` = 0)) as point'))
+            ->orderBy('point','desc')
+            ->paginate(5)->appends(request()->query());
+
         }else{
             $ideas = Idea::leftJoin('users', 'users.id', '=', 'idea.user_id')
             ->leftJoin('category_details','category_details.id','=','idea.cat_id')
@@ -109,11 +117,11 @@ class HomeController extends Controller
             ->paginate(5)->appends(request()->query());
         }
         
-
+        
         $comments = Comment::paginate(7);
         $data = Cactegory::all();
         foreach ($ideas as $key => $idea) {
-          
+
             $number_of_comment = Comment::where('idea_id',$idea->id)->get()->count();
             $ideas[$key]->number_of_comment = $number_of_comment;
           
@@ -134,15 +142,6 @@ class HomeController extends Controller
             {
                 $ideas[$key]->user_like = 'null';
             }
-
-            if($request->get('filter') == 'hottest-topic'){
-                $ideas[$key]->point = $number_of_like - $number_of_dislike;
-            }
-        }
-
-        if($request->get('filter') == 'hottest-topic'){
-            $sortedIdeas = ($ideas->getCollection()->sortByDesc('point')->values());
-            $ideas->setCollection($sortedIdeas);
         }
 
         return view('homepage',compact('ideas','comments','data','idea_closure_date','comment_closure_date','titleC'), $udata,);
