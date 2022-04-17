@@ -57,14 +57,6 @@
         </div>
       </div>
    
-    <!--<div class ="reminder">
-      <label>
-        <input type="checkbox" checked="checked" name="remember"> Remember me
-      </label>
-    
-      <span class="psw">Recovery <a href="#">password?</a></span>
-    </div>-->
-   
     <div class="d-flex aligns-items-center justify-content-center">
       <button class="lgn" type="submit">Login</button>
     </div>

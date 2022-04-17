@@ -105,6 +105,7 @@ class HomeController extends Controller
             $ideas = Idea::leftJoin('users', 'users.id', '=', 'idea.user_id')
             ->leftJoin('category_details','category_details.id','=','idea.cat_id')
             ->select(DB::raw('*,idea.created_at as created_at,users.profilepic, idea.id as id, category_details.cate_name'))
+            ->orderBy('idea.created_at','desc')
             ->paginate(5)->appends(request()->query());
         }
         
@@ -234,9 +235,9 @@ class HomeController extends Controller
 
         $userdepartment = User::select('department')->where('id','=', $userid)->get();//get user's department
 
-        $coordinatoremail = User::select('email')->where('position','=','coordinator')->where('department','=',$userdepartment[0]->department)->first(); //get user's coordinator email
+        $coordinatoremail = User::select('email')->where('position','=','Coordinator')->where('department','=',$userdepartment[0]->department)->first(); //get user's coordinator email
         $data=array("name"=>User::find($userid)->name,"title"=>Title::find($request->title)->title_name,"category"=>Cactegory::find($request->category)->cate_name);
-       // Mail::to($coordinatoremail->email)->send(new EmailIdea($data));
+        Mail::to($coordinatoremail->email)->send(new EmailIdea($data));
 
         $setting = Setting::firstOrCreate([
             'setting' => 'idea_closure_date',
@@ -312,8 +313,8 @@ class HomeController extends Controller
     public function store_closure_date(Request $request)
     {
         $udata = ['LoggedUserInfo'=>User::where('id','=', session('LoggedUser'))->first()];
-        if($udata['LoggedUserInfo']->position != 'manager'){
-            return redirect('/homepage')->with('fail','Only manager is allowed to set closure date.');
+        if($udata['LoggedUserInfo']->position != 'Manager'){
+            return redirect('/homepage')->with('fail','Only Manager is allowed to set closure date.');
         }
         $setting = Setting::firstOrCreate([
             'setting' => 'idea_closure_date',
@@ -367,7 +368,6 @@ class HomeController extends Controller
     {
         $data = new Cactegory;
         $data->cate_name = $request->input('cate_name');
-
         $data->save();
         return redirect('/homepage')->with('success','Category added successfully');
     }
@@ -377,7 +377,6 @@ class HomeController extends Controller
        // DB::delete('delete category_details , title_details from category_details INNERJOIN title_details
        // WHERE category_details.id = title_details.id and category_details.id = ?' ,[$id]);
         
-     
        $data = DB::table('category_details')
        ->leftJoin('title_details','category_details.id','=','title_details.id')
        ->leftJoin('idea','category_details.id','=','idea.cat_id')
@@ -394,10 +393,6 @@ class HomeController extends Controller
        // delete from title_details where id = ?,
         //delete from idea where cat_id = ?', [$id]);
         return back()->with('success','Category deleted successfully');
-       
-       
-
-      
 
     }
 
@@ -431,8 +426,8 @@ class HomeController extends Controller
         if(!$udata['LoggedUserInfo']){
             return redirect('/homepage');
         }
-        if($udata['LoggedUserInfo']->position != 'manager'){
-            return redirect('/homepage')->with('fail','Only manager is allowed to export data.');
+        if($udata['LoggedUserInfo']->position != 'Manager'){
+            return redirect('/homepage')->with('fail','Only Manager is allowed to export data.');
         }
       
         $ideas = Idea::get();

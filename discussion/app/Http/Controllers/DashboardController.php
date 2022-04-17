@@ -30,8 +30,8 @@ class DashboardController extends Controller
         if(!$udata){
             redirect('homepage');
         }
-        if($udata->position != 'manager'){
-            return back()->with('fail','Only manager is allowed to access the dashboard.');
+        if($udata->position != 'manager' && $udata->position != 'coordinator'){
+            return redirect('homepage')->with('fail','Only manager is allowed to access the dashboard.');
         }
         $departmentsArray = DB::table('users')->select('department')->distinct()->get()->toArray();
         $departments = array();

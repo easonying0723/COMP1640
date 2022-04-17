@@ -19,7 +19,10 @@ class MainController extends Controller
     function usercontrol(){
         $udata = ['LoggedUserInfo'=>User::where('id','=', session('LoggedUser'))->first()];// pass to sidebar
         $users = User::all();
-
+        //$userblock = User::where('id','=', session('LoggedUser'))->first();
+        //if($userblock->position != 'manager'|| 'coordinator'){
+        //    return back()->with('fail','Only manager and coordinator is allowed to access the dashboard.');
+        //}
         return view('usercontrol',['users' => $users],$udata);
     }
 
@@ -38,6 +41,8 @@ class MainController extends Controller
         }
 
         dd(strval($image));
+        
+        $user_id = (int)$request->session()->get('LoggedUser');
         $update = User::where('id','=',$user_id)->update(['profilepic'=>strval($image)]);
         if($update){
             return back()->with('success','Profile picture changed successfully.');
@@ -122,24 +127,26 @@ class MainController extends Controller
         ]);
         $statusCheck = User::select('status')->where('email','=',  $request->email)->first();
 
-        if($statusCheck->status == '0'){
-            return back()->with('fail','your account has been disabled');
-        }
-        else{
-            $userInfo = User::where('email','=', $request->email)->first();
-            if(!$userInfo){
-                return back()->with('fail','We do not recognize your email address');
+
+        $userInfo = User::where('email','=', $request->email)->first();
+        if(!$userInfo){
+            return back()->with('fail','We do not recognize your email address');
+        }else{
+            if($statusCheck->status == '0'){
+                return back()->with('fail','your account has been disabled');
+            }
+            else{
+            //check password
+            if(Hash::check($request->password, $userInfo->password)){
+                $request->session()->put('LoggedUser', $userInfo->id);
+                //echo session('LoggedUser');
+                return redirect('homepage');   
             }else{
-                //check password
-                if(Hash::check($request->password, $userInfo->password)){
-                    $request->session()->put('LoggedUser', $userInfo->id);
-                    //echo session('LoggedUser');
-                    return redirect('homepage');   
-                }else{
-                    return back()->with('fail','Incorrect password');
-                }
+                return back()->with('fail','Incorrect password');
+            }
             }
         }
+        
 
     }
 
