@@ -391,8 +391,8 @@
                      <div class="row">
                         <div class="col-md-12">
                            <label for="category">Category:</label>
-                           <select name="category" id="category" class="form-control">
-                           <option selected>Please Choose...</option>
+                           <select name="category" id="category" class="form-control" required>
+                           <option selected value="">Please Choose...</option>
                            @foreach($data as $categoryData)
                              <option value="{{$categoryData ->id}}">{{$categoryData -> cate_name}}</option>
                            @endforeach
@@ -403,8 +403,8 @@
                      <div class="row">
                         <div class="col-md-12">
                            <label for="title">Title:</label>
-                           <select name="title" id="title" class="form-control">
-                           <option selected>Please Choose...</option>
+                           <select name="title" id="title" class="form-control" required>
+                           <option selected value="">Please Choose...</option>
                            @foreach($titleC as $title)
                              <option value="{{$title ->title_id}}">{{$title -> title_name}}</option>
                            @endforeach
@@ -541,7 +541,7 @@
                      <div class="col-md-12 d-flex justify-content-center" id="photosec">
                         @if($idea->photo)
                         <a href="{{'images/idea/' .$idea->photo}}" target="_blank">
-                           <img width="100%" class="img-fluid" src="{{'images/idea/' .$idea->photo}}" id="pictureshow">
+                           <img width="400px" class="img-fluid" src="{{'images/idea/' .$idea->photo}}" id="pictureshow">
                         </a>
                         @endif
                      </div>

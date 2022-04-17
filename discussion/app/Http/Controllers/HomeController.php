@@ -105,6 +105,7 @@ class HomeController extends Controller
             $ideas = Idea::leftJoin('users', 'users.id', '=', 'idea.user_id')
             ->leftJoin('category_details','category_details.id','=','idea.cat_id')
             ->select(DB::raw('*,idea.created_at as created_at,users.profilepic, idea.id as id, category_details.cate_name'))
+            ->orderBy('idea.created_at','desc')
             ->paginate(5)->appends(request()->query());
         }
         
