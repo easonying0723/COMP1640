@@ -92,7 +92,7 @@ Route::get('/c','HomeController@store_comment');//email retrieve data
 Route::post('/homepage/category/stored',[HomeController::class,'category_store']);
 
 
-Route::get('/homepage/search',[HomeController::class,'search']);
+Route::get('/homepage/search',[HomeController::class,'category_search']);
 
 
 
