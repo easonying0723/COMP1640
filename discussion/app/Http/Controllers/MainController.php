@@ -33,15 +33,16 @@ class MainController extends Controller
         return view('profile',['users' => $users],$udata);
     }
     function updateprofilepic(Request $request){
+        if(!$request->hasFile('image')){
+            return back()->with('fail','No image has been selected.');
+        }
         $image = '';
-        if ($request->hasFile('img')) {
+        if ($request->hasFile('image')) {
             $file = $request->image;
-            $image = date('YmdHis') . '.' . $file[0]->getClientOriginalExtension();
-            $file[0]->move('images/', $image);
+            $image = date('YmdHis') . '.' . $file->getClientOriginalExtension();
+            $file->move('images/', $image);
         }
 
-        dd(strval($image));
-        
         $user_id = (int)$request->session()->get('LoggedUser');
         $update = User::where('id','=',$user_id)->update(['profilepic'=>strval($image)]);
         if($update){
