@@ -100,6 +100,8 @@
                               <option selected>Please Choose...</option>
                               <option value="IT">IT</option>
                               <option value="Marketing">Marketing</option>
+                              <option value="Lecturer">Lecturer</option>
+                              <option value="Bursary">Bursary</option>
                               <option value="Accounting Finance">Accounting Finance</option>
                            </select>
                         </div>
@@ -109,20 +111,11 @@
                            <label for="">Position:</label>
                            <select class="form-select" name="position" aria-label="Default select example">
                               <option selected>Please Choose...</option>
-                              <option value="manager">Manager</option>
-                              <option value="coordinator">Coordinator</option>
-                              <option value="staff">Staff</option>
+                              <option value="Manager">Manager</option>
+                              <option value="Coordinator">Coordinator</option>
+                              <option value="Staff">Staff</option>
                            </select>
                         </div>
-                        <!-- <div class="col-md-6">
-                           <label for="">Accessibility:</label>
-                           <select class="form-select" aria-label="Default select example">
-                              <option selected>Please Choose...</option>
-                              <option value="1">Level 1</option>
-                              <option value="2">Level 2</option>
-                              <option value="3">Level 3</option>
-                           </select>
-                        </div> -->
                         </div>
                         <br>
                         <button type="submit" class="btn btn-primary" id="createusercontrol">Create</button>

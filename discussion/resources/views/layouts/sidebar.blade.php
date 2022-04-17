@@ -56,7 +56,7 @@
                   <span class="nav_logo-name">DISCUSS.ION</span>
                </a>
                <div class="nav_list">
-               @if($LoggedUserInfo->position == 'manager'|| $LoggedUserInfo->position == 'coordinator' )
+               @if($LoggedUserInfo->position == 'Manager'|| $LoggedUserInfo->position == 'Coordinator' )
                   <a href="dashboard" class="nav_link">
                      <i class='bx bx-grid-alt nav_icon'></i>
                      <span class="nav_name">Dashboard</span>
@@ -66,7 +66,7 @@
                      <i class='bx bx-home nav_icon'></i>
                      <span class="nav_name">Home</span>
                   </a>
-                  @if($LoggedUserInfo->position == 'coordinator'|| $LoggedUserInfo->position == 'manager'))
+                  @if($LoggedUserInfo->position == 'Coordinator'|| $LoggedUserInfo->position == 'Manager')
                   <a href="usercontrol" class="nav_link">
                      <i class='bx bxs-user-badge nav_icon'></i>
                      <span class="nav_name">Users Control</span>
@@ -76,7 +76,7 @@
             </div>
             <form>
             <a href="profile" class="nav_link">
-               <img src="/images/ironman.png" class="userimg">
+               <img src="images/ironman.png" class="userimg">
                <div>
                   <br>
                   <span class="nav_name" style="font-size:12px">{{ $LoggedUserInfo['name'] }}</span>

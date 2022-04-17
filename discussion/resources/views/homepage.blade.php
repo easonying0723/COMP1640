@@ -23,7 +23,7 @@
       <div class="categoryContainer">
          <div class="container">
             <p class="justify-content-between" style="color: #D0D4E3; font-weight: bold;">Category
-            @if($LoggedUserInfo->position == 'manager')
+            @if($LoggedUserInfo->position == 'Manager')
                <button type="button" id="addcategory" class="btn btn-primary btn-lg bg-transparent float-right"
                   data-bs-toggle="modal" data-bs-target="#categoryModal" style="border: none">
                   <i class='bx bx-plus-circle' style="color: #F4F7FF"></i>
@@ -48,7 +48,7 @@
                   @foreach($titleC as $title)
                      
                      @if($categoryData->id == $title->id)
-                        @if($LoggedUserInfo->position == 'manager')
+                        @if($LoggedUserInfo->position == 'Manager')
                            <a href="/deletetitle/{{$title->title_id}}"><button type="button" class="btn-close" aria-label="Close"></button></a>
                           
                         @endif
@@ -62,7 +62,7 @@
 
                   @endforeach
 
-                  @if($LoggedUserInfo->position == 'manager')
+                  @if($LoggedUserInfo->position == 'Manager')
                      <hr><button type="button" class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#titleModal{{$categoryData->id}}">+ ADD TITLE</button>
                      <a href="/delete/{{$categoryData->id}}"><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button></a>
                      
@@ -107,7 +107,7 @@
             @endforeach
          </div>
       </div>
-      @if($LoggedUserInfo->position == 'manager')
+      @if($LoggedUserInfo->position == 'Manager')
          <div class="container ms-auto mt-4">
             <div class="ms-auto">
                <a class="btn btn-primary float-end" id="buttonClosureDate">Set Closure Date</a>
@@ -160,7 +160,7 @@
                
             </div>
 
-            @if($LoggedUserInfo->position == 'manager')
+            @if($LoggedUserInfo->position == 'Manager')
                <div class="ms-auto">
                   <a id="buttonExport" class="btn btn-primary float-end">Export All Data  <i class="fa fa-download" aria-hidden="true"></i></a>
                </div>
@@ -178,7 +178,7 @@
                      </div>
                      <div class="col-8">
                         <div class="card-body">
-                         @if($LoggedUserInfo->position == 'staff' )
+                         @if($LoggedUserInfo->position == 'Staff' )
                            @if(date('Y-m-d',strtotime($idea_closure_date->detail)) >= date('Y-m-d'))
                            <button type="button" class="btn btn-primary float-end" data-toggle="modal" id="addidea">
                               + New Idea
@@ -188,7 +188,7 @@
                            @endif
                            
                            @else
-                           <p class="float-end">Log in as a staff to contribute.</p>
+                           <p class="float-end">Log in as a Staff to contribute.</p>
                            @endif
                         </div>
                      </div>
@@ -219,7 +219,7 @@
                   </div>
                   <div class="card-footer">
                      <div>
-                     @if($LoggedUserInfo->position == 'staff' )
+                     @if($LoggedUserInfo->position == 'Staff' )
                         <button id="like" onClick="like({{$idea->id}},false)" class="btn like btn-warning btn-sm" style="margin:1px;">
                            @if($idea->user_like == 1)
                            <span class="bx bxs-like" aria-hidden="true"></span>
@@ -247,7 +247,7 @@
                            @endif
                         </button>
                      @else 
-                     <!-- if user is not staff, cannot click like -->
+                     <!-- if user is not Staff, cannot click like -->
                      <button id="like" class="btn like btn-warning btn-sm" style="margin:1px;" disabled>
                            @if($idea->user_like == 1)
                            <span class="bx bxs-like" aria-hidden="true"></span>
@@ -325,41 +325,8 @@
       </div>
    </div>
 </div>
-   <div id="tasks">
 
-
-   {{---------------------------- Add Title Modal ----------------------------}}
-   {{--<div class="modal fade" id="titleModal" tabindex="-1" aria-labelledby="titleModallLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-         <div class="modal-content">
-            <div class="modal-header">
-               <h5 class="modal-title" id="titleModalLabel">Add New Title</h5>
-               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="{{url ('/homepage/title/stored')}}" method="POST">
-            @csrf
-            <div class="modal-body">
-               <div class="container-fluid">
-                  <div class="row">
-                     <div class="col-md-12">
-                        <label for="">Title Name:</label>
-                        <input type="text" class="form-control" id="" name="title_name" placeholder="Please enter category name" required>
-                        <input type="text" class="form-control" id="" name="cat_id" value="{{$categoryData->id}}" required>
-                     </div>
-                  </div>
-                  <br>
-               </div><br>
-            </div>
-            <div class="modal-footer">
-               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-               <button type="submit" class="btn btn-primary" id="createtitle">Create</button>
-            </div>
-            </form>
-         </div>
-      </div>
-   </div> --}}
-
-
+<div id="tasks">
 
    {{---------------------------- Add Ideas Modal ----------------------------}}
    <div class="modal fade" id="ideaModal" tabindex="-1" aria-labelledby="ideaModallLabel" aria-hidden="true">
@@ -581,7 +548,7 @@
             <hr />
             <div class="container">
                <div id="numbersec">
-               @if($LoggedUserInfo->position == 'staff' )
+               @if($LoggedUserInfo->position == 'Staff' )
                   <button class="btn like btn-warning" onClick="like({{$idea->id}},true)" style="margin:1px;">
                      @if($idea->user_like == 1)
                      <span class="bx bxs-like" aria-hidden="true"></span>
@@ -600,7 +567,7 @@
                      <span class="dislikes">Dislike {{$idea->number_of_dislike}}</span>
                      @endif
                   </button>
-                  @else <!-- if user is not staff, cannot click like/dislike -->
+                  @else <!-- if user is not Staff, cannot click like/dislike -->
                   <button class="btn like btn-warning" style="margin:1px;" disabled>
                      @if($idea->user_like == 1)
                      <span class="bx bxs-like" aria-hidden="true"></span>
@@ -628,15 +595,12 @@
             
             <div class="container">
                <div class="modal-body" id="footersec">
-               @if($LoggedUserInfo->position == 'staff' )
+               @if($LoggedUserInfo->position == 'Staff' )
                @if(date('Y-m-d',strtotime($comment_closure_date->detail)) >= date('Y-m-d'))
                   <form action="{{ route('homepage.store_comment', ['id' => $idea->id ])}}" method="post">
                      @csrf
                      <div class="row" id="commentsec">
-                        <div class="col-md-1" id="">
-                           <img src="images/ironman.png" id="commentimg" alt="profilepic">
-                        </div>
-                        <div class="col-md-11">
+                        <div class="col-md-12">
                            <!--Comment Section-->
                            <div class="input-group mb-2 mt-2">
                               <input type="text" class="form-control" name="comment"
@@ -658,7 +622,7 @@
                   <p>Adding comment is no longer allowed after final closure date.</p>
                   @endif
                   @else
-                  <p>Log in as a staff to comment</p>
+                  <p>Log in as a Staff to comment</p>
                   @endif
                </div>
                <br><br>

@@ -41,6 +41,8 @@ class MainController extends Controller
         }
 
         dd(strval($image));
+        
+        $user_id = (int)$request->session()->get('LoggedUser');
         $update = User::where('id','=',$user_id)->update(['profilepic'=>strval($image)]);
         if($update){
             return back()->with('success','Profile picture changed successfully.');

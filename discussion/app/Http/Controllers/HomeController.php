@@ -234,9 +234,9 @@ class HomeController extends Controller
 
         $userdepartment = User::select('department')->where('id','=', $userid)->get();//get user's department
 
-        $coordinatoremail = User::select('email')->where('position','=','coordinator')->where('department','=',$userdepartment[0]->department)->first(); //get user's coordinator email
+        $coordinatoremail = User::select('email')->where('position','=','Coordinator')->where('department','=',$userdepartment[0]->department)->first(); //get user's coordinator email
         $data=array("name"=>User::find($userid)->name,"title"=>Title::find($request->title)->title_name,"category"=>Cactegory::find($request->category)->cate_name);
-       // Mail::to($coordinatoremail->email)->send(new EmailIdea($data));
+        Mail::to($coordinatoremail->email)->send(new EmailIdea($data));
 
         $setting = Setting::firstOrCreate([
             'setting' => 'idea_closure_date',
@@ -312,8 +312,8 @@ class HomeController extends Controller
     public function store_closure_date(Request $request)
     {
         $udata = ['LoggedUserInfo'=>User::where('id','=', session('LoggedUser'))->first()];
-        if($udata['LoggedUserInfo']->position != 'manager'){
-            return redirect('/homepage')->with('fail','Only manager is allowed to set closure date.');
+        if($udata['LoggedUserInfo']->position != 'Manager'){
+            return redirect('/homepage')->with('fail','Only Manager is allowed to set closure date.');
         }
         $setting = Setting::firstOrCreate([
             'setting' => 'idea_closure_date',
@@ -382,10 +382,6 @@ class HomeController extends Controller
        // delete from title_details where id = ?,
         //delete from idea where cat_id = ?', [$id]);
         return back()->with('success','Category deleted successfully');
-       
-       
-
-      
 
     }
 
@@ -419,8 +415,8 @@ class HomeController extends Controller
         if(!$udata['LoggedUserInfo']){
             return redirect('/homepage');
         }
-        if($udata['LoggedUserInfo']->position != 'manager'){
-            return redirect('/homepage')->with('fail','Only manager is allowed to export data.');
+        if($udata['LoggedUserInfo']->position != 'Manager'){
+            return redirect('/homepage')->with('fail','Only Manager is allowed to export data.');
         }
       
         $ideas = Idea::get();
