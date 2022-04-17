@@ -341,7 +341,6 @@ class HomeController extends Controller
     {
         $data = new Cactegory;
         $data->cate_name = $request->input('cate_name');
-
         $data->save();
         return redirect('/homepage')->with('success','Category added successfully');
     }
@@ -351,7 +350,6 @@ class HomeController extends Controller
        // DB::delete('delete category_details , title_details from category_details INNERJOIN title_details
        // WHERE category_details.id = title_details.id and category_details.id = ?' ,[$id]);
         
-     
        $data = DB::table('category_details')
        ->leftJoin('title_details','category_details.id','=','title_details.id')
        ->leftJoin('idea','category_details.id','=','idea.cat_id')

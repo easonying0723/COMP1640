@@ -528,7 +528,7 @@
                      <div class="col-md-12 d-flex justify-content-center" id="photosec">
                         @if($idea->photo)
                         <a href="{{'images/idea/' .$idea->photo}}" target="_blank">
-                           <img width="100%" class="img-fluid" src="{{'images/idea/' .$idea->photo}}" id="pictureshow">
+                           <img style="width:100%;height:100%;"  class="img-fluid" src="{{'images/idea/' .$idea->photo}}" id="pictureshow">
                         </a>
                         @endif
                      </div>
