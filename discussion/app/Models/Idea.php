@@ -16,6 +16,7 @@ class Idea extends Model
         'user_id',
         'name',
         'cat_id',
+        'title_id',
         'subject',
         'idea',
         'file',
