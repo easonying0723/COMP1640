@@ -12,10 +12,6 @@
 <div class="row homepagecontent">
    <div class="col-md-3 categorynav">
       <br>
-      <form class="input-group" action="{{url ('/homepage')}}" method="GET">
-         <input type="text" class="form-control" name="search" placeholder="Search" value="{{request()->query('search')}}"/>
-         <button type="submit" class="btn btn-secondary" >Search</button>
-      </form>
       <div class="categoryContainer">
          <div class="container">
             <p class="justify-content-between" style="color: #D0D4E3; font-weight: bold;">Category
