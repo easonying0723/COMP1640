@@ -143,6 +143,7 @@ class HomeController extends Controller
                 $ideas[$key]->user_like = 'null';
             }
         }
+        
         $search = request()->query('search');
         if($search){
             $data = Cactegory::where('cate_name','LIKE',"%{$search}%")->get();
