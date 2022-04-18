@@ -97,6 +97,13 @@
             @endforeach
          </div>
       </div>
+      <div class="container ms-auto mt-4">
+            <div class="ms-auto">
+               <p style="color:grey"><strong>Idea Closure Date : {{$idea_closure_date->created_at}}</strong></p>
+               <p style="color:grey"><strong>Comment Closure Date : {{$comment_closure_date->created_at}}</strong></p>
+            </div>
+         </div>
+
       @if($LoggedUserInfo->position == 'Manager')
          <div class="container ms-auto mt-4">
             <div class="ms-auto">
