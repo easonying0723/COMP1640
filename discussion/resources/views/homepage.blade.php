@@ -99,8 +99,8 @@
       </div>
       <div class="container ms-auto mt-4">
             <div class="ms-auto">
-               <p style="color:grey"><strong>Idea Closure Date : {{$idea_closure_date->created_at}}</strong></p>
-               <p style="color:grey"><strong>Comment Closure Date : {{$comment_closure_date->created_at}}</strong></p>
+               <p style="color:grey"><strong>Idea Closure Date : {{$idea_closure_date->detail}}</strong></p>
+               <p style="color:grey"><strong>Comment Closure Date : {{$comment_closure_date->detail}}</strong></p>
             </div>
          </div>
 
@@ -130,25 +130,25 @@
       <div class="container">
          <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
             <div class="btn-group me-2" role="group" aria-label="Second group">
-               <a class="btn btn-secondary" href="{{route('home', array('filter' => 'recent-view'))}}"> 
+               <a class="btn btn-secondary" href="{{ request()->fullUrlWithQuery(['filter' => 'recent-view'])}}"> 
                @if(Request::get('filter') == 'recent-view')
                   <strong class = 'text-warning'><red>Recently Viewed<red></strong></a>
                @else
                Recently Viewed</a>
                @endif
-               <a class="btn btn-secondary" href="{{route('home', array('filter' => 'hottest-topic'))}}"> 
+               <a class="btn btn-secondary" href="{{ request()->fullUrlWithQuery(['filter' => 'hottest-topic'])}}"> 
                @if(Request::get('filter') == 'hottest-topic')
                   <strong class = 'text-warning'><red>Hottest Topics <red></strong></a>
                @else
                Hottest Topics </a>
                @endif</a>
-               <a class="btn btn-secondary" href="{{route('home', array('filter' => 'most-liked'))}}">
+               <a class="btn btn-secondary" href="{{ request()->fullUrlWithQuery(['filter' => 'most-liked'])}}"> 
                @if(Request::get('filter') == 'most-liked')
                   <strong class = 'text-warning'><red>Most Liked <red></strong></a>
                @else
                Most Liked </a>
                @endif
-               <a class="btn btn-secondary" href="{{route('home', array('filter' => 'most-viewed'))}}">
+               <a class="btn btn-secondary" href="{{ request()->fullUrlWithQuery(['filter' => 'most-viewed'])}}"> 
                @if(Request::get('filter') == 'most-viewed')
                   <strong class = 'text-warning'><red>Most Viewed <red></strong></a>
                @else
@@ -158,7 +158,7 @@
             </div>
 
             @if($LoggedUserInfo->position == 'Manager')
-               <div class="ms-auto mt-4">
+               <div class="ms-auto">
                   <a id="buttonExport" class="btn btn-primary float-end">Export All Data  <i class="fa fa-download" aria-hidden="true"></i></a>
                </div>
             @endif

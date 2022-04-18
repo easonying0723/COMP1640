@@ -64,16 +64,60 @@ class HomeController extends Controller
 
         $titleC = Title::all();
 
-        if($request->get('tfilter')){
-            $ideas = DB::table('idea')
+        if($request->get('filter') == 'recent-view' && $request->get('tfilter')){
+            $ideas = DB::table('idea_view')
+            ->join('idea', 'idea.id', '=', 'idea_view.idea_id')
             ->join('title_details','title_details.title_id','=','idea.title_id')
-            ->Join('users', 'users.id', '=', 'idea.user_id')
-            ->join('category_details','category_details.id','=','idea.cat_id')
-            ->select(DB::raw('idea.*,users.name as user_name,users.profilepic,users.department, category_details.cate_name,title_details.title_id,title_details.title_name'))
+            ->leftJoin('users', 'users.id', '=', 'idea.user_id')
+            ->leftJoin('category_details','category_details.id','=','idea.cat_id')
+            ->select(DB::raw('idea.*,users.name as user_name,users.profilepic,  max(idea_view.created_at) as latest,users.department, title_details.title_name,category_details.cate_name'))
+            ->where('idea_view.user_id',$user_id)
             ->where('idea.title_id', $request->get('tfilter'))
+            ->groupBy('idea_view.idea_id')
+            ->orderBy('latest','desc')
+            ->paginate(5)->appends(request()->query());;
+            
+        }else if($request->get('filter') == 'most-viewed' && $request->get('tfilter')){
+            $ideas = DB::table('idea_view')
+            ->rightJoin('idea', 'idea.id', '=', 'idea_view.idea_id')
+            ->join('title_details','title_details.title_id','=','idea.title_id')
+            ->leftJoin('users', 'users.id', '=', 'idea.user_id')
+            ->leftJoin('category_details','category_details.id','=','idea.cat_id')
+            ->select(DB::raw('idea.*,users.name as user_name, users.profilepic, count(idea_view.id) as number_of_view,users.department,title_details.title_name,category_details.cate_name'))
+            ->where('idea.title_id', $request->get('tfilter'))
+            ->groupBy('idea.id')
+            ->orderBy('number_of_view','desc')            
+            ->paginate(5)->appends(request()->query());
+        }else if($request->get('filter') == 'most-liked' && $request->get('tfilter')){
+            $ideas = DB::table('idea')
+            ->leftJoin('users', 'users.id', '=', 'idea.user_id')
+            ->join('title_details','title_details.title_id','=','idea.title_id')
+            ->leftJoin('category_details','category_details.id','=','idea.cat_id')
+            ->select(DB::raw('title_details.title_name,idea.*,users.name as user_name,users.profilepic, (select count(likes.id) from likes where likes.idea_id = idea.id and likes.like = 1) as number_of_like,users.department, category_details.cate_name'))
+            ->where('idea.title_id', $request->get('tfilter'))
+            ->groupBy('idea.id')
+            ->orderBy('number_of_like','desc')->paginate(5)->appends(request()->query());
+        }else if($request->get('filter') == 'hottest-topic' && $request->get('tfilter')){
+            // $ideas = DB::table('idea')
+            // ->leftJoin('users', 'users.id', '=', 'idea.user_id')
+            // ->leftJoin('category_details','category_details.id','=','idea.cat_id')
+            // ->leftJoin('likes', 'idea.id', '=', 'likes.idea_id')
+            // ->leftJoin('title_details','title_details.title_id','=','idea.title_id')
+            // ->select(DB::raw('users.profilepic,  title_details.title_name,category_details.cate_name,idea.*'))
+            // ->where('idea.title_id', $request->get('tfilter'))
+            // ->groupBy('idea.id')
+            // ->paginate(5)->appends(request()->query());
+            // dd($ideas);
+            $ideas = Idea::leftjoin('users', 'users.id', '=', 'idea.user_id')
+            ->leftJoin('category_details','category_details.id','=','idea.cat_id')
+            ->leftJoin('likes','likes.idea_id','=','idea.id')
+            ->leftJoin('title_details','title_details.title_id','=','idea.title_id')
+            ->select(DB::raw('users.name as user_name,users.profilepic, title_details.title_name,category_details.cate_name,((select count(id) from likes where idea_id = idea.id and `like` = 1) - (select count(id) from likes where idea_id = idea.id and `like` = 0)) as point,idea.*'))
+            ->where('idea.title_id', $request->get('tfilter'))
+            ->groupBy('idea.id')
+            ->orderBy('point','desc')
             ->paginate(5)->appends(request()->query());
         }
-        
         else if($request->get('filter') == 'recent-view'){
             $ideas = DB::table('idea_view')
             ->join('idea', 'idea.id', '=', 'idea_view.idea_id')
@@ -88,7 +132,7 @@ class HomeController extends Controller
             
         }else if($request->get('filter') == 'most-viewed'){
             $ideas = DB::table('idea_view')
-            ->join('idea', 'idea.id', '=', 'idea_view.idea_id')
+            ->rightJoin('idea', 'idea.id', '=', 'idea_view.idea_id')
             ->join('title_details','title_details.title_id','=','idea.title_id')
             ->leftJoin('users', 'users.id', '=', 'idea.user_id')
             ->leftJoin('category_details','category_details.id','=','idea.cat_id')
@@ -98,11 +142,10 @@ class HomeController extends Controller
             ->paginate(5)->appends(request()->query());
         }else if($request->get('filter') == 'most-liked'){
             $ideas = DB::table('idea')
-            ->leftJoin('likes', 'idea.id', '=', 'likes.idea_id')
             ->leftJoin('users', 'users.id', '=', 'idea.user_id')
             ->join('title_details','title_details.title_id','=','idea.title_id')
             ->leftJoin('category_details','category_details.id','=','idea.cat_id')
-            ->select(DB::raw('idea.*,users.name as user_name,users.profilepic, count(likes.id) as number_of_like,users.department, category_details.cate_name'))
+            ->select(DB::raw('title_details.title_name,idea.*,users.name as user_name,users.profilepic, (select count(likes.id) from likes where likes.idea_id = idea.id and likes.like = 1) as number_of_like,users.department, category_details.cate_name'))
             ->groupBy('idea.id')
             ->orderBy('number_of_like','desc')->paginate(5)->appends(request()->query());
         }else if($request->get('filter') == 'hottest-topic'){
@@ -113,7 +156,14 @@ class HomeController extends Controller
             ->select(DB::raw('*,idea.created_at as created_at,users.profilepic, idea.id as id, title_details.title_name,category_details.cate_name,((select count(id) from likes where idea_id = idea.id and `like` = 1) - (select count(id) from likes where idea_id = idea.id and `like` = 0)) as point'))
             ->orderBy('point','desc')
             ->paginate(5)->appends(request()->query());
-
+        }else if($request->get('tfilter')){
+            $ideas = DB::table('idea')
+            ->join('title_details','title_details.title_id','=','idea.title_id')
+            ->Join('users', 'users.id', '=', 'idea.user_id')
+            ->join('category_details','category_details.id','=','idea.cat_id')
+            ->select(DB::raw('idea.*,users.name as user_name,users.profilepic,users.department, category_details.cate_name,title_details.title_id,title_details.title_name'))
+            ->where('idea.title_id', $request->get('tfilter'))
+            ->paginate(5)->appends(request()->query());
         }else{
             $ideas = Idea::leftJoin('users', 'users.id', '=', 'idea.user_id')
             ->leftJoin('category_details','category_details.id','=','idea.cat_id')
