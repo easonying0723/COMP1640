@@ -29,7 +29,7 @@
             @foreach($data as $categoryData)     
             <div class="accordion-item">
                <h2 class="accordion-header" id="flush-heading{{$categoryData->id}}">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$categoryData->id}}" aria-expanded="false" aria-controls="flush-collapse{{$categoryData->id}}">
+                  <button class="accordion-button collapsed" style="color: #a6a6ab"type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$categoryData->id}}" aria-expanded="false" aria-controls="flush-collapse{{$categoryData->id}}">
                      #{{$categoryData->cate_name}}
                   </button>
                </h2>
@@ -38,24 +38,18 @@
                <div class="accordion-body" id="{{$categoryData->id}}">
 
                   @foreach($titleC as $title)
-                     
                      @if($categoryData->id == $title->id)
-
                         @if($LoggedUserInfo->position == 'Manager')
                            <a href="/deletetitle/{{$title->title_id}}"><button type="button" class="btn-close" aria-label="Close"></button></a>
                         @endif
-                        <a href="{{route('home', array('tfilter' => $title->title_id))}}" >
+                        <a class="btn btn-primary m-1 p-2" href="{{route('home', array('tfilter' => $title->title_id))}}" >
                            @if(Request::get('filter') == '$title->id')
                            <strong class ="text-warning">{{$title->title_name}}</strong>
                            @else
                            {{$title->title_name}}
                            @endif
                         </a><br>
- 
-
-                  
                      @endif
-
                   @endforeach
 
                   @if($LoggedUserInfo->position == 'Manager')

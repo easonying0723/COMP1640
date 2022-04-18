@@ -77,9 +77,10 @@ class HomeController extends Controller
         else if($request->get('filter') == 'recent-view'){
             $ideas = DB::table('idea_view')
             ->join('idea', 'idea.id', '=', 'idea_view.idea_id')
+            ->join('title_details','title_details.title_id','=','idea.title_id')
             ->leftJoin('users', 'users.id', '=', 'idea.user_id')
             ->leftJoin('category_details','category_details.id','=','idea.cat_id')
-            ->select(DB::raw('idea.*,users.name as user_name,users.profilepic,  max(idea_view.created_at) as latest,users.department, category_details.cate_name'))
+            ->select(DB::raw('idea.*,users.name as user_name,users.profilepic,  max(idea_view.created_at) as latest,users.department, title_details.title_name,category_details.cate_name'))
             ->where('idea_view.user_id',$user_id)
             ->groupBy('idea_view.idea_id')
             ->orderBy('latest','desc')
@@ -88,9 +89,10 @@ class HomeController extends Controller
         }else if($request->get('filter') == 'most-viewed'){
             $ideas = DB::table('idea_view')
             ->join('idea', 'idea.id', '=', 'idea_view.idea_id')
+            ->join('title_details','title_details.title_id','=','idea.title_id')
             ->leftJoin('users', 'users.id', '=', 'idea.user_id')
             ->leftJoin('category_details','category_details.id','=','idea.cat_id')
-            ->select(DB::raw('idea.*,users.name as user_name, users.profilepic, count(idea_view.id) as number_of_view,users.department,category_details.cate_name'))
+            ->select(DB::raw('idea.*,users.name as user_name, users.profilepic, count(idea_view.id) as number_of_view,users.department,title_details.title_name,category_details.cate_name'))
             ->groupBy('idea.id')
             ->orderBy('number_of_view','desc')            
             ->paginate(5)->appends(request()->query());
@@ -98,6 +100,7 @@ class HomeController extends Controller
             $ideas = DB::table('idea')
             ->leftJoin('likes', 'idea.id', '=', 'likes.idea_id')
             ->leftJoin('users', 'users.id', '=', 'idea.user_id')
+            ->join('title_details','title_details.title_id','=','idea.title_id')
             ->leftJoin('category_details','category_details.id','=','idea.cat_id')
             ->select(DB::raw('idea.*,users.name as user_name,users.profilepic, count(likes.id) as number_of_like,users.department, category_details.cate_name'))
             ->groupBy('idea.id')
@@ -106,14 +109,16 @@ class HomeController extends Controller
             $ideas = Idea::leftJoin('users', 'users.id', '=', 'idea.user_id')
             ->leftJoin('category_details','category_details.id','=','idea.cat_id')
             ->leftJoin('likes','likes.idea_id','=','idea.id')
-            ->select(DB::raw('*,idea.created_at as created_at,users.profilepic, idea.id as id, category_details.cate_name,((select count(id) from likes where idea_id = idea.id and `like` = 1) - (select count(id) from likes where idea_id = idea.id and `like` = 0)) as point'))
+            ->join('title_details','title_details.title_id','=','idea.title_id')
+            ->select(DB::raw('*,idea.created_at as created_at,users.profilepic, idea.id as id, title_details.title_name,category_details.cate_name,((select count(id) from likes where idea_id = idea.id and `like` = 1) - (select count(id) from likes where idea_id = idea.id and `like` = 0)) as point'))
             ->orderBy('point','desc')
             ->paginate(5)->appends(request()->query());
 
         }else{
             $ideas = Idea::leftJoin('users', 'users.id', '=', 'idea.user_id')
             ->leftJoin('category_details','category_details.id','=','idea.cat_id')
-            ->select(DB::raw('*,idea.created_at as created_at,users.profilepic, idea.id as id, category_details.cate_name'))
+            ->join('title_details','title_details.title_id','=','idea.title_id')
+            ->select(DB::raw('*,idea.created_at as created_at,users.profilepic, idea.id as id, category_details.cate_name, title_details.title_name'))
             ->orderBy('idea.created_at','desc')
             ->paginate(5)->appends(request()->query());
         }
