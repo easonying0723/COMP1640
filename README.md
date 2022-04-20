@@ -8,19 +8,19 @@
 - [Trello](https://trello.com/b/Y1E6jQOt/comp1640)
 - [Video Presentation](https://)
 
-## How to start
+### How to start
 
-### Clone the Project from GitHub Desktop @ Source Folder
+#### Clone the Project from GitHub Desktop @ Source Folder
 
 ### Start Apache and MySQL in XAMPP
 
-### Open MySQL 'admin', then import database in your localdb @ Database Script  
+#### Open MySQL 'admin', then import database in your localdb @ Database Script  
 
-### Open new terminal in Visual Studio Code
+#### Open new terminal in Visual Studio Code
 
-### `cd ./discuss.ion/`
+#### `cd ./discuss.ion/`
 
-### `php artisan serve`
+#### `php artisan serve`
 
 
 
