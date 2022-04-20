@@ -8,7 +8,7 @@
 - [Trello](https://trello.com/b/Y1E6jQOt/comp1640)
 - [Video Presentation](https://)
 
-### How to start
+## How to start
 
 #### Clone the Project from GitHub Desktop @ Source Folder
 
