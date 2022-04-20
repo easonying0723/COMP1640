@@ -12,7 +12,7 @@
 
 #### Clone the Project from GitHub Desktop @ Source Folder
 
-### Start Apache and MySQL in XAMPP
+#### Start Apache and MySQL in XAMPP
 
 #### Open MySQL 'admin', then import database in your localdb @ Database Script  
 
@@ -22,5 +22,5 @@
 
 #### `php artisan serve`
 
-
+Open http://127.0.0.1:8000/auth/login to view it in your browser.
 
