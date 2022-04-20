@@ -18,9 +18,9 @@
 
 ### Open new terminal in Visual Studio Code
 
-### `cd ./discuss.ion/` ###
+### `cd ./discuss.ion/`
 
-### `php artisan serve` ###
+### `php artisan serve`
 
 
 
