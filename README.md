@@ -12,9 +12,9 @@
 
 ### Clone the Project from GitHub Desktop @ Source Folder
 
-### start Apache and MySQL in XAMPP
+### Start Apache and MySQL in XAMPP
 
-### open MySQL 'admin', then import database in your localdb @ Database Script  
+### Open MySQL 'admin', then import database in your localdb @ Database Script  
 
 ### Open new terminal in Visual Studio Code
 
